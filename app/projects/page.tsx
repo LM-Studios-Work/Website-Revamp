@@ -1,19 +1,50 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import Header from "@/components/header";
-import { Footer } from "@/components/sections/footer";
-import { projects, projectFilters, getProjectsByCategory } from "@/lib/projects";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ExternalLink,
+  ArrowRight,
+  Layers,
+  Users,
+  Star,
+  Clock,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { projects } from "@/lib/projects";
 
 export default function ProjectsPage() {
-  const [activeFilter, setActiveFilter] = useState("all");
-  const filteredProjects = getProjectsByCategory(activeFilter);
+  const router = useRouter();
+
+  // --- Animations ---
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const },
+    },
+  };
+
+  const drawLine = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: { duration: 1.2, ease: "easeInOut" as const, delay: 0.3 },
+    },
+  };
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
-      {/* Background */}
+    <div className="min-h-screen relative overflow-x-hidden font-sans text-white bg-black selection:bg-[#d4f534] selection:text-black">
+      {/* Background Layer */}
       <div
         className="fixed inset-0 z-0"
         style={{
@@ -23,184 +54,273 @@ export default function ProjectsPage() {
           backgroundRepeat: "no-repeat",
         }}
       />
+      {/* Dark Overlay for readability */}
+      <div className="fixed inset-0 z-0 bg-black/50 pointer-events-none" />
 
+      {/* Content Wrapper */}
       <div className="relative z-10">
-        <Header />
-
-        <main className="pt-24 pb-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
-              <div className="relative">
-                {/* Handwritten annotation */}
-                <div className="absolute -top-12 -left-4 md:-left-16 hidden lg:block transform -rotate-12">
-                  <span className="font-handwriting text-muted-foreground text-xl">
-                    Our best stuff!
-                  </span>
-                  <svg
-                    className="w-12 h-12 text-muted-foreground absolute top-6 right-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        {/* Hero Section */}
+        <section className="px-8 pt-10 pb-16">
+          <div className="max-w-7xl mx-auto">
+            {/* Brand Logo / Title Integration */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="flex flex-col gap-6"
+            >
+              <div className="flex flex-col md:flex-row gap-4 items-baseline mb-2">
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-7xl md:text-8xl font-bold text-white leading-tight"
+                >
+                  Our
+                </motion.h1>
+                <motion.span
+                  variants={itemVariants}
+                  className="relative inline-block text-7xl md:text-8xl font-bold"
+                >
+                  <span
+                    style={{
+                      color: "transparent",
+                      WebkitTextStroke: "2px white",
+                    }}
                   >
-                    <path
-                      d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="1.5"
+                    Projects
+                  </span>
+                  {/* Lime Green Squiggle SVG */}
+                  <svg
+                    className="absolute -bottom-4 left-0 w-full"
+                    viewBox="0 0 200 12"
+                  >
+                    <motion.path
+                      variants={drawLine}
+                      d="M 5 8 Q 15 4, 25 8 T 45 8 T 65 8 T 85 8 T 105 8 T 125 8 T 145 8 T 165 8 T 185 8 T 195 8"
+                      stroke="#d4f534"
+                      strokeWidth="3"
+                      fill="none"
                     />
                   </svg>
-                </div>
-
-                <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-2 text-foreground">
-                  Selected Work
-                </h1>
-                {/* Wavy underline */}
-                <svg
-                  className="text-primary mt-2 w-full max-w-sm"
-                  height="20"
-                  viewBox="0 0 300 20"
-                  width="300"
-                >
-                  <path
-                    d="M5 10 Q 75 25 150 10 T 295 10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeWidth="4"
-                  />
-                </svg>
+                </motion.span>
               </div>
 
-              {/* Filters */}
-              <div className="flex flex-wrap gap-6 text-lg font-medium">
-                {projectFilters.map((filter) => (
-                  <button
-                    key={filter.value}
-                    type="button"
-                    onClick={() => setActiveFilter(filter.value)}
-                    className={`pb-1 border-b-2 transition-colors ${
-                      activeFilter === filter.value
-                        ? "text-primary border-primary"
-                        : "text-muted-foreground border-transparent hover:text-foreground hover:border-muted"
-                    }`}
-                  >
-                    {filter.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-              {filteredProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="group cursor-pointer flex flex-col"
-                >
-                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-card mb-5 border border-border">
-                    <img
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      src={project.imageUrl || "/placeholder.svg"}
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
-
-                    {/* Featured Badge */}
-                    {project.featured && (
-                      <div className="absolute top-4 right-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary text-primary-foreground">
-                          FEATURED
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Tags on image */}
-                    {project.badge && (
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <span className="px-2 py-1 rounded border border-white/20 text-[10px] font-bold uppercase text-white backdrop-blur-sm bg-black/30">
-                          {project.badge}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm">
-                        {project.tags.slice(0, 2).join(" — ")}
-                      </p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-foreground group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-all">
-                      <ArrowUpRight className="w-5 h-5" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA Section */}
-            <div className="mt-24 text-center relative">
-              {/* Decorative star */}
-              <div className="absolute top-0 left-1/4 -translate-y-1/2 hidden md:block">
-                <svg
-                  className="text-muted animate-[spin_10s_linear_infinite]"
-                  height="60"
-                  viewBox="0 0 60 60"
-                  width="60"
-                >
-                  <path
-                    d="M30 0 L35 25 L60 30 L35 35 L30 60 L25 35 L0 30 L25 25 Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-
-              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-foreground">
-                Have a project in mind?
-              </h2>
-
-              <div className="inline-block relative group">
-                <Link
-                  href="/#contact"
-                  className="relative z-10 bg-transparent border-2 border-foreground text-foreground px-8 py-4 rounded-full text-xl font-bold flex items-center gap-4 hover:bg-foreground hover:text-background transition-all duration-300"
-                >
-                  Discuss your project
-                  <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </div>
-                </Link>
-                <div className="absolute -bottom-2 -right-2 w-full h-full bg-primary rounded-full -z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-
-              <div className="mt-12 flex justify-center gap-8 text-muted-foreground">
-                <a
-                  href="#"
-                  className="hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest"
-                >
-                  Instagram
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-primary transition-colors text-sm font-medium uppercase tracking-widest"
-                >
-                  Dribbble
-                </a>
-              </div>
-            </div>
+              <motion.p
+                variants={itemVariants}
+                className="text-gray-300 text-xl max-w-3xl leading-relaxed"
+              >
+                Take a look at some of the websites we've crafted for our clients.
+                From sleek e-commerce platforms to stunning corporate websites,
+                each project showcases our commitment to quality and innovation.
+              </motion.p>
+            </motion.div>
           </div>
-        </main>
+        </section>
 
-        <Footer />
+        {/* Stats Section */}
+        <section className="px-8 pb-16">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+            className="max-w-7xl mx-auto"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {/* Stat Block 1 */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors group"
+              >
+                <div className="flex justify-center mb-2">
+                  <Layers className="w-6 h-6 text-gray-400 group-hover:text-[#d4f534] transition-colors" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-[#d4f534] mb-2">
+                  50+
+                </div>
+                <div className="text-gray-300 text-sm">Projects Completed</div>
+              </motion.div>
+
+              {/* Stat Block 2 */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors group"
+              >
+                <div className="flex justify-center mb-2">
+                  <Users className="w-6 h-6 text-gray-400 group-hover:text-[#d4f534] transition-colors" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-[#d4f534] mb-2">
+                  40+
+                </div>
+                <div className="text-gray-300 text-sm">Happy Clients</div>
+              </motion.div>
+
+              {/* Stat Block 3 */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors group"
+              >
+                <div className="flex justify-center mb-2">
+                  <Star className="w-6 h-6 text-gray-400 group-hover:text-[#d4f534] transition-colors" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-[#d4f534] mb-2">
+                  95%
+                </div>
+                <div className="text-gray-300 text-sm">Client Satisfaction</div>
+              </motion.div>
+
+              {/* Stat Block 4 */}
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors group"
+              >
+                <div className="flex justify-center mb-2">
+                  <Clock className="w-6 h-6 text-gray-400 group-hover:text-[#d4f534] transition-colors" />
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-[#d4f534] mb-2">
+                  3+
+                </div>
+                <div className="text-gray-300 text-sm">Years Experience</div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Projects Grid */}
+        <section className="px-8 py-16">
+          {/* Increased max-width for 3-column layout */}
+          <div className="max-w-[1600px] mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={containerVariants}
+              // GRID UPDATE: Changed from md:grid-cols-2 to lg:grid-cols-3
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {projects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{ y: -10 }} // Smooth lift effect
+                  className="bg-white/5 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-[#d4f534] transition-colors group flex flex-col h-full"
+                >
+                  {/* Project Image */}
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <img
+                      src={project.img}
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                    />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                      <motion.button
+                        onClick={() => window.open(project.url, "_blank")}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-[#d4f534] text-black font-bold py-3 px-6 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(212,245,52,0.4)]"
+                      >
+                        View Project
+                        <ExternalLink className="w-4 h-4" />
+                      </motion.button>
+                    </div>
+                  </div>
+
+                  {/* Project Info */}
+                  <div className="p-8 flex flex-col flex-grow">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#d4f534] text-black"
+                      >
+                        {project.type}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#d4f534] transition-colors">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-gray-300 mb-6 leading-relaxed flex-grow">
+                      {project.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {project.tags?.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300 border border-white/10 group-hover:border-white/30 transition-colors"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="px-8 py-20">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-7xl mx-auto"
+          >
+            <div className="bg-[#d4f534] rounded-3xl p-16 text-center shadow-[0_0_50px_rgba(212,245,52,0.1)] relative overflow-hidden group">
+              {/* Decoration Animations */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.2, 0.3, 0.2],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -mr-16 -mt-16"
+              />
+              <motion.div
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.1, 0.2, 0.1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+                className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl -ml-16 -mb-16"
+              />
+
+              <div className="relative z-10">
+                <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+                  Want to be our next success story?
+                </h2>
+                <p className="text-black/80 text-lg mb-8 max-w-2xl mx-auto font-medium">
+                  Let's create something amazing together. Get in touch to
+                  discuss your project.
+                </p>
+                <motion.button
+                  onClick={() => router.push("/contact")}
+                  whileHover={{ scale: 1.05, gap: "12px" }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-black text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 hover:bg-gray-800 transition-all text-lg mx-auto shadow-xl"
+                >
+                  Start your project
+                  <ArrowRight className="w-5 h-5" />
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </section>
       </div>
     </div>
   );

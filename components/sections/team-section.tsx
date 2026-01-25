@@ -46,10 +46,12 @@ export function TeamSection() {
         {/* Right Content - Team Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <TeamMemberCard
+            name="Lupry"
             role="The Designer"
             description="Crafting beautiful, intuitive user experiences that capture your brand's essence."
           />
           <TeamMemberCard
+            name="Monare"
             role="The Developer"
             description="Building fast, secure, and scalable websites with clean, modern code."
           />

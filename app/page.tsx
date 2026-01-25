@@ -1,41 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import Header from "@/components/header";
-import WebDesignPage from "@/components/pages/web-design-page";
+import { Navigation } from "@/components/layout/navigation";
+import type { PageType } from "@/lib/navigation";
+
+// Import all page components
+import HomePage from "@/components/pages/homepage";
 import StandardPackPage from "@/components/pages/standard-pack-page";
-import CalculatorPage from "@/components/pages/calculator-page";
+import ContactForm from "@/components/pages/contact-form";
 import ComparePage from "@/components/pages/compare-page";
 import ProjectsPage from "@/components/pages/projects-page";
 import AboutPage from "@/components/pages/about-page";
-import HomePage from "@/components/pages/homepage";
-
-type PageType =
-  | "home"
-  | "web-design"
-  | "standard-pack"
-  | "calculator"
-  | "compare"
-  | "projects"
-  | "about";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState<PageType>("web-design");
+  const [currentPage, setCurrentPage] = useState<PageType>("home");
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "home":
+        return <HomePage onPageChange={setCurrentPage} />;
+      case "web-design":
+        return <StandardPackPage onPageChange={setCurrentPage} />;
+      case "seo":
+        return <div className="min-h-screen bg-black text-white flex items-center justify-center"><div>SEO Services - Coming Soon</div></div>;
+      case "contact":
+        return <ContactForm />;
+      case "compare":
+        return <ComparePage onPageChange={setCurrentPage} />;
+      case "projects":
+        return <ProjectsPage onPageChange={setCurrentPage} />;
+      case "about":
+        return <AboutPage onPageChange={setCurrentPage} />;
+      default:
+        return <HomePage onPageChange={setCurrentPage} />;
+    }
+  };
 
   return (
     <main className="min-h-screen">
-      <Header currentPage={currentPage} onPageChange={setCurrentPage} />
-
-      {/* Page Content */}
-      <div className="pt-20">
-        {currentPage === "web-design" && <WebDesignPage />}
-        {currentPage === "standard-pack" && <StandardPackPage />}
-        {currentPage === "calculator" && <CalculatorPage />}
-        {currentPage === "compare" && <ComparePage />}
-        {currentPage === "projects" && <ProjectsPage />}
-        {currentPage === "about" && <AboutPage />}
-        {currentPage === "home" && <HomePage />}
-      </div>
+      <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
+      <div className="pt-16 sm:pt-20">{renderPage()}</div>
     </main>
   );
 }

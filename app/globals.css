@@ -88,6 +88,34 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Smooth scrolling for better mobile experience */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Better touch response on mobile */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on UI elements for cleaner mobile feel */
+  button, .touch-manipulation {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Hide scrollbar for carousel components while keeping functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Custom slider styles */

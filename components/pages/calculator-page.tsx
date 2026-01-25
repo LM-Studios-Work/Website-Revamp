@@ -21,7 +21,7 @@ function ProjectTypeButton({
       onClick={onClick}
       className={`relative px-6 py-3 rounded-full border transition-all duration-300 ${
         selected
-          ? "bg-[#00F0FF] border-[#00F0FF] text-black font-bold"
+          ? "bg-[#d4f534] border-[#d4f534] text-black font-bold"
           : "bg-white/5 border-white/10 text-gray-300 hover:bg-white/10 hover:border-white/30"
       }`}
     >
@@ -74,14 +74,14 @@ export default function ContactPage() {
             >
               <path
                 d="M 10 10 Q 20 5, 30 10 T 50 10 T 70 10 T 90 10 T 110 10 T 130 10 T 150 10 T 170 10 T 190 10 T 210 10 T 230 10 T 250 10 T 270 10"
-                stroke="#00F0FF"
+                stroke="#d4f534"
                 strokeWidth="3"
                 fill="none"
               />
             </svg>
 
             {/* Handwritten Annotation Style */}
-            <div className="absolute top-0 right-0 lg:right-1/4 font-handwriting text-[#00F0FF] rotate-[15deg] hidden md:block">
+              <div className="absolute top-0 right-0 lg:right-1/4 font-handwriting text-[#d4f534] rotate-[15deg] hidden md:block">
               <div className="text-2xl">We reply</div>
               <div className="text-xl ml-4 underline decoration-wavy">
                 fast!
@@ -95,14 +95,14 @@ export default function ContactPage() {
             <div className="w-full lg:w-1/3 space-y-8">
               <p className="text-gray-300 text-lg leading-relaxed">
                 Fill out the form to get a quote or discuss your next project.
-                Whether it's a standard Odoo implementation or a custom web app,
+                Whether it's a standard implementation or a custom web app,
                 we're ready to help.
               </p>
 
               {/* Contact Cards */}
               <div className="space-y-4">
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-start gap-4 hover:border-[#00F0FF]/50 transition-colors group">
-                  <div className="p-3 rounded-full bg-white/10 group-hover:bg-[#00F0FF] transition-colors">
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-start gap-4 hover:border-[#d4f534]/50 transition-colors group">
+                  <div className="p-3 rounded-full bg-white/10 group-hover:bg-[#d4f534] transition-colors">
                     <Mail className="w-5 h-5 group-hover:text-black transition-colors" />
                   </div>
                   <div>
@@ -111,8 +111,8 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-start gap-4 hover:border-[#00F0FF]/50 transition-colors group">
-                  <div className="p-3 rounded-full bg-white/10 group-hover:bg-[#00F0FF] transition-colors">
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-start gap-4 hover:border-[#d4f534]/50 transition-colors group">
+                  <div className="p-3 rounded-full bg-white/10 group-hover:bg-[#d4f534] transition-colors">
                     <MapPin className="w-5 h-5 group-hover:text-black transition-colors" />
                   </div>
                   <div>
@@ -135,19 +135,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       placeholder="John Doe"
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00F0FF] focus:bg-white/5 transition-all"
-                    />
-                  </div>
-
-                  {/* Email Input */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-300 ml-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="john@company.com"
-                      className="w-full bg-black/20 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00F0FF] focus:bg-white/5 transition-all"
+                      className="w-full bg-black/20 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#d4f534] focus:bg-white/5 transition-all"
                     />
                   </div>
                 </div>
@@ -177,14 +165,14 @@ export default function ContactPage() {
                   <textarea
                     rows={4}
                     placeholder="We need a website that..."
-                    className="w-full bg-black/20 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00F0FF] focus:bg-white/5 transition-all resize-none"
+                    className="w-full bg-black/20 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#d4f534] focus:bg-white/5 transition-all resize-none"
                   />
                 </div>
 
                 {/* Submit Button - Matches Homepage CTA Style */}
                 <button
                   type="button"
-                  className="w-full bg-[#00F0FF] text-black font-bold py-5 px-8 rounded-full flex items-center justify-center gap-3 hover:bg-[#00D0E0] transition-colors text-lg shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)]"
+                  className="w-full bg-[#d4f534] text-black font-bold py-5 px-8 rounded-full flex items-center justify-center gap-3 hover:bg-[#c7e81f] transition-colors text-lg shadow-[0_0_20px_rgba(212,245,52,0.3)] hover:shadow-[0_0_30px_rgba(212,245,52,0.5)]"
                 >
                   Send Message
                   <Send className="w-5 h-5" />

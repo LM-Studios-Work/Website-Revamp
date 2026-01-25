@@ -1,12 +1,14 @@
 import { cn } from "@/lib/utils";
 
 interface TeamMemberCardProps {
+  name?: string;
   role: string;
   description: string;
   className?: string;
 }
 
 export function TeamMemberCard({
+  name,
   role,
   description,
   className,
@@ -27,6 +29,7 @@ export function TeamMemberCard({
           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
         </svg>
       </div>
+      {name && <p className="text-sm font-semibold text-muted-foreground mb-1">{name}</p>}
       <h3 className="text-xl font-bold text-foreground mb-2">{role}</h3>
       <p className="text-muted-foreground text-sm leading-relaxed">
         {description}

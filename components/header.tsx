@@ -61,7 +61,7 @@ export default function Header({ currentPage, onPageChange }: HeaderProps) {
           <div className="w-3 h-3 rounded-full border-2 border-white" />
         </div>
         <div className="text-white ml-1">
-          <div className="text-xl tracking-wide">odoo</div>
+          <div className="text-xl tracking-wide">LM Studios</div>
           <div className="text-sm italic -mt-1">web design</div>
         </div>
       </button>

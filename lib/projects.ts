@@ -1,95 +1,71 @@
 export interface Project {
-  id: string;
   title: string;
-  tags: string[];
   description: string;
-  imageUrl: string;
-  category: "all" | "web-design" | "development" | "ux-ui";
-  featured?: boolean;
-  badge?: string;
+  img: string;
+  url: string;
+  type: "Portfolio" | "Event Management" | "Essential Business";
+  tags?: string[];
 }
 
 export const projects: Project[] = [
   {
-    id: "mr-float",
     title: "MR FLOAT - Transport Service",
-    tags: ["Transportation", "Booking"],
     description:
       "A transport company in Zimbabwe that offers a wide array of services, including taxi rides, long-distance travel, car hire, airport shuttles, and package deliveries.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "web-design",
-    featured: true,
+    img: "/preview/float.webp",
+    url: "https://private-car-hire.vercel.app",
+    type: "Essential Business",
+    tags: ["Transportation", "Booking"],
   },
   {
-    id: "vuza-trading",
     title: "Vuza Trading",
-    tags: ["Automated Security", "Aluminum Solutions", "CCTV"],
     description:
       "A professional trading platform with real-time analytics and user-friendly interface.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "web-design",
+    img: "/preview/vuza-trading.png",
+    url: "https://vuzatrading.com",
+    type: "Essential Business",
+    tags: ["Automated Security", "Aluminum Solutions", "CCTV", "Alarm Systems"],
   },
   {
-    id: "mothupi-lesego-wedding",
     title: "Mothupi & Lesego - Wedding",
-    tags: ["Wedding", "Event"],
     description:
       "A wedding invitation with an interactive map and a gift registry.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "ux-ui",
+    img: "/preview/mothupi-and-lesego.png",
+    url: "https://mothupi-and-lesego.co.za",
+    type: "Event Management",
+    tags: ["Wedding", "Event"],
   },
   {
-    id: "rokunda-mboyi",
     title: "Rokunda Mboyi",
+    description: "A passionate architect shaping the future of design with innovative and sustainable solutions.",
+    img: "/preview/rokunda-mboyi.png",
+    url: "https://rokundamboyi.com",
+    type: "Portfolio",
     tags: ["Architect", "Portfolio"],
-    description:
-      "A passionate architect shaping the future of design with innovative and sustainable solutions.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "web-design",
   },
   {
-    id: "monare-selahle",
     title: "Monare Selahle",
-    tags: ["Software Engineer", "Portfolio"],
     description: "Modern portfolio for a Computer Science student.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "development",
+    img: "/preview/monare-selahle.png",
+    url: "https://monareselahle.co.za",
+    type: "Portfolio",
+    tags: ["Software Engineer", "Portfolio"],
   },
   {
-    id: "shots-by-ozee",
     title: "Shots By Ozee",
-    tags: ["Photography", "Portfolio"],
     description:
       "A photographer and visionary creative currently studying Chemical Engineering.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "ux-ui",
+    img: "/preview/shots-by-ozee.png",
+    url: "https://shotsbyozee.co.za",
+    type: "Portfolio",
+    tags: ["Photography", "Portfolio"],
   },
   {
-    id: "gordian-malaka",
     title: "Gordian Malaka",
-    tags: ["Photography", "Videography", "Portfolio"],
     description: "A film student who has a passion for photography.",
-    imageUrl: "/placeholder.svg?height=400&width=600",
-    category: "ux-ui",
+    img: "/preview/gordian-malaka.png",
+    url: "https://uvhu-portfolio-9rw1.vercel.app/",
+    type: "Portfolio",
+    tags: ["Photography", "Videography", "Portfolio"],
   },
 ];
-
-export const projectFilters = [
-  { label: "All Projects", value: "all" },
-  { label: "Web Design", value: "web-design" },
-  { label: "Development", value: "development" },
-  { label: "UX/UI", value: "ux-ui" },
-] as const;
-
-export function getProjectsByCategory(category: string): Project[] {
-  if (category === "all") return projects;
-  return projects.filter((p) => p.category === category);
-}
-
-export function getProjectById(id: string): Project | undefined {
-  return projects.find((p) => p.id === id);
-}
-
-export function getFeaturedProjects(): Project[] {
-  return projects.filter((p) => p.featured);
-}
