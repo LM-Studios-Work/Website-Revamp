@@ -10,6 +10,24 @@ export interface ServicePackage {
 }
 
 export const servicePackages: ServicePackage[] = [
+   {
+    id: "personal-portfolio",
+    name: "Personal Portfolio",
+    price: "R1,999",
+    description:
+      "A stunning, modern portfolio to showcase your work, skills, and personality.",
+    delivery: "4–6 working days",
+    features: [
+      "Single-page scrolling design",
+      "Animated introductions & effects",
+      "Project gallery with descriptions",
+      "Resume/CV download link",
+      "Contact form & social links",
+      "Custom Domain",
+    ],
+    color: "#b4a7d6",
+    popular: false,
+  },
   {
     id: "startup",
     name: "Startup Pack",
@@ -49,24 +67,7 @@ export const servicePackages: ServicePackage[] = [
     color: "#5dd9c1",
     popular: true,
   },
-  {
-    id: "personal-portfolio",
-    name: "Personal Portfolio",
-    price: "R1,999",
-    description:
-      "A stunning, modern portfolio to showcase your work, skills, and personality.",
-    delivery: "4–6 working days",
-    features: [
-      "Single-page scrolling design",
-      "Animated introductions & effects",
-      "Project gallery with descriptions",
-      "Resume/CV download link",
-      "Contact form & social links",
-      "Custom Domain",
-    ],
-    color: "#b4a7d6",
-    popular: false,
-  },
+ 
   {
     id: "event-management",
     name: "Event Management",

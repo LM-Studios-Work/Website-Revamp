@@ -10,7 +10,24 @@ import {
 
 export default function WebDesignPage() {
   const packages = [
-    {
+   {
+      id: 3,
+      name: "Personal Portfolio",
+      price: "R1,999",
+      description:
+        "A stunning, modern portfolio to showcase your work, skills, and personality.",
+      delivery: "4–6 working days",
+      features: [
+        "Single-page scrolling design",
+        "Animated introductions & effects",
+        "Project gallery with descriptions",
+        "Resume/CV download link",
+        "Contact form & social links",
+        "Custom Domain",
+      ],
+      color: "#b4a7d6",
+      popular: false,
+    }, {
       id: 1,
       name: "Essential Business",
       price: "R2,499",
@@ -49,24 +66,7 @@ export default function WebDesignPage() {
       color: "#5dd9c1",
       popular: true,
     },
-    {
-      id: 3,
-      name: "Personal Portfolio",
-      price: "R1,999",
-      description:
-        "A stunning, modern portfolio to showcase your work, skills, and personality.",
-      delivery: "4–6 working days",
-      features: [
-        "Single-page scrolling design",
-        "Animated introductions & effects",
-        "Project gallery with descriptions",
-        "Resume/CV download link",
-        "Contact form & social links",
-        "Custom Domain",
-      ],
-      color: "#b4a7d6",
-      popular: false,
-    },
+    
     {
       id: 4,
       name: "Event Management",

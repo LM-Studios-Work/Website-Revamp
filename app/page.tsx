@@ -7,6 +7,7 @@ import type { PageType } from "@/lib/navigation";
 // Import all page components
 import HomePage from "@/components/pages/homepage";
 import StandardPackPage from "@/components/pages/standard-pack-page";
+import SEOPage from "@/components/pages/seo-page";
 import ContactForm from "@/components/pages/contact-form";
 import ComparePage from "@/components/pages/compare-page";
 import ProjectsPage from "@/components/pages/projects-page";
@@ -22,7 +23,7 @@ export default function Home() {
       case "web-design":
         return <StandardPackPage onPageChange={setCurrentPage} />;
       case "seo":
-        return <div className="min-h-screen bg-black text-white flex items-center justify-center"><div>SEO Services - Coming Soon</div></div>;
+        return <SEOPage onPageChange={setCurrentPage} />;
       case "contact":
         return <ContactForm />;
       case "compare":
