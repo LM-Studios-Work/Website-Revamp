@@ -193,6 +193,15 @@ export const services: Service[] = [
     items: ["Keyword research & strategy", "On-page & technical SEO", "Performance tracking & reporting"],
     accentColor: "#c084fc",
   },
+  {
+    id: "app-development",
+    title: "App Development",
+    subtitle: "Mobile & Web Applications",
+    description: "From concept to launch, we build high-performance mobile and web applications that engage users and drive business growth.",
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1080&q=80",
+    items: ["iOS & Android Development", "Cross-platform solutions", "Custom backend & APIs"],
+    accentColor: "#6ee2d1",
+  },
 ];
 
 // ============================================
@@ -456,6 +465,165 @@ export const features: Feature[] = [
     title: "Modern Stack",
     description: "Built with cutting-edge technologies and best practices for performance.",
     icon: "CheckCircle",
+  },
+];
+
+// ============================================
+// APP DEVELOPMENT PACKAGES DATA
+// ============================================
+
+export interface AppPackage {
+  id: number;
+  name: string;
+  price: string;
+  description: string;
+  delivery: string;
+  features: string[];
+  color: string;
+  popular: boolean;
+}
+
+export const appPackages: AppPackage[] = [
+  {
+    id: 1,
+    name: "Starter App",
+    price: "R15,000",
+    description: "A simple mobile app with essential features for startups and small businesses.",
+    delivery: "4-6 weeks",
+    features: [
+      "Single platform (iOS or Android)",
+      "Up to 5 core screens",
+      "Basic user authentication",
+      "Push notifications",
+      "App store submission",
+      "3 months support",
+    ],
+    color: "#6ee2d1",
+    popular: false,
+  },
+  {
+    id: 2,
+    name: "Business App",
+    price: "R35,000",
+    description: "Cross-platform app with advanced features for growing businesses.",
+    delivery: "8-12 weeks",
+    features: [
+      "iOS & Android (React Native)",
+      "Up to 15 screens",
+      "User profiles & dashboards",
+      "Payment integration",
+      "Admin panel included",
+      "API integrations",
+      "6 months support",
+    ],
+    color: "#6ee2d1",
+    popular: true,
+  },
+  {
+    id: 3,
+    name: "Enterprise Solution",
+    price: "Custom",
+    description: "Fully custom app development for complex enterprise requirements.",
+    delivery: "12+ weeks",
+    features: [
+      "Native iOS & Android",
+      "Unlimited screens & features",
+      "Custom backend development",
+      "Third-party integrations",
+      "Dedicated project manager",
+      "12 months support & maintenance",
+    ],
+    color: "#b4a7d6",
+    popular: false,
+  },
+];
+
+export const appProcessSteps: ProcessStep[] = [
+  {
+    id: 1,
+    title: "Discovery",
+    description: "We analyse your requirements, target audience, and define the app's core features and user flows.",
+    color: "bg-[#6ee2d1]",
+    textColor: "text-black",
+  },
+  {
+    id: 2,
+    title: "UI/UX Design",
+    description: "We create wireframes and high-fidelity designs that prioritise user experience and brand consistency.",
+    color: "bg-[#5dd9c1]",
+    textColor: "text-black",
+    tag: "Critical",
+  },
+  {
+    id: 3,
+    title: "Development",
+    description: "Our developers build your app using modern frameworks, ensuring clean code and optimal performance.",
+    color: "bg-[#4fd1b5]",
+    textColor: "text-black",
+  },
+  {
+    id: 4,
+    title: "Testing & Launch",
+    description: "Rigorous QA testing across devices, followed by app store submission and launch support.",
+    color: "bg-[#38c4a8]",
+    textColor: "text-white",
+  },
+];
+
+export const appDevFAQs: FAQ[] = [
+  {
+    category: "Platforms & Technology",
+    icon: "Smartphone",
+    questions: [
+      {
+        q: "Do you build native or cross-platform apps?",
+        a: "We offer both options. For cost-effective solutions, we use React Native for cross-platform development. For maximum performance, we build native apps using Swift (iOS) and Kotlin (Android).",
+      },
+      {
+        q: "Which technology stack do you use?",
+        a: "We use React Native and Flutter for cross-platform apps, Swift/SwiftUI for iOS, and Kotlin for Android. Backend services are typically built with Node.js, Python, or Go.",
+      },
+      {
+        q: "Can you develop web applications as well?",
+        a: "Yes. We build Progressive Web Apps (PWAs) and full-stack web applications using Next.js, React, and modern backend technologies.",
+      },
+    ],
+  },
+  {
+    category: "Process & Timeline",
+    icon: "Clock",
+    questions: [
+      {
+        q: "How long does it take to build an app?",
+        a: "A simple app takes 4-6 weeks, while complex apps with multiple features can take 3-6 months. We provide detailed timelines after the discovery phase.",
+      },
+      {
+        q: "Do you handle app store submissions?",
+        a: "Yes. We manage the entire submission process for both Apple App Store and Google Play Store, including compliance with their guidelines.",
+      },
+      {
+        q: "What is your development process?",
+        a: "We follow an agile methodology with regular sprints, demos, and feedback sessions. You'll have visibility into progress through weekly updates and milestone reviews.",
+      },
+    ],
+  },
+  {
+    category: "Support & Maintenance",
+    icon: "Server",
+    questions: [
+      {
+        q: "Do you provide ongoing maintenance?",
+        a: "Yes. All packages include post-launch support. We also offer monthly maintenance plans for updates, bug fixes, and new feature development.",
+      },
+      {
+        q: "Can you update my existing app?",
+        a: "Yes. We can take over existing projects, perform code audits, and implement improvements or new features.",
+      },
+      {
+        q: "What happens after the app is launched?",
+        a: "We monitor performance, address user feedback, and provide analytics reports. Our team remains available for iterations and scaling as your user base grows.",
+      },
+    ],
   },
 ];
 

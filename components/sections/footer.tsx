@@ -1,31 +1,62 @@
-import React from "react";
-import Link from "next/link";
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Twitter } from "lucide-react";
+"use client";
 
-export function Footer() {
+import React from "react";
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Twitter } from "lucide-react";
+import type { PageType } from "@/lib/navigation";
+
+interface FooterProps {
+  currentPage?: PageType;
+  onPageChange?: (page: PageType) => void;
+}
+
+// Page accent colors mapping
+const pageAccentColors: Record<PageType, string> = {
+  "home": "#d4f534",
+  "about": "#d4f534",
+  "projects": "#d4f534",
+  "web-design": "#d4f534",
+  "seo": "#c084fc",
+  "app-development": "#6ee2d1",
+  "contact": "#d4f534",
+};
+
+export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
+  const accentColor = pageAccentColors[currentPage] || "#d4f534";
+  
+  const serviceLinks = [
+    { id: "web-design" as PageType, label: "Web Design" },
+    { id: "seo" as PageType, label: "SEO Optimization" },
+    { id: "app-development" as PageType, label: "App Development" },
+  ];
+
+  const handleNavClick = (page: PageType) => {
+    onPageChange?.(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="relative z-20 bg-black text-white pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="text-2xl font-bold">
-              odoo<span className="text-[#d4ff3f]">web design</span>
+              LM<span style={{ color: accentColor }}> Studios</span>
             </div>
             <p className="text-white/50 leading-relaxed">
               Your All-in-one Business Solution | Creative Digital Agency | Web design company | SEO (Search Engine Optimisation)
             </p>
             <div className="flex gap-4">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <Instagram className="w-5 h-5 text-white/50 hover:text-[#d4ff3f] cursor-pointer transition-colors" />
+                <Instagram className="w-5 h-5 text-white/50 cursor-pointer transition-colors" style={{ ["--hover-color" as string]: accentColor }} onMouseEnter={(e) => e.currentTarget.style.color = accentColor} onMouseLeave={(e) => e.currentTarget.style.color = ""} />
               </a>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <Facebook className="w-5 h-5 text-white/50 hover:text-[#d4ff3f] cursor-pointer transition-colors" />
+                <Facebook className="w-5 h-5 text-white/50 cursor-pointer transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = accentColor} onMouseLeave={(e) => e.currentTarget.style.color = ""} />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 text-white/50 hover:text-[#d4ff3f] cursor-pointer transition-colors" />
+                <Linkedin className="w-5 h-5 text-white/50 cursor-pointer transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = accentColor} onMouseLeave={(e) => e.currentTarget.style.color = ""} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                <Twitter className="w-5 h-5 text-white/50 hover:text-[#d4ff3f] cursor-pointer transition-colors" />
+                <Twitter className="w-5 h-5 text-white/50 cursor-pointer transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = accentColor} onMouseLeave={(e) => e.currentTarget.style.color = ""} />
               </a>
             </div>
           </div>
@@ -33,46 +64,57 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-6 text-lg">Services</h4>
             <ul className="space-y-4 text-white/50">
-              <li>
-                <Link href="/services/web-design" className="hover:text-[#d4ff3f] transition-colors">
-                  Web Design
-                </Link>
-              </li>
-              <li>
-                <Link href="/services/seo" className="hover:text-[#d4ff3f] text-[#d4ff3f] transition-colors">
-                  SEO Optimization
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-[#d4ff3f] transition-colors">
-                  Digital Marketing
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-[#d4ff3f] transition-colors">
-                  Graphic Design
-                </Link>
-              </li>
+              {serviceLinks.map((service) => (
+                <li key={service.id}>
+                  <button 
+                    onClick={() => handleNavClick(service.id)}
+                    className="transition-colors text-left"
+                    style={{ color: currentPage === service.id ? accentColor : undefined }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                    onMouseLeave={(e) => e.currentTarget.style.color = currentPage === service.id ? accentColor : ""}
+                  >
+                    {service.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-6 text-lg">Legal</h4>
+            <h4 className="font-bold mb-6 text-lg">Company</h4>
             <ul className="space-y-4 text-white/50">
               <li>
-                <Link href="/privacy" className="hover:text-[#d4ff3f] transition-colors">
-                  Privacy Policy
-                </Link>
+                <button 
+                  onClick={() => handleNavClick("about")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "about" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "about" ? accentColor : ""}
+                >
+                  About Us
+                </button>
               </li>
               <li>
-                <Link href="/refunds" className="hover:text-[#d4ff3f] transition-colors">
-                  Returns and Refund Policy
-                </Link>
+                <button 
+                  onClick={() => handleNavClick("projects")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "projects" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "projects" ? accentColor : ""}
+                >
+                  Projects
+                </button>
               </li>
               <li>
-                <Link href="/acceptable-use" className="hover:text-[#d4ff3f] transition-colors">
-                  Acceptable Use Policy
-                </Link>
+                <button 
+                  onClick={() => handleNavClick("contact")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "contact" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "contact" ? accentColor : ""}
+                >
+                  Contact
+                </button>
               </li>
             </ul>
           </div>
@@ -81,19 +123,29 @@ export function Footer() {
             <h4 className="font-bold mb-6 text-lg">Contact</h4>
             <ul className="space-y-4 text-white/50">
               <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-[#d4ff3f]" />
-                <a href="mailto:hello@odooweb.co.za" className="hover:text-[#d4ff3f] transition-colors">
-                  hello@odooweb.co.za
+                <Mail className="w-4 h-4" style={{ color: accentColor }} />
+                <a 
+                  href="mailto:hello@lmstudios.co.za" 
+                  className="transition-colors"
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = ""}
+                >
+                  hello@lmstudios.co.za
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-[#d4ff3f]" />
-                <a href="tel:+27111234567" className="hover:text-[#d4ff3f] transition-colors">
+                <Phone className="w-4 h-4" style={{ color: accentColor }} />
+                <a 
+                  href="tel:+27111234567" 
+                  className="transition-colors"
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = ""}
+                >
                   +27 (0) 11 123 4567
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <MapPin className="w-4 h-4 text-[#d4ff3f]" />
+                <MapPin className="w-4 h-4" style={{ color: accentColor }} />
                 <span>Johannesburg, South Africa</span>
               </li>
             </ul>
@@ -104,7 +156,7 @@ export function Footer() {
           <p className="mb-4">
             Website Design Johannesburg | Web Designers South Africa | Top Website Design Company in South Africa | Website Designing | Website Hosting
           </p>
-          <p>© {new Date().getFullYear()} Odoo Web Design. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} LM Studios. All rights reserved.</p>
         </div>
       </div>
     </footer>

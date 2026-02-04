@@ -79,7 +79,7 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
   };
 
   return (
-    <PageLayout containerRef={containerRef}>
+    <PageLayout containerRef={containerRef} currentPage="web-design" onPageChange={onPageChange}>
       {/* Hero Section */}
       <HeroSection 
         heroY={heroY} 
@@ -252,48 +252,44 @@ function ProcessSection({
   scrollRef, 
   scroll 
 }: { 
-  scrollRef: React.RefObject<HTMLDivElement>; 
+  scrollRef: React.RefObject<HTMLDivElement | null>; 
   scroll: (direction: "left" | "right") => void;
 }) {
+  // Color values for process steps (matching the Tailwind classes from data)
+  const stepColors = ["#d4f534", "#5dd9c1", "#b4a7d6", "#ff6b6b"];
+
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true }} 
-          variants={staggerContainer}
-          className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
-        >
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-4 text-white">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
               Our <span className="text-transparent" style={{ WebkitTextStroke: "1px #d4f534" }}>process</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground max-w-xl text-lg">
+            </h2>
+            <p className="text-muted-foreground max-w-xl text-lg">
               From concept to launch, we craft visually striking websites.
-            </motion.p>
+            </p>
           </div>
-          <motion.div variants={fadeInUp} className="gap-4 hidden md:flex">
+          <div className="gap-4 hidden md:flex">
             <button onClick={() => scroll("left")} className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#d4f534] hover:text-black transition-all">
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button onClick={() => scroll("right")} className="w-12 h-12 rounded-full bg-[#d4f534] text-black flex items-center justify-center hover:bg-[#c7e81f]">
               <ChevronRight className="w-6 h-6" />
             </button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
-          <div ref={scrollRef} className="flex gap-4 md:gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory" style={{ scrollBehavior: "smooth" }}>
+          <div 
+            ref={scrollRef} 
+            className="flex gap-4 md:gap-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
+          >
             {webProcessSteps.map((step, index) => (
-              <motion.div 
+              <div 
                 key={step.id}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                className="snap-center flex-none w-[85vw] md:w-[350px] rounded-[2rem] p-8 relative transition-all hover:-translate-y-2" 
-                style={{ backgroundColor: step.color }}
+                className="snap-center flex-none w-[85vw] md:w-[350px] rounded-[2rem] p-8 relative transition-transform duration-300 hover:-translate-y-2" 
+                style={{ backgroundColor: stepColors[index] || stepColors[0] }}
               >
                 <div className="absolute top-6 right-6 w-10 h-10 rounded-full border-2 border-black/10 flex items-center justify-center font-bold text-black">
                   {step.id}
@@ -305,7 +301,7 @@ function ProcessSection({
                 )}
                 <h3 className="text-3xl font-bold mb-4 mt-6 text-black">{step.title}</h3>
                 <p className="text-base font-medium text-black/70">{step.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

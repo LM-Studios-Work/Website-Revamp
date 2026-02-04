@@ -28,7 +28,7 @@ export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
   );
 
   return (
-    <PageLayout solidBackground vignette>
+    <PageLayout solidBackground vignette currentPage="projects" onPageChange={onPageChange}>
       {/* Header Section */}
       <section className="pt-16 pb-16 px-6 relative overflow-hidden z-10">
         {/* Background Gradient */}
