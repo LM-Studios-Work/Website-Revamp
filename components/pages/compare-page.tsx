@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import { Footer } from "@/components/sections/footer";
 
 const features = [
   { name: "Sitemap", standard: true, custom: true },
@@ -181,6 +182,7 @@ export default function ComparePage({ onPageChange }: ComparePageProps) {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

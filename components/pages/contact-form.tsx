@@ -16,6 +16,7 @@ import {
   Mail,
   Send
 } from "lucide-react";
+import { Footer } from "@/components/sections/footer";
 
 // --- Components for the Form ---
 
@@ -397,6 +398,7 @@ export default function MultiStepContact() {
 
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

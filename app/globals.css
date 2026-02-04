@@ -162,3 +162,13 @@ input[type="range"]::-moz-range-thumb {
 .font-handwriting {
   font-family: var(--font-handwriting);
 }
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

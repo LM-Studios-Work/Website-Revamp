@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ArrowUpRight, Code, PenTool, Linkedin, Twitter, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PageType } from "@/lib/navigation";
+import { Footer } from "@/components/sections/footer";
 
 interface AboutPageProps {
   onPageChange?: (page: PageType) => void;
@@ -334,6 +335,7 @@ export default function AboutPage({ onPageChange }: AboutPageProps) {
           </motion.div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

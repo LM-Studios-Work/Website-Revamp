@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageType } from "@/lib/navigation";
+import { Footer } from "@/components/sections/footer";
 
 interface SeoPageProps {
   onPageChange?: (page: PageType) => void;
@@ -88,7 +89,7 @@ const processes = [
   {
     id: 4,
     title: "REPORTING AND ANALYSIS",
-    description: "Our SEO review consists of several factors like a content, linking structure, social media efforts, and its trust on the internet.",
+    description: "Our SEO review consists of several factors like content, linking structure, social media efforts, and trust on the internet.",
     color: "bg-[#7c3aed]",
     textColor: "text-white"
   }
@@ -96,8 +97,23 @@ const processes = [
 
 export default function SeoPage({ onPageChange }: SeoPageProps) {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#d4ff3f] selection:text-black">
-      
+    <div className="min-h-screen bg-black text-white selection:bg-[#d4ff3f] selection:text-black relative">
+      {/* Background Layer */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(/images/dark-background-solid.png)",
+            backgroundColor: "#050505",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+      </div>
+
+      <div className="relative z-10">
       {/* =========================================
           HERO SECTION
           ========================================= */}
@@ -114,7 +130,7 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
 
           <div className="flex items-center gap-3 mb-6">
             <span className="px-3 py-1 rounded-full border border-[#c084fc]/30 bg-[#c084fc]/10 text-[#c084fc] text-xs font-bold uppercase tracking-widest">
-              Search Engine Optimization
+              Search Engine Optimisation
             </span>
           </div>
           
@@ -213,7 +229,7 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
             </h2>
             <div className="space-y-6 text-white/70 text-lg leading-relaxed">
               <p>
-                The goal of on page and off page optimisation is to generate a theme consistent with your targeted keywords. The search engine is a robot, not a human… and therefore, you must follow our proven process to educate the robot so that it brings your website up when your potential customers are searching for specific business related keywords.
+                The goal of on-page and off-page optimisation is to generate a theme consistent with your targeted keywords. The search engine is a robot, not a human... and therefore, you must follow our proven process to educate the robot so that it brings your website up when your potential customers are searching for specific business-related keywords.
               </p>
             </div>
             
@@ -238,7 +254,7 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
                 How we go to <span className="text-white/40">work</span>
               </h2>
               <p className="text-white/60 text-lg">
-                Before beginning a search engine optimisation (SEO), it is important to understand the process involved in an effective SEO campaign.
+                Before beginning search engine optimisation (SEO), it is important to understand the process involved in an effective SEO campaign.
               </p>
             </div>
           </div>
@@ -251,7 +267,7 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className={`${process.color} ${process.textColor} ${process.border || ""} p-8 rounded-[32px] min-h-[400px] flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300`}
+                className={`${process.color} ${process.textColor} p-8 rounded-[32px] min-h-[400px] flex flex-col justify-between group hover:-translate-y-2 transition-transform duration-300`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-8">
@@ -275,7 +291,7 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
             <div>
               <h4 className="text-2xl font-bold text-white mb-2">LINK BUILDING</h4>
               <p className="text-white/60">
-                In the field of SEO, link building describes actions aimed at increasing the number and quality of inbound links to a web-page.
+                In the field of SEO, link building describes actions aimed at increasing the number and quality of inbound links to a webpage.
               </p>
             </div>
             <button onClick={() => onPageChange?.("contact")} className="px-8 py-3 bg-[#c084fc] text-white font-bold rounded-full hover:bg-[#a960ec] transition-colors whitespace-nowrap">
@@ -435,7 +451,8 @@ export default function SeoPage({ onPageChange }: SeoPageProps) {
           </div>
         </div>
       </div>
-
+      </div>
+      <Footer />
     </div>
   );
 }

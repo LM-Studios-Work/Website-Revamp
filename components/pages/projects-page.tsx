@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ExternalLink, Github, Filter, LayoutGrid, List } from "lucide-react";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
-import { Navbar } from "@/app/components/Navbar";
-import { Footer } from "@/app/components/Footer";
+import { PageType } from "@/lib/navigation";
+import { Footer } from "@/components/sections/footer";
+
+interface ProjectsPageProps {
+  onPageChange?: (page: PageType) => void;
+}
 
 const categories = ["All", "Web Design", "SEO", "E-commerce", "App Development"];
 
@@ -66,7 +69,39 @@ const allProjects = [
   }
 ];
 
-export default function ProjectsPage() {
+function ImageWithFallback({ 
+  src, 
+  alt, 
+  className = ""
+}: { 
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className={`relative ${className}`}>
+      {hasError ? (
+        <div className="w-full h-full bg-white/5 flex items-center justify-center">
+          <span className="text-white/40 text-sm">Image unavailable</span>
+        </div>
+      ) : (
+        <img
+          src={imgSrc}
+          alt={alt}
+          className={className}
+          onError={() => {
+            setHasError(true);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
   const [activeCategory, setActiveCategory] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
@@ -77,24 +112,22 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#d4ff3f] selection:text-black relative">
       {/* Background Layer */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "url(/images/dark-background.png)",
+            backgroundImage: "url(/images/dark-background-solid.png)",
+            backgroundColor: "#050505",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black pointer-events-none" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150 mix-blend-overlay"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
       </div>
 
-      <div className="relative z-10">
-        <Navbar />
-      
       {/* Header Section */}
-      <section className="pt-32 pb-16 px-6 relative overflow-hidden">
+      <section className="pt-16 pb-16 px-6 relative overflow-hidden z-10">
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#D4FF3F]/10 blur-[150px] rounded-full -translate-y-1/2 pointer-events-none" />
         
@@ -167,7 +200,7 @@ export default function ProjectsPage() {
                   : "flex flex-col gap-8"
               }
             >
-              {filteredProjects.map((project, idx) => (
+              {filteredProjects.map((project) => (
                 <motion.div
                   key={project.id}
                   layout
@@ -227,8 +260,6 @@ export default function ProjectsPage() {
           )}
         </div>
       </section>
-      </div>
-
       <Footer />
     </div>
   );

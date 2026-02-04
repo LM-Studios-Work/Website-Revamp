@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { PageType } from "@/lib/navigation";
+import { Footer } from "@/components/sections/footer";
 
 interface StandardPackPageProps {
   onPageChange?: (page: PageType) => void;
@@ -491,6 +492,7 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
                 </button>
             </motion.div>
       </section>
+      <Footer />
     </div>
   );
 }
@@ -525,3 +527,4 @@ function FAQItem({ question, answer }: { question: string, answer: string }) {
         </div>
     );
 }
+

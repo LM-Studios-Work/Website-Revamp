@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { PageType } from "@/lib/navigation";
+import { Footer } from "@/components/sections/footer";
 
 interface HomePageProps {
   onPageChange?: (page: PageType) => void;
@@ -451,6 +452,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 }
