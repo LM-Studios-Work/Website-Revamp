@@ -182,7 +182,7 @@ function ProjectCard({ project, viewMode }: ProjectCardProps) {
         className={
           viewMode === "list" 
             ? "w-full md:w-1/3 aspect-video shrink-0 overflow-hidden rounded-[32px]" 
-            : "aspect-[4/5] overflow-hidden"
+            : "aspect-video overflow-hidden"
         }
       >
         {hasError ? (
@@ -199,12 +199,12 @@ function ProjectCard({ project, viewMode }: ProjectCardProps) {
         )}
       </div>
 
-      {/* Content */}
+      {/* Content - Below Image */}
       <div 
         className={
           viewMode === "list" 
             ? "flex flex-col justify-center flex-1" 
-            : "p-8 pt-0 absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end translate-y-24 group-hover:translate-y-0 transition-transform duration-500"
+            : "p-8"
         }
       >
         <div className="mb-4">
@@ -236,15 +236,6 @@ function ProjectCard({ project, viewMode }: ProjectCardProps) {
           </button>
         </div>
       </div>
-      
-      {/* Category Badge for Grid Mode */}
-      {viewMode === "grid" && (
-        <div className="absolute top-8 left-8">
-          <span className="px-4 py-2 bg-black/50 backdrop-blur-md rounded-full text-xs font-bold border border-white/10">
-            {project.category}
-          </span>
-        </div>
-      )}
     </motion.div>
   );
 }
