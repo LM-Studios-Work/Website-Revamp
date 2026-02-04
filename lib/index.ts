@@ -86,13 +86,11 @@ export {
 // NAVIGATION
 // ============================================
 export {
-  navItems,
-  servicePages,
-  getPageTitle,
+  mainNavItems,
+  serviceNavItems,
   isServicePage,
   type PageType,
   type NavItem,
-  type ServicePage,
 } from "./navigation";
 
 // ============================================

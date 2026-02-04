@@ -21,12 +21,12 @@ export { Footer } from "./sections/footer";
 // ============================================
 // PAGE COMPONENTS
 // ============================================
-export { Homepage } from "./pages/homepage";
-export { ProjectsPage } from "./pages/projects-page";
-export { AboutPage } from "./pages/about-page";
-export { SEOPage } from "./pages/seo-page";
-export { WebDesignPage } from "./pages/webdesign";
-export { ContactForm } from "./pages/contact-form";
+export { default as HomePage } from "./pages/homepage";
+export { default as ProjectsPage } from "./pages/projects-page";
+export { default as AboutPage } from "./pages/about-page";
+export { default as SEOPage } from "./pages/seo-page";
+export { default as WebDesignPage } from "./pages/webdesign";
+export { default as ContactForm } from "./pages/contact-form";
 
 // ============================================
 // SHARED/REUSABLE COMPONENTS
