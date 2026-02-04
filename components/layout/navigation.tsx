@@ -247,12 +247,6 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
                     ))}
                   </div>
                 </div>
-
-                <MobileBigLink 
-                  label="Calculator" 
-                  isActive={currentPage === "calculator"} 
-                  onClick={() => handleNavClick("calculator")} 
-                />
               </div>
             </motion.div>
 

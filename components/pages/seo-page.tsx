@@ -17,7 +17,7 @@ interface SeoPageProps {
 
 export default function SeoPage({ onPageChange }: SeoPageProps) {
   return (
-    <PageLayout solidBackground vignette>
+    <PageLayout solidBackground vignette currentPage="seo" onPageChange={onPageChange}>
       <div className="relative z-10">
         {/* Hero Section */}
         <HeroSection onPageChange={onPageChange} />

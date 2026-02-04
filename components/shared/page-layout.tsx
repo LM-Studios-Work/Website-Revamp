@@ -15,6 +15,7 @@ import { useRef } from "react";
 import { PageBackground } from "./page-background";
 import { Footer } from "@/components/sections/footer";
 import { cn } from "@/lib/utils";
+import type { PageType } from "@/lib/navigation";
 
 interface PageLayoutProps {
   children: React.ReactNode;
@@ -28,6 +29,10 @@ interface PageLayoutProps {
   className?: string;
   /** Hide the footer */
   hideFooter?: boolean;
+  /** Current page for footer accent color */
+  currentPage?: PageType;
+  /** Page change handler for footer navigation */
+  onPageChange?: (page: PageType) => void;
 }
 
 export function PageLayout({
@@ -37,6 +42,8 @@ export function PageLayout({
   vignette = false,
   className,
   hideFooter = false,
+  currentPage,
+  onPageChange,
 }: PageLayoutProps) {
   const internalRef = useRef<HTMLDivElement>(null);
   const ref = containerRef || internalRef;
@@ -56,7 +63,7 @@ export function PageLayout({
         {children}
       </div>
       
-      {!hideFooter && <Footer />}
+      {!hideFooter && <Footer currentPage={currentPage} onPageChange={onPageChange} />}
     </div>
   );
 }

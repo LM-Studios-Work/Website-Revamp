@@ -11,8 +11,7 @@ export type PageType =
   | "web-design" 
   | "seo" 
   | "app-development"
-  | "contact" 
-  | "calculator";
+  | "contact";
 
 export interface NavItem {
   id: PageType;

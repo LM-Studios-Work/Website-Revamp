@@ -43,7 +43,7 @@ export default function AppDevelopmentPage({ onPageChange }: AppDevelopmentPageP
   };
 
   return (
-    <PageLayout solidBackground vignette>
+    <PageLayout solidBackground vignette currentPage="app-development" onPageChange={onPageChange}>
       <div className="relative z-10">
         <HeroSection onPageChange={onPageChange} />
         <TechStackSection />

@@ -26,7 +26,7 @@ export default function AboutPage({ onPageChange }: AboutPageProps) {
   const headerY = useTransform(scrollYProgress, [0, 0.5], ["0%", "50%"]);
 
   return (
-    <PageLayout containerRef={containerRef} solidBackground vignette>
+    <PageLayout containerRef={containerRef} solidBackground vignette currentPage="about" onPageChange={onPageChange}>
       <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 sm:py-20 md:py-24 lg:py-32">
         <div className="max-w-6xl mx-auto">
           

@@ -60,7 +60,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, isMobile ? 1 : 0.8]);
 
   return (
-    <PageLayout containerRef={containerRef}>
+    <PageLayout containerRef={containerRef} currentPage="home" onPageChange={onPageChange}>
       {/* Hero Section */}
       <PageHero size="large" className="lg:min-h-screen">
         <motion.div 
@@ -221,7 +221,7 @@ function CustomPackSection({ isMobile }: { isMobile: boolean }) {
             <div className="absolute inset-0 bg-[#d4f534] mix-blend-color opacity-0 md:group-hover:opacity-20 transition-opacity duration-700 z-10" />
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
-              alt="Team meeting"
+              alt="Team researching industry trends"
               className="w-full h-auto object-cover md:group-hover:scale-105 transition-transform duration-1000"
             />
           </div>
@@ -238,25 +238,43 @@ function CustomPackSection({ isMobile }: { isMobile: boolean }) {
             <span className="text-5xl font-thin tracking-wide text-muted-foreground">01</span>
             <div className="h-[1px] w-20 bg-white/20" />
             <span className="px-4 py-1 border border-[#d4f534] text-[#d4f534] bg-[#d4f534]/10 rounded-full text-xs font-bold uppercase tracking-wider inline-block">
-              Custom Pack
+              Tailored Solutions
             </span>
           </motion.div>
 
           <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 leading-[1.1]">
-            Tailored web <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">development.</span>
+            Built for <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">your industry.</span>
           </motion.h2>
 
           <motion.div variants={fadeInUp} className="space-y-6 text-base md:text-lg leading-relaxed text-muted-foreground font-light border-l border-white/10 pl-6">
             <p>
-              Our <strong className="text-white">Custom Pack</strong> is designed for visionaries. It is perfect for businesses
-              seeking a fully tailored website with a unique design system and specialized functionalities.
+              We don&apos;t do cookie-cutter websites. Before writing a single line of code, we <strong className="text-white">research your industry</strong>, 
+              analyse your competitors, and understand your target audience to craft a digital presence that truly resonates.
             </p>
             <p>
-              We take you through a comprehensive <strong className="text-white">100h+ process</strong> including
-              sitemap architecture, high-fidelity wireframing, interactive prototyping, and robust full-stack
-              development.
+              From <strong className="text-white">market positioning</strong> to user behaviour analysis, every design decision 
+              is backed by data. The result? A website that speaks directly to your customers and drives measurable business growth.
             </p>
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="mt-8 grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-[#d4f534]" />
+              <span className="text-sm text-white/70">Competitor Analysis</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-[#d4f534]" />
+              <span className="text-sm text-white/70">Industry Research</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-[#d4f534]" />
+              <span className="text-sm text-white/70">Audience Targeting</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-[#d4f534]" />
+              <span className="text-sm text-white/70">Custom Strategy</span>
+            </div>
           </motion.div>
         </motion.div>
       </div>
