@@ -21,6 +21,7 @@ interface ServiceCardProps {
   accentColor?: string;
   isMobile?: boolean;
   className?: string;
+  compact?: boolean;
 }
 
 export function ServiceCard({
@@ -33,19 +34,24 @@ export function ServiceCard({
   accentColor = "#d4f534",
   isMobile = false,
   className,
+  compact = false,
 }: ServiceCardProps) {
   return (
     <motion.div
       variants={fadeInUp}
       className={cn(
-        "group relative bg-[#0a0a0a] rounded-[2rem] overflow-hidden border border-white/10",
+        "group relative bg-[#0a0a0a] overflow-hidden border border-white/10",
         "transition-all duration-500",
         "md:hover:border-white/30",
+        compact ? "rounded-2xl" : "rounded-[2rem]",
         className
       )}
     >
       {/* Image Section */}
-      <div className="relative h-48 md:h-56 lg:h-64 overflow-hidden">
+      <div className={cn(
+        "relative overflow-hidden",
+        compact ? "h-36 md:h-40" : "h-48 md:h-56 lg:h-64"
+      )}>
         <img
           src={image}
           alt={title}
@@ -55,7 +61,10 @@ export function ServiceCard({
         
         {/* Icon Badge */}
         <div
-          className="absolute top-4 left-4 p-3 rounded-xl"
+          className={cn(
+            "absolute top-4 left-4 rounded-lg",
+            compact ? "p-2" : "p-3 rounded-xl"
+          )}
           style={{ backgroundColor: accentColor }}
         >
           {icon}
@@ -63,30 +72,42 @@ export function ServiceCard({
       </div>
 
       {/* Content Section */}
-      <div className="p-6 md:p-8">
-        <div className="mb-4">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">{title}</h3>
+      <div className={cn(compact ? "p-4 md:p-5" : "p-6 md:p-8")}>
+        <div className={cn(compact ? "mb-3" : "mb-4")}>
+          <h3 className={cn(
+            "font-bold text-white mb-1",
+            compact ? "text-lg md:text-xl" : "text-2xl md:text-3xl"
+          )}>{title}</h3>
           <p 
-            className="text-sm font-medium uppercase tracking-wider"
+            className={cn(
+              "font-medium uppercase tracking-wider",
+              compact ? "text-[10px]" : "text-sm"
+            )}
             style={{ color: accentColor }}
           >
             {subtitle}
           </p>
         </div>
 
-        <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
+        <p className={cn(
+          "text-muted-foreground leading-relaxed",
+          compact ? "text-xs md:text-sm mb-4 line-clamp-2" : "text-sm md:text-base mb-6"
+        )}>
           {description}
         </p>
 
         {/* Feature List */}
-        <ul className="space-y-3">
-          {items.map((item, index) => (
-            <li key={index} className="flex items-start gap-3">
+        <ul className={cn(compact ? "space-y-2" : "space-y-3")}>
+          {(compact ? items.slice(0, 3) : items).map((item, index) => (
+            <li key={index} className="flex items-start gap-2">
               <CheckCircle 
-                className="w-4 h-4 mt-0.5 shrink-0" 
+                className={cn("mt-0.5 shrink-0", compact ? "w-3 h-3" : "w-4 h-4")} 
                 style={{ color: accentColor }}
               />
-              <span className="text-sm text-muted-foreground md:group-hover:text-white transition-colors">
+              <span className={cn(
+                "text-muted-foreground md:group-hover:text-white transition-colors",
+                compact ? "text-xs" : "text-sm"
+              )}>
                 {item}
               </span>
             </li>

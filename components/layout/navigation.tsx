@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Menu, X, ArrowRight, Monitor, Package, Smartphone } from "lucide-react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageType } from "@/lib/navigation";
 
@@ -11,19 +10,14 @@ interface NavigationProps {
 }
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Close dropdown on outside click
+  // Track scroll for header background
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setServicesOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Lock body scroll
@@ -39,231 +33,183 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const isServicePage = currentPage === "web-design" || currentPage === "seo" || currentPage === "app-development";
 
   const servicePages = [
-    { id: "web-design" as const, label: "Web Design", icon: Monitor, desc: "Custom & Responsive" },
-    { id: "seo" as const, label: "SEO Services", icon: Package, desc: "Rank Higher" },
-    { id: "app-development" as const, label: "App Development", icon: Smartphone, desc: "Mobile & Web Apps" },
+    { id: "web-design" as const, label: "Web" },
+    { id: "seo" as const, label: "SEO" },
+    { id: "app-development" as const, label: "Apps" },
   ];
 
   const handleNavClick = (pageId: PageType) => {
     onPageChange(pageId);
     setMobileMenuOpen(false);
-    setServicesOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <>
-      {/* --- HEADER BAR --- 
-        Added: Stronger blur, grainy feel via border-b, and distinct z-index stacking.
-      */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 md:px-12 transition-all duration-300">
+      {/* Desktop Navigation - Editorial Style */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-4" : "py-6"}`}>
+        <div className={`absolute inset-0 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-sm" : "bg-transparent"}`} />
         
-        {/* Glass Background Layer */}
-        <div className="absolute inset-0 bg-[#050505]/80 backdrop-blur-md border-b border-white/10 shadow-lg" />
-
-        {/* --- Logo --- */}
-        <button
-          type="button"
-          onClick={() => handleNavClick("home")}
-          className="relative z-10 flex items-center gap-3 group"
-        >
-          {/* Logo Icon with depth */}
-          <div className="flex items-center justify-center w-10 h-10 transition-all duration-300 border border-white/20 rounded-xl bg-white/5 group-hover:border-[#d4f534]/50 group-hover:shadow-[0_0_15px_rgba(212,245,52,0.3)]">
-            <span className="font-bold text-xs text-white group-hover:text-[#d4f534]">LM</span>
-          </div>
-          {/* Text */}
-          <div className="flex flex-col items-start">
-            <span className="text-lg font-bold leading-none tracking-tight text-white transition-colors group-hover:text-gray-200">
-              LM Studios
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 flex items-center justify-between">
+          {/* Logo - Clean Typography */}
+          <button
+            type="button"
+            onClick={() => handleNavClick("home")}
+            className="group flex items-baseline gap-1"
+          >
+            <span className="text-xl md:text-2xl font-bold tracking-tight text-white">
+              LM
             </span>
-          </div>
-        </button>
+            <span className="text-xl md:text-2xl font-light tracking-tight text-white/60 group-hover:text-white transition-colors">
+              Studios
+            </span>
+          </button>
 
-        {/* --- Desktop Navigation --- */}
-        <nav className="relative z-10 hidden items-center gap-1 md:flex">
-          <DesktopNavLink 
-            label="Home" 
-            isActive={currentPage === "home"} 
-            onClick={() => handleNavClick("home")} 
-          />
-          <DesktopNavLink 
-            label="About Us" 
-            isActive={currentPage === "about"} 
-            onClick={() => handleNavClick("about")} 
-          />
-          <DesktopNavLink 
-            label="Projects" 
-            isActive={currentPage === "projects"} 
-            onClick={() => handleNavClick("projects")} 
-          />
+          {/* Desktop Nav - Horizontal with Services Inline */}
+          <nav className="hidden md:flex items-center">
+            {/* Main Links */}
+            <div className="flex items-center border-r border-white/10 pr-8 mr-8">
+              <NavLink 
+                label="Home" 
+                isActive={currentPage === "home"} 
+                onClick={() => handleNavClick("home")} 
+              />
+              <NavLink 
+                label="About" 
+                isActive={currentPage === "about"} 
+                onClick={() => handleNavClick("about")} 
+              />
+              <NavLink 
+                label="Work" 
+                isActive={currentPage === "projects"} 
+                onClick={() => handleNavClick("projects")} 
+              />
+            </div>
 
-          {/* Services Dropdown Trigger */}
-          <div className="relative px-1" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setServicesOpen(!servicesOpen)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
-                isServicePage || servicesOpen
-                  ? "border-[#d4f534]/30 text-[#d4f534] bg-[#d4f534]/10 shadow-[0_0_15px_-5px_rgba(212,245,52,0.5)]" 
-                  : "border-transparent text-gray-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              Services
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {/* Premium Dropdown Menu */}
-            <AnimatePresence>
-              {servicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                  transition={{ duration: 0.2, ease: "circOut" }}
-                  className="absolute right-0 top-full mt-4 w-72 p-2 rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-2xl overflow-hidden backdrop-blur-xl ring-1 ring-white/5"
+            {/* Services - Inline, no dropdown */}
+            <div className="flex items-center gap-1">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-white/30 mr-4">Services</span>
+              {servicePages.map((page, idx) => (
+                <button
+                  key={page.id}
+                  onClick={() => handleNavClick(page.id)}
+                  className={`relative px-3 py-1.5 text-sm transition-all duration-300 ${
+                    currentPage === page.id 
+                      ? "text-white" 
+                      : "text-white/40 hover:text-white"
+                  }`}
                 >
-                  <div className="flex flex-col gap-1">
-                    {servicePages.map((page) => (
-                      <button
-                        key={page.id}
-                        onClick={() => handleNavClick(page.id)}
-                        className={`group flex items-start gap-4 p-3 rounded-xl transition-all duration-300 border border-transparent ${
-                          currentPage === page.id 
-                            ? "bg-[#1a1a1a] border-white/5" 
-                            : "hover:bg-[#111] hover:border-white/5"
-                        }`}
-                      >
-                        <div className={`p-2.5 rounded-lg transition-colors ${
-                          currentPage === page.id ? "bg-[#d4f534] text-black" : "bg-white/5 text-gray-400 group-hover:text-white"
-                        }`}>
-                          <page.icon className="w-5 h-5" />
-                        </div>
-                        <div className="text-left">
-                          <div className={`text-sm font-bold transition-colors ${
-                            currentPage === page.id ? "text-[#d4f534]" : "text-gray-200 group-hover:text-white"
-                          }`}>
-                            {page.label}
-                          </div>
-                          <div className="text-xs text-gray-500 mt-0.5 font-medium">{page.desc}</div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                  {page.label}
+                  {currentPage === page.id && (
+                    <motion.span 
+                      layoutId="serviceIndicator"
+                      className="absolute -bottom-1 left-3 right-3 h-px bg-white"
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                    />
+                  )}
+                  {idx < servicePages.length - 1 && (
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-white/10">/</span>
+                  )}
+                </button>
+              ))}
+            </div>
 
-          {/* Contact CTA */}
-          <div className="ml-4 pl-4 border-l border-white/10">
+            {/* Contact - Minimal */}
             <button
               onClick={() => handleNavClick("contact")}
-              className="bg-white text-black hover:bg-[#d4f534] transition-colors px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2"
+              className={`ml-10 text-sm font-medium transition-all duration-300 ${
+                currentPage === "contact" 
+                  ? "text-black bg-white px-5 py-2" 
+                  : "text-white/60 hover:text-white"
+              }`}
             >
               Contact
-              <ArrowRight className="w-3 h-3" />
             </button>
-          </div>
-        </nav>
+          </nav>
 
-        {/* --- Mobile Menu Toggle --- */}
-        <button
-          type="button"
-          className="relative z-10 flex items-center justify-center w-10 h-10 text-white md:hidden"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-           <Menu className="w-6 h-6" />
-        </button>
+          {/* Mobile Toggle - Custom Lines */}
+          <button
+            type="button"
+            className="relative z-10 md:hidden w-8 h-8 flex flex-col justify-center items-end gap-1.5"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`block h-[2px] bg-white transition-all duration-300 ${mobileMenuOpen ? "w-6 rotate-45 translate-y-[5px]" : "w-8"}`} />
+            <span className={`block h-[2px] bg-white transition-all duration-300 ${mobileMenuOpen ? "opacity-0 w-4" : "w-5"}`} />
+            <span className={`block h-[2px] bg-white transition-all duration-300 ${mobileMenuOpen ? "w-6 -rotate-45 -translate-y-[5px]" : "w-6"}`} />
+          </button>
+        </div>
       </header>
 
-      {/* --- MOBILE MENU (High Fidelity) --- 
-        Matches Reference Image 2: Dark, large typography, glowing active state, bottom CTA.
-      */}
+      {/* Mobile Menu - Full Screen Editorial */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-[60] flex flex-col bg-[#050505] md:hidden"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[55] bg-black md:hidden"
           >
-            {/* Mobile Header */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.2 }}
-              className="flex items-center justify-end px-6 py-6 border-b border-white/5"
-            >
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center w-12 h-12 transition-colors rounded-full bg-white/5 text-gray-400 active:text-white active:bg-white/10"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </motion.div>
+            <div className="h-full flex flex-col pt-24 px-8 pb-10">
+              {/* Main Navigation */}
+              <nav className="flex-1 flex flex-col justify-center">
+                <div className="space-y-1">
+                  <MobileLink 
+                    label="Home" 
+                    isActive={currentPage === "home"} 
+                    onClick={() => handleNavClick("home")}
+                    index={0}
+                  />
+                  <MobileLink 
+                    label="About" 
+                    isActive={currentPage === "about"} 
+                    onClick={() => handleNavClick("about")}
+                    index={1}
+                  />
+                  <MobileLink 
+                    label="Work" 
+                    isActive={currentPage === "projects"} 
+                    onClick={() => handleNavClick("projects")}
+                    index={2}
+                  />
+                </div>
 
-            {/* Mobile Links - Smooth Fade In */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.15, duration: 0.3, ease: "easeOut" }}
-              className="flex flex-col justify-center flex-1 px-8 space-y-2"
-            >
-              <div className="flex flex-col gap-6">
-                <MobileBigLink 
-                  label="Home" 
-                  isActive={currentPage === "home"} 
-                  onClick={() => handleNavClick("home")} 
-                />
-                <MobileBigLink 
-                  label="About Us" 
-                  isActive={currentPage === "about"} 
-                  onClick={() => handleNavClick("about")} 
-                />
-                <MobileBigLink 
-                  label="Projects" 
-                  isActive={currentPage === "projects"} 
-                  onClick={() => handleNavClick("projects")} 
-                />
-                
-                {/* Services Section in Mobile */}
-                <div className="pt-4">
-                  <div className={`text-3xl font-bold mb-4 transition-colors ${isServicePage ? "text-[#d4f534] drop-shadow-[0_0_15px_rgba(212,245,52,0.4)]" : "text-white"}`}>
-                    Services
-                    {isServicePage && <span className="block h-1 w-12 bg-[#d4f534] mt-2 rounded-full" />}
-                  </div>
-                  <div className="pl-4 space-y-4 border-l-2 border-white/10">
+                {/* Services Section */}
+                <div className="mt-12 pt-8 border-t border-white/10">
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-white/30 block mb-6">Services</span>
+                  <div className="grid grid-cols-3 gap-4">
                     {servicePages.map((page) => (
                       <button
                         key={page.id}
                         onClick={() => handleNavClick(page.id)}
-                        className={`flex items-center gap-3 text-lg font-medium transition-colors duration-200 ${
-                          currentPage === page.id ? "text-[#d4f534]" : "text-gray-400 active:text-white"
+                        className={`text-left py-3 border-b transition-all duration-300 ${
+                          currentPage === page.id 
+                            ? "text-white border-white" 
+                            : "text-white/40 border-white/10 active:text-white"
                         }`}
                       >
-                         <span className="capitalize">{page.label}</span>
+                        <span className="text-lg font-medium">{page.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </nav>
 
-            {/* Mobile CTA Bottom */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 pb-8 border-t border-white/10"
-            >
-              <button
-                onClick={() => handleNavClick("contact")}
-                className="w-full bg-[#d4f534] text-black font-bold py-3 px-4 rounded-lg text-sm transition-colors active:bg-[#c7e81f]"
+              {/* Bottom CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
               >
-                Contact
-              </button>
-            </motion.div>
+                <button
+                  onClick={() => handleNavClick("contact")}
+                  className="w-full bg-white text-black font-medium py-4 text-base transition-colors active:bg-white/90"
+                >
+                  Get in Touch
+                </button>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -271,50 +217,40 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   );
 }
 
-// --- Helper Components ---
-
-function DesktopNavLink({ label, isActive, onClick }: { label: string, isActive: boolean, onClick: () => void }) {
+// Desktop Nav Link
+function NavLink({ label, isActive, onClick }: { label: string; isActive: boolean; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-        isActive ? "text-white" : "text-gray-400 hover:text-white"
+      className={`relative px-4 py-2 text-sm transition-colors duration-300 ${
+        isActive ? "text-white" : "text-white/40 hover:text-white"
       }`}
     >
       {label}
-      {/* Glow Effect for Active State */}
       {isActive && (
-        <motion.div
-          layoutId="navGlow"
-          className="absolute inset-0 rounded-full bg-white/5 -z-10 blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+        <motion.span 
+          layoutId="navIndicator"
+          className="absolute -bottom-1 left-4 right-4 h-px bg-white"
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
         />
-      )}
-      {/* Bottom active indicator */}
-      {isActive && (
-         <motion.div 
-           layoutId="navUnderline"
-           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#d4f534] rounded-full shadow-[0_0_8px_#d4f534]" 
-         />
       )}
     </button>
   );
 }
 
-function MobileBigLink({ label, isActive, onClick }: { label: string, isActive: boolean, onClick: () => void }) {
+// Mobile Link - Large Typography
+function MobileLink({ label, isActive, onClick, index }: { label: string; isActive: boolean; onClick: () => void; index: number }) {
   return (
-    <button 
+    <motion.button
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
       onClick={onClick}
-      className={`text-left text-4xl font-bold tracking-tight transition-colors duration-200 touch-manipulation ${
-        isActive 
-        ? "text-[#d4f534] drop-shadow-[0_0_15px_rgba(212,245,52,0.4)]" // The "Neon" look
-        : "text-white active:text-gray-200"
+      className={`block text-left w-full py-2 transition-colors duration-200 ${
+        isActive ? "text-white" : "text-white/30 active:text-white"
       }`}
     >
-      {label}
-      {isActive && <div className="h-1 w-12 bg-[#d4f534] mt-2 rounded-full shadow-[0_0_10px_#d4f534]" />}
-    </button>
-  )
+      <span className="text-5xl font-light tracking-tight">{label}</span>
+    </motion.button>
+  );
 }

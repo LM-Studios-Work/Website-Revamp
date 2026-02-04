@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { ArrowRight, Sparkles, TrendingUp, Code, Zap, CheckCircle } from "lucide-react";
+import { ArrowRight, Sparkles, TrendingUp, Code, Zap, CheckCircle, Smartphone } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 // Centralized imports
@@ -26,8 +26,9 @@ interface HomePageProps {
 
 // Icon mapping for services
 const serviceIcons: Record<string, React.ReactNode> = {
-  "web-design": <Sparkles className="w-5 h-5 md:w-6 md:h-6 text-black" />,
-  "seo": <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-black" />,
+  "web-design": <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-black" />,
+  "seo": <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-black" />,
+  "app-development": <Smartphone className="w-4 h-4 md:w-5 md:h-5 text-black" />,
 };
 
 // Icon mapping for features
@@ -153,7 +154,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
           isMobile={isMobile}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
           {services.map((service) => (
             <ServiceCard
               key={service.id}
@@ -165,6 +166,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
               items={service.items}
               accentColor={service.accentColor}
               isMobile={isMobile}
+              compact
             />
           ))}
         </div>
