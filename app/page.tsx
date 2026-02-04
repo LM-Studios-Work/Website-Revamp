@@ -6,10 +6,9 @@ import type { PageType } from "@/lib/navigation";
 
 // Import all page components
 import HomePage from "@/components/pages/homepage";
-import StandardPackPage from "@/components/pages/standard-pack-page";
+import StandardPackPage from "@/components/pages/webdesign";
 import SEOPage from "@/components/pages/seo-page";
 import ContactForm from "@/components/pages/contact-form";
-import ComparePage from "@/components/pages/compare-page";
 import ProjectsPage from "@/components/pages/projects-page";
 import AboutPage from "@/components/pages/about-page";
 
@@ -26,8 +25,7 @@ export default function Home() {
         return <SEOPage onPageChange={setCurrentPage} />;
       case "contact":
         return <ContactForm />;
-      case "compare":
-        return <ComparePage onPageChange={setCurrentPage} />;
+
       case "projects":
         return <ProjectsPage onPageChange={setCurrentPage} />;
       case "about":
