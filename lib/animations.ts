@@ -5,7 +5,7 @@
  * This ensures consistency and makes it easy to update animations globally.
  */
 
-import { Variants } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 // ============================================
 // FADE ANIMATIONS
@@ -135,6 +135,25 @@ export const staggerContainerMobile: Variants = {
 };
 
 // ============================================
+// SPRING ANIMATIONS (for cards and interactive elements)
+// ============================================
+
+export const springCard: Variants = {
+  hidden: { opacity: 0, y: 100, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      type: "spring",
+      stiffness: 70,
+      damping: 15,
+      mass: 1.2,
+    },
+  },
+};
+
+// ============================================
 // SPECIAL EFFECTS
 // ============================================
 
@@ -172,6 +191,22 @@ export const slideDown: Variants = {
   },
 };
 
+export const expandWidth: Variants = {
+  hidden: { width: 0 },
+  visible: {
+    width: "100%",
+    transition: { duration: 1.2, delay: 1, ease: "circOut" },
+  },
+};
+
+export const expandWidthMobile: Variants = {
+  hidden: { width: 0 },
+  visible: {
+    width: "100%",
+    transition: { duration: 0.8, delay: 0.6, ease: "circOut" },
+  },
+};
+
 // ============================================
 // HOVER ANIMATIONS (for whileHover prop)
 // ============================================
@@ -188,7 +223,7 @@ export const hoverScaleLarge = {
 
 export const hoverLift = {
   y: -10,
-  transition: { duration: 0.3 },
+  transition: { type: "spring", stiffness: 400, damping: 10 },
 };
 
 export const hoverGlow = {
@@ -212,3 +247,21 @@ export const createItemVariant = (delayMultiplier: number = 0.1): Variants => ({
     },
   }),
 });
+
+// ============================================
+// VIEWPORT OPTIONS (for whileInView)
+// ============================================
+
+export const viewportOnce = { once: true };
+
+export const viewportDefault = { 
+  once: true, 
+  margin: "-10%", 
+  amount: 0.2 as const,
+};
+
+export const viewportMobile = { 
+  once: true, 
+  margin: "0px", 
+  amount: 0.2 as const,
+};
