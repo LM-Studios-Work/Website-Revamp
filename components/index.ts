@@ -47,7 +47,4 @@ export {
   ProcessCard,
 } from "./shared";
 
-// ============================================
-// UI CARD COMPONENTS
-// ============================================
-export { ProjectCard } from "./cards/project-card";
+
