@@ -10,6 +10,7 @@ export type PageType =
   | "projects" 
   | "web-design" 
   | "seo" 
+  | "app-development"
   | "contact" 
   | "calculator";
 
@@ -28,8 +29,9 @@ export const mainNavItems: NavItem[] = [
 export const serviceNavItems: NavItem[] = [
   { id: "web-design", label: "Web Design", description: "Custom & Responsive" },
   { id: "seo", label: "SEO Services", description: "Rank Higher" },
+  { id: "app-development", label: "App Development", description: "Mobile & Web Apps" },
 ];
 
 export const isServicePage = (page: PageType): boolean => {
-  return page === "web-design" || page === "seo";
+  return page === "web-design" || page === "seo" || page === "app-development";
 };

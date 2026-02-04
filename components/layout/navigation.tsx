@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Menu, X, ArrowRight, Monitor, Package } from "lucide-react";
+import { ChevronDown, Menu, X, ArrowRight, Monitor, Package, Smartphone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PageType } from "@/lib/navigation";
 
@@ -36,11 +36,12 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
     return () => { document.body.style.overflow = "unset"; };
   }, [mobileMenuOpen]);
 
-  const isServicePage = currentPage === "web-design" || currentPage === "seo";
+  const isServicePage = currentPage === "web-design" || currentPage === "seo" || currentPage === "app-development";
 
   const servicePages = [
     { id: "web-design" as const, label: "Web Design", icon: Monitor, desc: "Custom & Responsive" },
     { id: "seo" as const, label: "SEO Services", icon: Package, desc: "Rank Higher" },
+    { id: "app-development" as const, label: "App Development", icon: Smartphone, desc: "Mobile & Web Apps" },
   ];
 
   const handleNavClick = (pageId: PageType) => {
