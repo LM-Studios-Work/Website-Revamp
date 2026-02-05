@@ -52,11 +52,10 @@ export function PageLayout({
     <div
       ref={ref}
       className={cn(
-        "min-h-screen overflow-x-hidden font-sans text-white bg-black",
+        "min-h-screen relative overflow-x-hidden font-sans text-white bg-black",
         "selection:bg-[#d4f534] selection:text-black",
         className
       )}
-      style={{ position: "relative" }}
     >
       <PageBackground solid={solidBackground} vignette={vignette} />
       
