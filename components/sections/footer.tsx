@@ -19,6 +19,8 @@ const pageAccentColors: Record<PageType, string> = {
   "app-development": "#6ee2d1",
   "contact": "#d4f534",
   "midrand-web-design": "#d4f534",
+  "centurion-web-design": "#d4f534",
+  "sandton-web-design": "#d4f534",
 };
 
 export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
@@ -132,6 +134,28 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
                   onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "midrand-web-design" ? accentColor : ""}
                 >
                   Midrand
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("centurion-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "centurion-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "centurion-web-design" ? accentColor : ""}
+                >
+                  Centurion
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("sandton-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "sandton-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "sandton-web-design" ? accentColor : ""}
+                >
+                  Sandton
                 </button>
               </li>
             </ul>
