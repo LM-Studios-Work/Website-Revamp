@@ -19,6 +19,13 @@ const pageAccentColors: Record<PageType, string> = {
   "app-development": "#6ee2d1",
   "contact": "#d4f534",
   "midrand-web-design": "#d4f534",
+  "centurion-web-design": "#d4f534",
+  "sandton-web-design": "#d4f534",
+  "thohoyandou-web-design": "#d4f534",
+  "pretoria-web-design": "#d4f534",
+  "polokwane-web-design": "#d4f534",
+  "johannesburg-web-design": "#d4f534",
+  "kempton-park-web-design": "#d4f534",
 };
 
 export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
@@ -132,6 +139,83 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
                   onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "midrand-web-design" ? accentColor : ""}
                 >
                   Midrand
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("centurion-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "centurion-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "centurion-web-design" ? accentColor : ""}
+                >
+                  Centurion
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("sandton-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "sandton-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "sandton-web-design" ? accentColor : ""}
+                >
+                  Sandton
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("thohoyandou-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "thohoyandou-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "thohoyandou-web-design" ? accentColor : ""}
+                >
+                  Thohoyandou
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("pretoria-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "pretoria-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "pretoria-web-design" ? accentColor : ""}
+                >
+                  Pretoria
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("polokwane-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "polokwane-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "polokwane-web-design" ? accentColor : ""}
+                >
+                  Polokwane
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("johannesburg-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "johannesburg-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "johannesburg-web-design" ? accentColor : ""}
+                >
+                  Johannesburg
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("kempton-park-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "kempton-park-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "kempton-park-web-design" ? accentColor : ""}
+                >
+                  Kempton Park
                 </button>
               </li>
             </ul>
