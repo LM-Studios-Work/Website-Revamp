@@ -25,6 +25,7 @@ const pageAccentColors: Record<PageType, string> = {
   "pretoria-web-design": "#d4f534",
   "polokwane-web-design": "#d4f534",
   "johannesburg-web-design": "#d4f534",
+  "kempton-park-web-design": "#d4f534",
 };
 
 export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
@@ -204,6 +205,17 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
                   onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "johannesburg-web-design" ? accentColor : ""}
                 >
                   Johannesburg
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("kempton-park-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "kempton-park-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "kempton-park-web-design" ? accentColor : ""}
+                >
+                  Kempton Park
                 </button>
               </li>
             </ul>

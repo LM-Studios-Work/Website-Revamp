@@ -19,6 +19,7 @@ import ThohoyandouWebDesignPage from "@/components/pages/thohoyandou-web-design-
 import PretoriaWebDesignPage from "@/components/pages/pretoria-web-design-page";
 import PolokwaneWebDesignPage from "@/components/pages/polokwane-web-design-page";
 import JohannesburgWebDesignPage from "@/components/pages/johannesburg-web-design-page";
+import KemptonParkWebDesignPage from "@/components/pages/kempton-park-web-design-page";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
@@ -54,6 +55,8 @@ export default function Home() {
         return <PolokwaneWebDesignPage onPageChange={setCurrentPage} />;
       case "johannesburg-web-design":
         return <JohannesburgWebDesignPage onPageChange={setCurrentPage} />;
+      case "kempton-park-web-design":
+        return <KemptonParkWebDesignPage onPageChange={setCurrentPage} />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }
