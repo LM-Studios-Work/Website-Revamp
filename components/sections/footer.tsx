@@ -18,6 +18,7 @@ const pageAccentColors: Record<PageType, string> = {
   "seo": "#c084fc",
   "app-development": "#6ee2d1",
   "contact": "#d4f534",
+  "midrand-web-design": "#d4f534",
 };
 
 export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
@@ -37,12 +38,12 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
   return (
     <footer className="relative z-20 bg-black text-white pt-24 pb-12 px-6 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+          <div className="space-y-6 lg:col-span-1">
             <div className="text-2xl font-bold">
               LM<span style={{ color: accentColor }}> Studios</span>
             </div>
-            <p className="text-white/50 leading-relaxed">
+            <p className="text-white/50 leading-relaxed text-sm">
               Your All-in-one Business Solution | Creative Digital Agency | Web design company | SEO (Search Engine Optimisation)
             </p>
             <div className="flex gap-4">
@@ -120,6 +121,23 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
           </div>
 
           <div>
+            <h4 className="font-bold mb-6 text-lg">Areas We Serve</h4>
+            <ul className="space-y-4 text-white/50">
+              <li>
+                <button 
+                  onClick={() => handleNavClick("midrand-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "midrand-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "midrand-web-design" ? accentColor : ""}
+                >
+                  Midrand
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div>
             <h4 className="font-bold mb-6 text-lg">Contact</h4>
             <ul className="space-y-4 text-white/50">
               <li className="flex items-center gap-3">
@@ -154,7 +172,7 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
 
         <div className="pt-12 border-t border-white/5 text-center text-white/30 text-sm">
           <p className="mb-4">
-            Website Design Johannesburg | Web Designers South Africa | Top Website Design Company in South Africa | Website Designing | Website Hosting
+            Website Design Johannesburg | Web Design Midrand | Web Designers South Africa | Top Website Design Company in South Africa | Website Designing | Website Hosting
           </p>
           <p>© {new Date().getFullYear()} LM Studios. All rights reserved.</p>
         </div>
