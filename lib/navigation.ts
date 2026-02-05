@@ -11,7 +11,8 @@ export type PageType =
   | "web-design" 
   | "seo" 
   | "app-development"
-  | "contact";
+  | "contact"
+  | "midrand-web-design";
 
 export interface NavItem {
   id: PageType;
@@ -33,4 +34,8 @@ export const serviceNavItems: NavItem[] = [
 
 export const isServicePage = (page: PageType): boolean => {
   return page === "web-design" || page === "seo" || page === "app-development";
+};
+
+export const isAreaPage = (page: PageType): boolean => {
+  return page === "midrand-web-design";
 };

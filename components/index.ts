@@ -27,6 +27,7 @@ export { default as AboutPage } from "./pages/about-page";
 export { default as SEOPage } from "./pages/seo-page";
 export { default as WebDesignPage } from "./pages/webdesign";
 export { default as ContactForm } from "./pages/contact-form";
+export { default as MidrandWebDesignPage } from "./pages/midrand-web-design-page";
 
 // ============================================
 // SHARED/REUSABLE COMPONENTS

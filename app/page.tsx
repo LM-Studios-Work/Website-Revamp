@@ -12,6 +12,7 @@ import AppDevelopmentPage from "@/components/pages/app-development-page";
 import ContactForm from "@/components/pages/contact-form";
 import ProjectsPage from "@/components/pages/projects-page";
 import AboutPage from "@/components/pages/about-page";
+import MidrandWebDesignPage from "@/components/pages/midrand-web-design-page";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
@@ -33,6 +34,8 @@ export default function Home() {
         return <ProjectsPage onPageChange={setCurrentPage} />;
       case "about":
         return <AboutPage onPageChange={setCurrentPage} />;
+      case "midrand-web-design":
+        return <MidrandWebDesignPage onPageChange={setCurrentPage} />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }
