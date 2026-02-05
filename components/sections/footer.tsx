@@ -22,6 +22,7 @@ const pageAccentColors: Record<PageType, string> = {
   "centurion-web-design": "#d4f534",
   "sandton-web-design": "#d4f534",
   "thohoyandou-web-design": "#d4f534",
+  "pretoria-web-design": "#d4f534",
 };
 
 export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
@@ -168,6 +169,17 @@ export function Footer({ currentPage = "home", onPageChange }: FooterProps) {
                   onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "thohoyandou-web-design" ? accentColor : ""}
                 >
                   Thohoyandou
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleNavClick("pretoria-web-design")}
+                  className="transition-colors text-left"
+                  style={{ color: currentPage === "pretoria-web-design" ? accentColor : undefined }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = accentColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = currentPage === "pretoria-web-design" ? accentColor : ""}
+                >
+                  Pretoria
                 </button>
               </li>
             </ul>

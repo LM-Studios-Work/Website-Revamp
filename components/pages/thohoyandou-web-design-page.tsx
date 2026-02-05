@@ -129,6 +129,18 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
               View Our Work
             </button>
           </motion.div>
+
+          {/* Hero image placeholder - replace src with actual Thohoyandou image */}
+          <motion.div variants={fadeInUp} className="mt-14 max-w-4xl mx-auto">
+            <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#5dd9c1]/20 to-transparent mix-blend-overlay z-10" />
+              <img
+                src="/placeholder.svg?height=560&width=1080"
+                alt="Thohoyandou cityscape showcasing the growing business district in the Vhembe region"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
