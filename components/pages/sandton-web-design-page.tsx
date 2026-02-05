@@ -39,11 +39,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
+import type { PageType } from "@/lib/navigation";
+
 interface SandtonWebDesignPageProps {
-  onPageChange?: (page: string) => void;
+  onPageChange?: (page: PageType) => void;
 }
 
-export function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignPageProps) {
+export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignPageProps) {
   const primaryColor = "#d4f534";
   const secondaryColor = "#5dd9c1";
   const accentColor = "#b4a7d6";
