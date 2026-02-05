@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import {
   ChevronDown,
   MapPin,
+  Globe,
   ArrowRight,
   CheckCircle,
   Building2,
@@ -17,10 +18,9 @@ import {
   BarChart3,
   Store,
   Briefcase,
+  Home as HomeIcon,
   Factory,
-  Target,
-  Award,
-  Rocket,
+  Wrench,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -49,37 +49,16 @@ export default function CenturionWebDesignPage({ onPageChange }: CenturionWebDes
 
   return (
     <PageLayout containerRef={containerRef} currentPage="centurion-web-design" onPageChange={onPageChange}>
-      {/* Hero Section */}
       <HeroSection heroY={heroY} onPageChange={onPageChange} />
-
-      {/* Trust Bar */}
       <TrustBar />
-
-      {/* Why Centurion Businesses Need a Website */}
       <WhyCenturionSection isMobile={isMobile} onPageChange={onPageChange} />
-
-      {/* Industry-Specific Web Design */}
       <IndustrySection isMobile={isMobile} onPageChange={onPageChange} />
-
-      {/* Local SEO Section */}
       <LocalSEOSection isMobile={isMobile} onPageChange={onPageChange} />
-
-      {/* Packages */}
       <PackagesSection onPageChange={onPageChange} />
-
-      {/* Service Area Map */}
       <ServiceAreaSection isMobile={isMobile} />
-
-      {/* Why Partner With Us */}
       <WhyPartnerSection isMobile={isMobile} onPageChange={onPageChange} />
-
-      {/* Tech Hub Positioning */}
-      <TechHubSection isMobile={isMobile} onPageChange={onPageChange} />
-
-      {/* FAQs */}
+      <AutomationSection isMobile={isMobile} onPageChange={onPageChange} />
       <FAQsSection />
-
-      {/* CTA */}
       <CTASection onPageChange={onPageChange} />
     </PageLayout>
   );
@@ -112,12 +91,12 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             </div>
           </motion.div>
           <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
-            Professional Websites <br />
+            High-Performance Sites <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">for Centurion Businesses.</span>
           </motion.h2>
           <motion.div variants={fadeInUp} className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
             <p>
-              Centurion{"'"}s manufacturing, logistics, and professional sectors demand digital excellence. From Highveld Park to Hennopspark, we craft <strong className="text-white">custom websites that showcase industrial strength and corporate sophistication</strong>.
+              Centurion is more than the bridge between Johannesburg and Pretoria {"--"} it{"'"}s a thriving independent economy. From tech hubs in Highveld to the industrial sector in Hennopspark, we build <strong className="text-white">custom websites that command authority in this competitive market</strong>.
             </p>
           </motion.div>
 
@@ -160,24 +139,23 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
 // TRUST BAR
 // =============================
 function TrustBar() {
+  const stats = [
+    { value: "50+", label: "Websites Delivered" },
+    { value: "100%", label: "Code Ownership" },
+    { value: "5-7", label: "Day Turnaround" },
+    { value: "Local", label: "Centurion Based" },
+  ];
+
   return (
-    <section className="px-4 sm:px-8 py-12 border-y border-white/10">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div className="text-3xl font-bold text-[#d4f534]">150+</div>
-          <p className="text-sm text-muted-foreground mt-2">Websites Built</p>
-        </div>
-        <div>
-          <div className="text-3xl font-bold text-[#d4f534]">98%</div>
-          <p className="text-sm text-muted-foreground mt-2">Client Satisfaction</p>
-        </div>
-        <div>
-          <div className="text-3xl font-bold text-[#d4f534]">12+</div>
-          <p className="text-sm text-muted-foreground mt-2">Years Experience</p>
-        </div>
-        <div>
-          <div className="text-3xl font-bold text-[#d4f534]">24/7</div>
-          <p className="text-sm text-muted-foreground mt-2">Support Available</p>
+    <section className="relative z-10 border-y border-white/5 bg-white/[0.02]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-[#d4f534]">{stat.value}</div>
+              <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -185,89 +163,170 @@ function TrustBar() {
 }
 
 // =============================
-// WHY CENTURION SECTION
+// WHY CENTURION NEEDS A WEBSITE
 // =============================
 function WhyCenturionSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
-  const reasons = [
-    { icon: Factory, title: "Manufacturing Hub", desc: "Strong presence of heavy industries and logistics" },
-    { icon: Users, title: "Growing Professional Sector", desc: "Accounting, legal, and consulting firms need digital presence" },
-    { icon: TrendingUp, title: "Rising Business Competition", desc: "Local businesses invest heavily in web presence" },
-    { icon: Building2, title: "Corporate Headquarters", desc: "Multiple multinational offices require sophisticated websites" },
-  ];
-
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Why Centurion</PageBadge>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        >
+          <motion.div variants={fadeInUp} className="mb-4">
+            <PageBadge>Centurion{"'"}s Digital Partner</PageBadge>
           </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
-            Why Centurion Businesses Need Strong Web Presence
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+            Why Your Centurion Business Needs <span className="text-[#d4f534]">a Professional Website</span>
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Centurion is more than just a location—it{"'"}s South Africa{"'"}s manufacturing and logistics powerhouse
+          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl mb-12 leading-relaxed">
+            Business in Centurion requires a balance of suburban trust and corporate efficiency. You don{"'"}t need to look to Pretoria or Sandton for expert development. We operate locally, understanding the unique dynamics of the Centurion {"\""}Garden City{"\""} economy. As a remote-first team, we eliminate agency bloat {"--"} you get enterprise-grade development at a price point that makes sense.
           </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {reasons.map((reason, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: <Globe className="w-6 h-6" />,
+              title: "Remote-First, Locally Rooted",
+              description: "We operate as a remote-first team rooted in the Centurion area. This model lets us offer premium, agency-grade development without inflated costs. You get high-performance code suitable for Highveld Techno Park, at a price that works for a family business in Lyttelton.",
+            },
+            {
+              icon: <TrendingUp className="w-6 h-6" />,
+              title: "Centurion Is Growing Fast",
+              description: "With developments in Eco Park, the Centurion CBD revival, and ongoing expansion in Irene, Centurion attracts more businesses every month. A professional website positions you to capture this growing market before competitors do.",
+            },
+            {
+              icon: <ShieldCheck className="w-6 h-6" />,
+              title: "Full Code Ownership",
+              description: "You own every line of code we write. No lock-in contracts, no hidden fees, no monthly website rental schemes. Just a solid digital asset owned 100% by you.",
+            },
+          ].map((item) => (
             <motion.div
-              key={idx}
+              key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-xl border border-white/10 hover:border-[#d4f534]/50 transition-colors bg-white/5 backdrop-blur-sm"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#d4f534]/30 transition-colors group"
             >
-              <reason.icon className="w-12 h-12 text-[#d4f534] mb-4" />
-              <h3 className="text-xl font-bold mb-2">{reason.title}</h3>
-              <p className="text-muted-foreground">{reason.desc}</p>
+              <div className="w-12 h-12 rounded-xl bg-[#d4f534]/10 text-[#d4f534] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
+              <p className="text-muted-foreground leading-relaxed text-sm">{item.description}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <p className="text-muted-foreground">
+            Want to learn more about our full range of services?{" "}
+            <button onClick={() => onPageChange?.("web-design")} className="text-[#d4f534] font-medium hover:underline">
+              View our web design packages
+            </button>{" "}
+            or{" "}
+            <button onClick={() => onPageChange?.("about")} className="text-[#d4f534] font-medium hover:underline">
+              read about our team
+            </button>.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 // =============================
-// INDUSTRY SECTION
+// INDUSTRY-SPECIFIC WEB DESIGN
 // =============================
 function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
   const industries = [
-    { name: "Manufacturing", icon: Factory, desc: "Showcase production capabilities and certifications" },
-    { name: "Logistics & Distribution", icon: Briefcase, desc: "Track services and fleet management systems" },
-    { name: "Professional Services", icon: Award, desc: "Build credibility and client trust" },
-    { name: "Retail & E-commerce", icon: Store, desc: "Convert visitors into paying customers" },
+    {
+      icon: <Factory className="w-6 h-6" />,
+      title: "Industrial & Manufacturing (Hennopspark & Sunderland Ridge)",
+      description: "If you operate in Centurion's industrial belt, you need credibility. We build robust, information-rich websites that showcase your capabilities, catalogues, and safety certifications to secure B2B contracts.",
+      color: "#d4f534",
+    },
+    {
+      icon: <Wrench className="w-6 h-6" />,
+      title: "Service Professionals (Rooihuiskraal & Wierda Park)",
+      description: "The competition for home services in suburbs like Rooihuiskraal is fierce. We build fast, conversion-focused sites for plumbers, electricians, and contractors that turn local Google searches into phone calls.",
+      color: "#5dd9c1",
+    },
+    {
+      icon: <Briefcase className="w-6 h-6" />,
+      title: "Professional Services (Highveld & Eco Park)",
+      description: "For the financial advisors, legal firms, and tech consultants in the business parks, we create polished, corporate-identity websites that mirror the professionalism of your physical offices.",
+      color: "#b4a7d6",
+    },
   ];
 
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Industries We Serve</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
-            Industry-Specific Solutions
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={isMobile ? staggerContainerMobile : staggerContainer}
+          className="mb-12"
+        >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-4">
+            Custom Website Design for <span className="text-[#5dd9c1]">Centurion{"'"}s Industries</span>
           </motion.h2>
+          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+            One size does not fit all in Centurion. We adapt our design strategy to your specific location and industry, whether you{"'"}re in the industrial belt or the tech parks.
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {industries.map((industry, idx) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {industries.map((industry) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-xl border border-[#d4f534]/30 bg-gradient-to-br from-[#d4f534]/10 to-transparent hover:border-[#d4f534]/60 transition-all"
+              key={industry.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative p-6 md:p-8 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-all group"
             >
-              <industry.icon className="w-12 h-12 text-[#d4f534] mb-4" />
-              <h3 className="text-2xl font-bold mb-2">{industry.name}</h3>
-              <p className="text-muted-foreground">{industry.desc}</p>
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
+                style={{ backgroundColor: `${industry.color}15`, color: industry.color }}
+              >
+                {industry.icon}
+              </div>
+              <h3 className="text-lg font-bold mb-3 text-white">{industry.title}</h3>
+              <p className="text-muted-foreground leading-relaxed text-sm">{industry.description}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <button
+            onClick={() => onPageChange?.("contact")}
+            className="bg-[#d4f534] text-black font-bold py-3 px-8 rounded-full hover:bg-[#c7e81f] transition-colors flex items-center gap-2"
+          >
+            Discuss Your Project <ArrowRight className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => onPageChange?.("projects")}
+            className="text-white/60 hover:text-white font-medium transition-colors"
+          >
+            See examples of our work
+          </button>
+        </motion.div>
       </div>
     </section>
   );
@@ -278,41 +337,76 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
 // =============================
 function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
   const seoFeatures = [
-    "Google Local Business Optimization",
-    "Multi-location Schema Markup",
-    "Centurion-specific keyword targeting",
-    "Local Citation Building",
-    "Review Management System",
-    "Mobile-First Optimization",
+    { icon: <Search className="w-5 h-5" />, text: "Google Business Profile optimisation for Centurion map pack results" },
+    { icon: <MapPin className="w-5 h-5" />, text: "Hyper-local keyword targeting for Highveld, Irene, Lyttelton, and surrounding areas" },
+    { icon: <BarChart3 className="w-5 h-5" />, text: "High-intent local traffic driven directly to your phone and inbox" },
+    { icon: <Globe className="w-5 h-5" />, text: "Position capture from the N1 and N14 highways and commuter routes" },
   ];
 
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeInUp}>
-            <PageBadge>Local SEO Dominance</PageBadge>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
-              Rank First in Centurion Search Results
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              We optimize every website for local Centurion searches. When someone searches "web design in Centurion" or "manufacturing solutions near me", your business appears first.
-            </p>
-            <div className="space-y-4">
-              {seoFeatures.map((feature, idx) => (
-                <motion.div key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.05 }} className="flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-[#d4f534] flex-shrink-0" />
-                  <span>{feature}</span>
-                </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className="mb-4">
+              <PageBadge color="#c084fc">SEO for Centurion</PageBadge>
+            </motion.div>
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+              Dominating Search Results <span className="text-[#c084fc]">from Zwartkop to Irene</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-8">
+              The battle for visibility in Centurion is fought on {"\""}Near Me{"\""} search results. If a resident in Eldoraigne searches for your service, they shouldn{"'"}t be seeing results from Midrand. We implement hyper-local SEO strategies to ensure you own your backyard.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className="space-y-4 mb-8">
+              {seoFeatures.map((feature) => (
+                <div key={feature.text} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+                  <div className="w-10 h-10 rounded-lg bg-[#c084fc]/10 text-[#c084fc] flex items-center justify-center flex-shrink-0">
+                    {feature.icon}
+                  </div>
+                  <p className="text-sm text-white/80 leading-relaxed">{feature.text}</p>
+                </div>
               ))}
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <button
+                onClick={() => onPageChange?.("seo")}
+                className="text-[#c084fc] font-medium hover:underline flex items-center gap-2"
+              >
+                Explore our full SEO services <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="hidden lg:block"
+          >
+            <div className="relative rounded-3xl overflow-hidden border border-white/10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                <Search className="w-24 h-24 text-[#c084fc]/30" />
+              </div>
+              <div className="absolute bottom-6 left-6 right-6 z-20">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl">
+                  <p className="text-sm font-medium text-white">
+                    {"\""}Leveraging local signals around Centurion Mall and the Gautrain Station for Map Pack dominance.{"\""}
+                  </p>
+                  <p className="text-xs text-[#c084fc] mt-2">Local SEO Strategy</p>
+                </div>
+              </div>
             </div>
           </motion.div>
-          <motion.div variants={fadeInUp} className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
-            <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
-              <Search className="w-24 h-24 text-[#d4f534]/30" />
-            </div>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -323,28 +417,56 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
 // =============================
 function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
+    <section className="relative z-10 px-4 sm:px-8 py-12 md:py-16 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Web Design Packages</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
-            Scalable Solutions for Every Budget
-          </motion.h2>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeInUp}
+          className="mb-12"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            Web Design Packages for <span className="text-[#d4f534]">Centurion</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
+            We do not use templates. Every website is custom-built for your business. Whether you{"'"}re a solo consultant in Highveld or a growing company in Eco Park, we have a package that fits.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {webPackages.map((pkg, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <PackageCard package={pkg} onContactClick={() => onPageChange?.("contact")} />
-            </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
+        >
+          {webPackages.map((pkg) => (
+            <PackageCard
+              key={pkg.id}
+              name={pkg.name}
+              price={pkg.price}
+              description={pkg.description}
+              features={pkg.features}
+              color={pkg.color}
+              popular={pkg.popular}
+              delivery={pkg.delivery}
+              onSelect={() => onPageChange?.("contact")}
+            />
           ))}
+        </motion.div>
+
+        <div className="text-center">
+          <p className="text-muted-foreground">
+            Need something more custom?{" "}
+            <button onClick={() => onPageChange?.("contact")} className="text-[#d4f534] font-medium hover:underline">
+              Contact us for a tailored quote
+            </button>{" "}
+            or{" "}
+            <button onClick={() => onPageChange?.("web-design")} className="text-[#d4f534] font-medium hover:underline">
+              view full package details
+            </button>.
+          </p>
         </div>
       </div>
     </section>
@@ -352,88 +474,75 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
 }
 
 // =============================
-// SERVICE AREA SECTION
+// SERVICE AREA MAP SECTION
 // =============================
 function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
   const areas = [
-    "Highveld Park",
-    "Hennopspark", 
-    "Centurion Mall Area",
-    "Irene",
-    "Eldorado",
-    "Zwartkop",
-    "Lyttelton",
-    "Gauteng Industrial Area",
+    {
+      category: "Business & Tech Hubs",
+      icon: <Building2 className="w-5 h-5" />,
+      locations: ["Highveld Techno Park", "Eco Park Estate", "Centurion CBD", "Icon Industrial Park"],
+      color: "#d4f534",
+    },
+    {
+      category: "Industrial Zones",
+      icon: <Factory className="w-5 h-5" />,
+      locations: ["Hennopspark", "Sunderland Ridge", "Lyttelton Industrial", "Zwartkop"],
+      color: "#5dd9c1",
+    },
+    {
+      category: "Residential & Lifestyle",
+      icon: <Users className="w-5 h-5" />,
+      locations: ["Irene", "Lyttelton", "Eldoraigne", "Clubview", "Rooihuiskraal", "Wierda Park", "The Reeds", "Southdowns"],
+      color: "#b4a7d6",
+    },
   ];
 
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Service Areas</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
-            Serving All of Centurion
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={isMobile ? staggerContainerMobile : staggerContainer}
+          className="mb-12"
+        >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-4">
+            Serving the <span className="text-[#5dd9c1]">Entire Centurion Region</span>
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
-            From industrial areas to commercial hubs, we serve every part of Centurion
+          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+            Centurion is a collection of distinct communities. Our digital services cover the entire region, anchoring your presence around key landmarks like SuperSport Park and the Unitas Hospital district.
           </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-4 gap-4">
-          {areas.map((area, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {areas.map((area) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05 }}
-              className="p-6 rounded-lg border border-white/10 hover:border-[#d4f534]/50 text-center transition-colors bg-white/5"
-            >
-              <MapPin className="w-6 h-6 text-[#d4f534] mx-auto mb-3" />
-              <p className="font-medium">{area}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// =============================
-// TECH HUB SECTION
-// =============================
-function TechHubSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
-  const techs = [
-    { name: "React & Next.js", icon: Code },
-    { name: "Advanced Performance", icon: Zap },
-    { name: "Security First", icon: ShieldCheck },
-    { name: "Analytics Integration", icon: BarChart3 },
-  ];
-
-  return (
-    <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
-      <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Technology Stack</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
-            Built with Enterprise-Grade Technology
-          </motion.h2>
-        </motion.div>
-
-        <div className="grid md:grid-cols-4 gap-6">
-          {techs.map((tech, idx) => (
-            <motion.div
-              key={idx}
+              key={area.category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-xl border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10"
             >
-              <tech.icon className="w-12 h-12 text-[#d4f534] mx-auto mb-4" />
-              <h3 className="font-bold">{tech.name}</h3>
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${area.color}15`, color: area.color }}
+                >
+                  {area.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white">{area.category}</h3>
+              </div>
+              <ul className="space-y-3">
+                {area.locations.map((loc) => (
+                  <li key={loc} className="flex items-center gap-3 text-sm text-white/70">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: area.color }} />
+                    {loc}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>
@@ -443,36 +552,163 @@ function TechHubSection({ isMobile, onPageChange }: { isMobile: boolean; onPageC
 }
 
 // =============================
-// WHY PARTNER SECTION
+// WHY PARTNER WITH US
 // =============================
 function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
-  const reasons = [
-    "Deep understanding of Centurion business landscape",
-    "Proven track record with local manufacturers",
-    "24/7 support and maintenance",
-    "Transparent pricing and timelines",
+  const benefits = [
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "Accessible & Understandable",
+      description: "We speak plain English, avoiding confusing jargon. We explain exactly how your investment will generate returns for your Centurion business.",
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: "Efficient & Cost-Effective",
+      description: "Our remote model eliminates overhead costs. You receive the same quality of work as a Pretoria or Sandton agency at a fraction of the price.",
+    },
+    {
+      icon: <Code className="w-6 h-6" />,
+      title: "Modern Technology Stack",
+      description: "We build with Next.js, React, and Tailwind CSS. Your website will be fast, secure, and built to scale as your business grows.",
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6" />,
+      title: "No Lock-In Contracts",
+      description: "You own everything. Your domain, your hosting, your code. We believe in earning your business through results, not contracts.",
+    },
   ];
 
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>Why Partner With Us</PageBadge>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="hidden lg:block"
+          >
+            <div className="relative rounded-3xl overflow-hidden border border-white/10">
+              <div className="absolute inset-0 bg-black/40 z-10" />
+              <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                <Code className="w-24 h-24 text-[#d4f534]/30" />
+              </div>
+            </div>
           </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-8">
-            Your Centurion Web Design Partner
-          </motion.h2>
 
-          <div className="grid md:grid-cols-2 gap-6 text-left">
-            {reasons.map((reason, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }} className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-[#d4f534] flex-shrink-0 mt-1" />
-                <p className="text-lg">{reason}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          >
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+              Why Partner With a <span className="text-[#d4f534]">Local Remote Team</span>?
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-8">
+              We offer the agility of a modern tech partner with the understanding of a local neighbour. We cut through the jargon to explain exactly how your website will deliver ROI.
+            </motion.p>
+
+            <div className="space-y-4">
+              {benefits.map((benefit, idx) => (
+                <motion.div
+                  key={benefit.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.4 }}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-[#d4f534]/20 transition-colors group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-[#d4f534]/10 text-[#d4f534] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    {benefit.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white mb-1">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div variants={fadeInUp} className="mt-8 flex gap-4">
+              <button
+                onClick={() => onPageChange?.("about")}
+                className="text-[#d4f534] font-medium hover:underline flex items-center gap-2"
+              >
+                Meet our team <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================
+// APP & AUTOMATION SECTION
+// =============================
+function AutomationSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+  return (
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className="mb-4">
+              <PageBadge color="#6ee2d1">Beyond Websites</PageBadge>
+            </motion.div>
+            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+              App Development & <span className="text-[#6ee2d1]">Business Automation</span>
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-6">
+              Centurion is a hub for innovation. We support this with custom software development designed to streamline your operations and help you scale efficiently.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className="space-y-4 mb-8">
+              {[
+                "Need a secure client portal for a firm in Southdowns? We build secure, branded portals.",
+                "Managing inventory for a warehouse in Hennopspark? We develop custom inventory management tools.",
+                "Handling bookings for a lifestyle business in Irene? We create automated booking systems.",
+                "Running staff across multiple locations? We build staff management portals and B2B interfaces.",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#6ee2d1] flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-white/80 leading-relaxed">{item}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <button
+                onClick={() => onPageChange?.("app-development")}
+                className="text-[#6ee2d1] font-medium hover:underline flex items-center gap-2"
+              >
+                See our app development packages <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="hidden lg:block"
+          >
+            <div className="relative rounded-3xl overflow-hidden border border-white/10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                <Smartphone className="w-24 h-24 text-[#6ee2d1]/30" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -482,51 +718,95 @@ function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
 // FAQs SECTION
 // =============================
 function FAQsSection() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
   const faqs = [
-    { q: "How long does it take to build a website?", a: "Most websites take 4-8 weeks from design to launch." },
-    { q: "Do you offer maintenance and support?", a: "Yes, we provide ongoing maintenance, updates, and 24/7 support." },
-    { q: "What about SEO?", a: "All websites come with local SEO optimization built-in." },
-    { q: "Can you help with e-commerce?", a: "Absolutely. We build full e-commerce solutions for retail and B2B." },
-    { q: "Do you work with existing websites?", a: "Yes, we redesign and optimize existing sites frequently." },
-    { q: "What's included in the price?", a: "Domain, hosting, design, development, SEO, and 1 month of free support." },
+    {
+      category: "Web Design in Centurion",
+      icon: <Globe className="w-6 h-6" />,
+      questions: [
+        {
+          q: "Do you provide web design services specifically for Centurion businesses?",
+          a: "Yes. We provide full web design and development services tailored specifically for businesses operating in the Centurion area, including Highveld, Hennopspark, Irene, Lyttelton, Eldoraigne, Clubview, Rooihuiskraal, and Wierda Park. We understand the local market dynamics and build websites that resonate with your target audience.",
+        },
+        {
+          q: "How much does a website cost for a small business in Centurion?",
+          a: "Our Essential Business package starts at R2,499 for a professional 3-page website delivered in 5-7 days. For growing businesses that need more pages and features, our Professional Growth package is R4,999. Every website is custom-built, mobile-responsive, and SEO-optimised for local Centurion search terms.",
+        },
+        {
+          q: "Can we meet in person to discuss my project?",
+          a: "Absolutely. While we operate as a remote-first team for efficiency, we are locally based and available for in-person consultations across the Centurion area. We can meet at a location convenient to you in Highveld, Irene, or any other part of Centurion.",
+        },
+      ],
+    },
+    {
+      category: "Local SEO & Rankings",
+      icon: <Search className="w-6 h-6" />,
+      questions: [
+        {
+          q: "Can you help my business rank on Google in the Centurion area?",
+          a: "Yes. We specialise in local SEO for Centurion businesses. We optimise your Google Business Profile, target hyper-local keywords such as 'web design Centurion', 'plumber Rooihuiskraal', and 'accountant Highveld', and implement technical SEO to help you appear in the Google Map Pack and organic search results.",
+        },
+        {
+          q: "How long does it take to see SEO results?",
+          a: "Local SEO results typically begin to show within 2-4 months, with significant improvements in 4-6 months. The timeline depends on competition in your industry and the current state of your online presence. We provide monthly reporting so you can track progress.",
+        },
+        {
+          q: "Do you optimise for specific Centurion suburbs and areas?",
+          a: "Yes. We create location-specific content and optimise for suburbs including Highveld, Irene, Lyttelton, Eldoraigne, Clubview, Rooihuiskraal, Wierda Park, Hennopspark, Sunderland Ridge, Southdowns, The Reeds, and Zwartkop. This hyper-local approach ensures you capture traffic from people searching in your immediate service area.",
+        },
+      ],
+    },
+    {
+      category: "Process & Delivery",
+      icon: <Zap className="w-6 h-6" />,
+      questions: [
+        {
+          q: "How long does it take to build a website?",
+          a: "Our Essential Business package is typically delivered within 5-7 business days. The Professional Growth package takes 7-12 business days. Custom and e-commerce solutions take longer depending on complexity. We provide clear timelines during the initial consultation.",
+        },
+        {
+          q: "Do I own the website after it is built?",
+          a: "Yes, 100%. You own every line of code, your domain name, and your hosting account. There are no lock-in contracts or monthly website rental fees. The website is a digital asset that belongs entirely to you.",
+        },
+        {
+          q: "What technologies do you use to build websites?",
+          a: "We build with modern frameworks including Next.js, React, and Tailwind CSS. These technologies ensure your website is fast, secure, accessible, and easy to maintain. We also implement structured data, meta tags, and other technical SEO elements as standard.",
+        },
+      ],
+    },
   ];
 
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
-      <div className="max-w-3xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
-            <PageBadge>FAQs</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold">
-            Frequently Asked Questions
-          </motion.h2>
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-black border-t border-white/10">
+      <div className="max-w-4xl mx-auto">
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-16">
+          <PageBadge>Common Questions</PageBadge>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 mt-4">
+            Frequently Asked Questions About <span className="text-[#d4f534]">Web Design in Centurion</span>
+          </h2>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Everything you need to know about getting a professional website built for your Centurion business.
+          </p>
         </motion.div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => (
+        <div className="space-y-8">
+          {faqs.map((section, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="border border-white/10 rounded-lg overflow-hidden"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeInUp}
+              className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 hover:border-white/20 transition-colors"
             >
-              <button
-                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                className="w-full p-6 flex items-center justify-between bg-white/5 hover:bg-white/10 transition-colors text-left"
-              >
-                <span className="font-bold">{faq.q}</span>
-                <ChevronDown className={`w-5 h-5 transition-transform ${openIdx === idx ? "rotate-180" : ""}`} />
-              </button>
-              <AnimatePresence>
-                {openIdx === idx && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                    <div className="p-6 bg-white/5 border-t border-white/10 text-muted-foreground">{faq.a}</div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <h3 className="text-xl md:text-2xl font-bold mb-6 text-[#d4f534] flex items-center gap-3">
+                {section.icon}
+                {section.category}
+              </h3>
+              <div className="space-y-4">
+                {section.questions.map((item, qIdx) => (
+                  <FAQItem key={qIdx} question={item.q} answer={item.a} />
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -540,27 +820,85 @@ function FAQsSection() {
 // =============================
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <section className="px-4 sm:px-8 py-20 md:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#d4f534]/10 to-transparent opacity-50 -z-10" />
-      
-      <div className="max-w-3xl mx-auto text-center">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer}>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-6">
-            Ready to Transform Your Digital Presence?
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-xl text-muted-foreground mb-12">
-            Get a free quote from our Centurion web design experts today
-          </motion.p>
-          <motion.button
-            variants={fadeInUp}
-            onClick={() => onPageChange?.("contact")}
-            className="group bg-[#d4f534] text-black font-bold py-6 px-12 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(212,245,52,0.3)] md:hover:scale-105 mx-auto"
-          >
-            <span>Get Your Free Quote</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+    <section className="relative z-10 px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="bg-[#d4f534] rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 lg:p-24 text-center relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 mix-blend-multiply" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-white/20 rounded-full blur-[80px] md:blur-[100px] animate-pulse" />
+
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 tracking-tight text-balance">
+              Ready to Build Your Digital Presence in Centurion?
+            </h2>
+            <p className="text-black/70 text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-2xl mx-auto font-medium leading-relaxed">
+              The Centurion market is competitive. Don{"'"}t let your business get left behind with an outdated website. Let{"'"}s build a solution that commands authority in Gauteng{"'"}s Garden City.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => onPageChange?.("contact")}
+                className="bg-black text-white font-bold py-4 px-8 md:py-5 md:px-10 rounded-full flex items-center gap-3 active:scale-95 md:hover:scale-105 md:hover:bg-gray-900 transition-all text-base md:text-lg shadow-2xl"
+              >
+                Get a Free Quote <ArrowRight className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => onPageChange?.("web-design")}
+                className="text-black/70 font-medium hover:text-black transition-colors"
+              >
+                View all packages
+              </button>
+            </div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Bottom SEO text block */}
+      <div className="max-w-4xl mx-auto mt-16 text-center">
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          LM Studios is a professional{" "}
+          <strong className="text-white/70">web design company in Centurion</strong>, providing custom website design, SEO optimisation, and app development services to businesses across Highveld, Hennopspark, Irene, Lyttelton, Eldoraigne, Clubview, Rooihuiskraal, Wierda Park, and the greater Centurion region. We serve both the Johannesburg and Pretoria markets along the N1 and N14 corridors.
+        </p>
+      </div>
     </section>
+  );
+}
+
+// =============================
+// FAQ ITEM HELPER
+// =============================
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-white/10 last:border-0 pb-4 last:pb-0">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-start justify-between text-left group py-2"
+      >
+        <span className="font-bold text-white text-sm md:text-base group-hover:text-[#d4f534] transition-colors pr-4">
+          {question}
+        </span>
+        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

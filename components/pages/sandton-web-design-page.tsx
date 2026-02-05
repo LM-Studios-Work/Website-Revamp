@@ -21,6 +21,7 @@ import {
   Globe,
   Target,
   Award,
+  Rocket,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
@@ -334,18 +335,27 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
           </motion.h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {webPackages.map((pkg, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
-            >
-              <PackageCard package={pkg} onContactClick={() => onPageChange?.("contact")} />
-            </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
+        >
+          {webPackages.map((pkg) => (
+            <PackageCard
+              key={pkg.id}
+              name={pkg.name}
+              price={pkg.price}
+              description={pkg.description}
+              features={pkg.features}
+              color={pkg.color}
+              popular={pkg.popular}
+              delivery={pkg.delivery}
+              onSelect={() => onPageChange?.("contact")}
+            />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
