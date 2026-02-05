@@ -18,7 +18,7 @@ import {
 import { motion } from "framer-motion";
 import type { PageType } from "@/lib/navigation";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
-import PageLayout from "@/components/shared/page-layout";
+import { PageLayout } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared/package-card";
 
 interface ThohoyandouWebDesignPageProps {
@@ -76,7 +76,7 @@ const faqs = [
 ];
 
 export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWebDesignPageProps) {
-  const [openFaq, setOpenFaq] = useState<string | undefined>(undefined);
+  const [openFaq, setOpenFaq] = useState<number | undefined>(undefined);
 
   return (
     <PageLayout currentPage="thohoyandou-web-design" onPageChange={onPageChange}>
