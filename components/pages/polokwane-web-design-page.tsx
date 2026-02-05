@@ -22,7 +22,7 @@ import type { PageType } from "@/lib/navigation";
 import { PageLayout, PageBadge } from "@/components/shared";
 import { PackageCard } from "@/components/shared/package-card";
 import { webPackages } from "@/lib/data";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import {
@@ -46,7 +46,7 @@ export default function PolokwaneWebDesignPage({
   });
 
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   return (
     <PageLayout
