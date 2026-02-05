@@ -15,6 +15,7 @@ import AboutPage from "@/components/pages/about-page";
 import MidrandWebDesignPage from "@/components/pages/midrand-web-design-page";
 import CenturionWebDesignPage from "@/components/pages/centurion-web-design-page";
 import SandtonWebDesignPage from "@/components/pages/sandton-web-design-page";
+import ThohoyandouWebDesignPage from "@/components/pages/thohoyandou-web-design-page";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<PageType>("home");
@@ -42,6 +43,8 @@ export default function Home() {
         return <CenturionWebDesignPage onPageChange={setCurrentPage} />;
       case "sandton-web-design":
         return <SandtonWebDesignPage onPageChange={setCurrentPage} />;
+      case "thohoyandou-web-design":
+        return <ThohoyandouWebDesignPage onPageChange={setCurrentPage} />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }

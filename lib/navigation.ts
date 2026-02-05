@@ -14,7 +14,8 @@ export type PageType =
   | "contact"
   | "midrand-web-design"
   | "centurion-web-design"
-  | "sandton-web-design";
+  | "sandton-web-design"
+  | "thohoyandou-web-design";
 
 export interface NavItem {
   id: PageType;
@@ -39,5 +40,5 @@ export const isServicePage = (page: PageType): boolean => {
 };
 
 export const isAreaPage = (page: PageType): boolean => {
-  return page === "midrand-web-design" || page === "centurion-web-design" || page === "sandton-web-design";
+  return page === "midrand-web-design" || page === "centurion-web-design" || page === "sandton-web-design" || page === "thohoyandou-web-design";
 };
