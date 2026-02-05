@@ -51,6 +51,7 @@ const staggerContainer = {
 };
 
 export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWebDesignPageProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [openFaq, setOpenFaq] = useState<string | undefined>(undefined);
 
   const webPackages = [
@@ -169,7 +170,7 @@ export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWe
   ];
 
   return (
-    <PageLayout currentPage="thohoyandou-web-design" onPageChange={onPageChange}>
+    <PageLayout containerRef={containerRef} currentPage="thohoyandou-web-design" onPageChange={onPageChange}>
       {/* Hero Section - Split Design */}
       <SectionWrapper className="pt-24 pb-16 md:pt-32 md:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
