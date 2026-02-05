@@ -113,14 +113,13 @@ export default function HomePage({ onPageChange }: HomePageProps) {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight"
             >
               Innovative Web Design <br />
-              <span className="text-gray-500">for a Digital World.</span>
+              <span className="text-gray-500">for Johannesburg Businesses.</span>
             </motion.h1>
             <motion.p
               variants={fadeInUp}
               className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl font-light leading-relaxed text-muted-foreground"
             >
-              Crafting user-centric digital experiences with a focus on modern
-              aesthetics, clean code, and modern web technologies.
+              Crafting modern, mobile-responsive websites with a single focus: turning site visitors into paying customers. We combine aesthetics with clean code to drive results.
             </motion.p>
           </motion.div>
 
@@ -150,7 +149,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
         <SectionHeader
           title="Our"
           titleHighlight="services"
-          description="We offer comprehensive digital solutions to elevate your online presence and drive measurable results."
+          description="We specialize in partnering with small and medium-sized businesses (SMBs) across Gauteng. Our goal is simple: to provide the digital infrastructure you need for stable growth and long-term profits."
           isMobile={isMobile}
         />
 
@@ -251,12 +250,10 @@ function CustomPackSection({ isMobile }: { isMobile: boolean }) {
 
           <motion.div variants={fadeInUp} className="space-y-6 text-base md:text-lg leading-relaxed text-muted-foreground font-light border-l border-white/10 pl-6">
             <p>
-              We don&apos;t do cookie-cutter websites. Before writing a single line of code, we <strong className="text-white">research your industry</strong>, 
-              analyse your competitors, and understand your target audience to craft a digital presence that truly resonates.
+              <strong className="text-white">Beyond Constant Research.</strong> We are committed to ensuring that every website we build blends sound business principles, marketing strategy, and financial logic into a solution that works for you.
             </p>
             <p>
-              From <strong className="text-white">market positioning</strong> to user behaviour analysis, every design decision 
-              is backed by data. The result? A website that speaks directly to your customers and drives measurable business growth.
+              <strong className="text-white">From Startup to Scale.</strong> From well-established businesses to new startups, we assist you with the next step in your online journey. We don&apos;t just design; we build solutions that fit your business model.
             </p>
           </motion.div>
 

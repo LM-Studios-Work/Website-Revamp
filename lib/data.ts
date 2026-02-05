@@ -175,7 +175,7 @@ export const services: Service[] = [
     subtitle: "Crafting beautiful, user-friendly websites",
     description: "Our web design services combine stunning visuals with seamless functionality. Whether you need a standard website or a fully custom solution.",
     image: "https://images.unsplash.com/photo-1637502875124-eb4a9843a2fa?auto=format&fit=crop&w=1080&q=80",
-    items: ["Custom & Standard Pack options", "Responsive design for all devices", "Built with modern frameworks"],
+    items: ["Scalable Architecture (Startups to Corporates)", "Mobile-First Speed Optimization", "Built with modern frameworks"],
     accentColor: "#d4f534",
   },
   {
@@ -701,3 +701,4 @@ export const webDesignFAQs: FAQ[] = [
     ],
   },
 ];
+

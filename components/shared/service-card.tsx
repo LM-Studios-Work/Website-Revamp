@@ -91,7 +91,7 @@ export function ServiceCard({
 
         <p className={cn(
           "text-muted-foreground leading-relaxed",
-          compact ? "text-xs md:text-sm mb-4 line-clamp-2" : "text-sm md:text-base mb-6"
+          compact ? "text-xs md:text-sm mb-4" : "text-sm md:text-base mb-6"
         )}>
           {description}
         </p>
