@@ -6,8 +6,6 @@
  * A reusable card for displaying services with image, icon, and feature list.
  */
 
-import { motion } from "framer-motion";
-import { fadeInUp } from "@/lib/animations";
 import { CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -37,8 +35,7 @@ export function ServiceCard({
   compact = false,
 }: ServiceCardProps) {
   return (
-    <motion.div
-      variants={fadeInUp}
+    <div
       className={cn(
         "group relative bg-[#0a0a0a] overflow-hidden border border-white/10",
         "transition-all duration-500",
@@ -120,6 +117,6 @@ export function ServiceCard({
         className="absolute inset-0 opacity-0 md:group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
         style={{ backgroundColor: accentColor }}
       />
-    </motion.div>
+    </div>
   );
 }

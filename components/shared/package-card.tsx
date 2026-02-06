@@ -6,8 +6,6 @@
  * A reusable card for displaying pricing packages with features list.
  */
 
-import { motion } from "framer-motion";
-import { springCard } from "@/lib/animations";
 import { Check, Clock, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -39,13 +37,7 @@ export function PackageCard({
   className,
 }: PackageCardProps) {
   return (
-    <motion.div
-      variants={springCard}
-      whileHover={{ 
-        y: -10, 
-        scale: 1.02,
-        transition: { type: "spring", stiffness: 400, damping: 10 },
-      }}
+    <div
       className={cn("relative group", className)}
     >
       <div
@@ -58,15 +50,12 @@ export function PackageCard({
         {/* Popular Badge */}
         {popular && (
           <div className="absolute top-0 right-0 p-4">
-            <motion.span
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
+            <span
               className="px-3 py-1 text-black rounded-full text-[10px] font-bold inline-block shadow-lg uppercase tracking-wider"
               style={{ backgroundColor: color }}
             >
               Popular
-            </motion.span>
+            </span>
           </div>
         )}
 
@@ -137,7 +126,7 @@ export function PackageCard({
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

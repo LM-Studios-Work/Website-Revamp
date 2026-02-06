@@ -20,11 +20,11 @@ import {
   Briefcase,
   Home as HomeIcon,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { webPackages } from "@/lib/data";
-import { fadeInUp, staggerContainer, staggerContainerMobile } from "@/lib/animations";
+
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
 
@@ -35,8 +35,8 @@ interface MidrandWebDesignPageProps {
 export default function MidrandWebDesignPage({ onPageChange }: MidrandWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -48,7 +48,7 @@ export default function MidrandWebDesignPage({ onPageChange }: MidrandWebDesignP
   return (
     <PageLayout containerRef={containerRef} currentPage="midrand-web-design" onPageChange={onPageChange}>
       {/* Hero Section */}
-      <HeroSection heroY={heroY} onPageChange={onPageChange} />
+      <HeroSection onPageChange={onPageChange} />
 
       {/* Trust Bar */}
       <TrustBar />
@@ -86,12 +86,12 @@ export default function MidrandWebDesignPage({ onPageChange }: MidrandWebDesignP
 // =============================
 // HERO SECTION
 // =============================
-function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page: PageType) => void }) {
+function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-20 md:py-32 overflow-hidden">
-      <motion.div style={{ y: heroY }} className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex-1">
-          <motion.div variants={fadeInUp} className="mb-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div className="flex-1">
+          <div className="mb-4">
             <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
               <button onClick={() => onPageChange?.("home")} className="hover:text-white transition-colors">Home</button>
               <span>/</span>
@@ -108,18 +108,18 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#d4f534]/50 bg-[#d4f534]/10 rounded-full text-[#d4f534] text-xs font-bold tracking-widest uppercase">
               <MapPin className="w-3 h-3" /> Midrand, Gauteng
             </div>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
             Professional Websites <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">for Midrand Businesses.</span>
-          </motion.h2>
-          <motion.div variants={fadeInUp} className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
+          </h2>
+          <div className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
             <p>
               Positioned between Johannesburg and Pretoria, Midrand is Gauteng{"'"}s fastest-growing business hub. Whether you{"'"}re launching a startup in Vorna Valley or running an operation near the Gallagher Convention Centre, we build <strong className="text-white">custom websites that match the pace of this area</strong>.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button
               onClick={() => onPageChange?.("contact")}
               className="group bg-[#d4f534] text-black font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(212,245,52,0.3)] md:hover:scale-105"
@@ -133,13 +133,10 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             >
               View Our Work
             </button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+        <div
           className="flex-1 w-full hidden md:block"
         >
           <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
@@ -150,8 +147,8 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
               className="w-full h-auto object-cover"
             />
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -190,22 +187,19 @@ function WhyMidrandSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
         >
-          <motion.div variants={fadeInUp} className="mb-4">
+          <div className="mb-4">
             <PageBadge>Midrand{"'"}s Digital Partner</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Why Your Midrand Business Needs <span className="text-[#d4f534]">a Professional Website</span>
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl mb-12 leading-relaxed">
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl mb-12 leading-relaxed">
             You don{"'"}t need to outsource your digital strategy to a generic agency in Cape Town or an expensive firm in Sandton. We are based right here, and we understand the unique mix of Midrand{"'"}s economy — from the retail bustle of the Mall of Africa district to the logistics powerhouses in Kyalami.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
@@ -225,12 +219,8 @@ function WhyMidrandSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
               description: "You own every line of code we write. No lock-in contracts, no hidden fees, no monthly website rental schemes. Just a solid digital asset owned 100% by you.",
             },
           ].map((item) => (
-            <motion.div
+            <div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
               className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#d4f534]/30 transition-colors group"
             >
               <div className="w-12 h-12 rounded-xl bg-[#d4f534]/10 text-[#d4f534] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -238,14 +228,11 @@ function WhyMidrandSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
               </div>
               <h3 className="text-xl font-bold mb-3 text-white">{item.title}</h3>
               <p className="text-muted-foreground leading-relaxed text-sm">{item.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="mt-8 text-center"
         >
           <p className="text-muted-foreground">
@@ -258,7 +245,7 @@ function WhyMidrandSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
               read about our team
             </button>.
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -292,29 +279,22 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="mb-12"
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Custom Website Design for <span className="text-[#5dd9c1]">Midrand{"'"}s Industries</span>
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
             Your website is your 24/7 salesperson. We build sites that work for your specific industry, whether you{"'"}re a local service provider or a national distributor operating from the N1 corridor.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {industries.map((industry) => (
-            <motion.div
+            <div
               key={industry.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
               className="relative p-6 md:p-8 rounded-2xl bg-black/40 border border-white/10 hover:border-white/20 transition-all group"
             >
               <div
@@ -325,14 +305,11 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
               </div>
               <h3 className="text-lg font-bold mb-3 text-white">{industry.title}</h3>
               <p className="text-muted-foreground leading-relaxed text-sm">{industry.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
@@ -347,7 +324,7 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
           >
             See examples of our work
           </button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -368,23 +345,20 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="mb-4">
+            <div className="mb-4">
               <PageBadge color="#c084fc">SEO for Midrand</PageBadge>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Dominating Search Results <span className="text-[#c084fc]">Along the N1 Corridor</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-8">
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
               Midrand is highly competitive. When a potential client in Blue Hills or Crowthorne searches for your services, they should not find a competitor in Centurion. We specialise in hyper-local SEO that puts your business in front of the right people, at the right time.
-            </motion.p>
+            </p>
 
-            <motion.div variants={fadeInUp} className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8">
               {seoFeatures.map((feature) => (
                 <div key={feature.text} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
                   <div className="w-10 h-10 rounded-lg bg-[#c084fc]/10 text-[#c084fc] flex items-center justify-center flex-shrink-0">
@@ -393,23 +367,19 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
                   <p className="text-sm text-white/80 leading-relaxed">{feature.text}</p>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.div variants={fadeInUp}>
+            <div>
               <button
                 onClick={() => onPageChange?.("seo")}
                 className="text-[#c084fc] font-medium hover:underline flex items-center gap-2"
               >
                 Explore our full SEO services <ArrowRight className="w-4 h-4" />
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="hidden lg:block"
           >
             <div className="relative rounded-3xl overflow-hidden border border-white/10">
@@ -428,7 +398,7 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -442,11 +412,8 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
   return (
     <section className="relative z-10 px-4 sm:px-8 py-12 md:py-16 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
@@ -455,13 +422,10 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
           <p className="text-muted-foreground max-w-2xl text-lg leading-relaxed">
             We do not use templates. Every website is custom-built for your business. Whether you{"'"}re a solo consultant in Noordwyk or a growing company in Waterfall City, we have a package that fits.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
         >
           {webPackages.map((pkg) => (
@@ -477,7 +441,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
 
         <div className="text-center">
           <p className="text-muted-foreground">
@@ -524,29 +488,22 @@ function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="mb-12"
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Serving the <span className="text-[#5dd9c1]">Entire Midrand Region</span>
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl leading-relaxed">
             We don{"'"}t just say {"\""}Midrand{"\""}. We mean the whole ecosystem. Our web design and SEO services cover the key economic and residential nodes across the region.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {areas.map((area) => (
-            <motion.div
+            <div
               key={area.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
               className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10"
             >
               <div className="flex items-center gap-3 mb-6">
@@ -566,7 +523,7 @@ function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -605,11 +562,7 @@ function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="hidden lg:block"
           >
             <div className="relative rounded-3xl overflow-hidden border border-white/10">
@@ -620,29 +573,22 @@ function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
                 className="w-full h-full object-cover"
               />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
+           
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Why Partner With a <span className="text-[#d4f534]">Local Remote Team</span>?
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-8">
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
               We offer the best of both worlds. Local enough to meet you at a coffee shop in Waterfall City, remote enough to keep our prices competitive.
-            </motion.p>
+            </p>
 
             <div className="space-y-4">
               {benefits.map((benefit, idx) => (
-                <motion.div
+                <div
                   key={benefit.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.4 }}
                   className="flex items-start gap-4 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-[#d4f534]/20 transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-[#d4f534]/10 text-[#d4f534] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -652,19 +598,19 @@ function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
                     <h3 className="text-base font-bold text-white mb-1">{benefit.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <motion.div variants={fadeInUp} className="mt-8 flex gap-4">
+            <div className="mt-8 flex gap-4">
               <button
                 onClick={() => onPageChange?.("about")}
                 className="text-[#d4f534] font-medium hover:underline flex items-center gap-2"
               >
                 Meet our team <ArrowRight className="w-4 h-4" />
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -679,23 +625,20 @@ function AutomationSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="mb-4">
+            <div className="mb-4">
               <PageBadge color="#6ee2d1">Beyond Websites</PageBadge>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
               App Development & <span className="text-[#6ee2d1]">Business Automation</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground text-lg leading-relaxed mb-6">
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-6">
               As Midrand grows, so does the complexity of running a business here. We build custom software solutions to streamline your operations and help you scale efficiently.
-            </motion.p>
+            </p>
 
-            <motion.div variants={fadeInUp} className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8">
               {[
                 "Managing a fleet near Grand Central Airport? We build logistics dashboards.",
                 "Handling bookings for a lifestyle business in Blue Hills? We create automated booking systems.",
@@ -707,23 +650,19 @@ function AutomationSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
                   <p className="text-sm text-white/80 leading-relaxed">{item}</p>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
-            <motion.div variants={fadeInUp}>
+            <div>
               <button
                 onClick={() => onPageChange?.("app-development")}
                 className="text-[#6ee2d1] font-medium hover:underline flex items-center gap-2"
               >
                 See our app development packages <ArrowRight className="w-4 h-4" />
               </button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
             className="hidden lg:block"
           >
             <div className="relative rounded-3xl overflow-hidden border border-white/10">
@@ -734,7 +673,7 @@ function AutomationSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
                 className="w-full h-full object-cover"
               />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -805,7 +744,7 @@ function FAQsSection() {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-black border-t border-white/10">
       <div className="max-w-4xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-16">
+        <div className="text-center mb-16">
           <PageBadge>Common Questions</PageBadge>
           <h2 className="text-3xl md:text-5xl font-bold mb-6 mt-4">
             Frequently Asked Questions About <span className="text-[#d4f534]">Web Design in Midrand</span>
@@ -813,16 +752,13 @@ function FAQsSection() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             Everything you need to know about getting a professional website built for your Midrand business.
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-8">
           {faqs.map((section, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeInUp}
+             
               className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 hover:border-white/20 transition-colors"
             >
               <h3 className="text-xl md:text-2xl font-bold mb-6 text-[#d4f534] flex items-center gap-3">
@@ -834,7 +770,7 @@ function FAQsSection() {
                   <FAQItem key={qIdx} question={item.q} answer={item.a} />
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -849,11 +785,7 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
   return (
     <section className="relative z-10 px-4 sm:px-6 md:px-8 py-16 md:py-24">
       <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6 }}
+        <div
           className="bg-[#d4f534] rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 lg:p-24 text-center relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-40 mix-blend-multiply" />
@@ -881,7 +813,7 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Bottom SEO text block */}
@@ -912,20 +844,17 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         </span>
         <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      <AnimatePresence>
+      
         {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+          <div
             className="overflow-hidden"
           >
             <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">
               {answer}
             </p>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </div>
   );
 }

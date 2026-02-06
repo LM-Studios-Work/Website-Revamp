@@ -23,11 +23,11 @@ import {
   Award,
   Rocket,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { webPackages } from "@/lib/data";
-import { fadeInUp, staggerContainer, staggerContainerMobile } from "@/lib/animations";
+
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
 
@@ -38,8 +38,8 @@ interface SandtonWebDesignPageProps {
 export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -51,7 +51,7 @@ export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignP
   return (
     <PageLayout containerRef={containerRef} currentPage="sandton-web-design" onPageChange={onPageChange}>
       {/* Hero Section */}
-      <HeroSection heroY={heroY} onPageChange={onPageChange} />
+      <HeroSection onPageChange={onPageChange} />
 
       {/* Trust Bar */}
       <TrustBar />
@@ -89,12 +89,12 @@ export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignP
 // =============================
 // HERO SECTION
 // =============================
-function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page: PageType) => void }) {
+function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-20 md:py-32 overflow-hidden">
-      <motion.div style={{ y: heroY }} className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex-1">
-          <motion.div variants={fadeInUp} className="mb-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div className="flex-1">
+          <div className="mb-4">
             <div className="flex items-center gap-2 mb-3 text-sm text-muted-foreground">
               <button onClick={() => onPageChange?.("home")} className="hover:text-white transition-colors">Home</button>
               <span>/</span>
@@ -111,18 +111,18 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#d4f534]/50 bg-[#d4f534]/10 rounded-full text-[#d4f534] text-xs font-bold tracking-widest uppercase">
               <MapPin className="w-3 h-3" /> Sandton, Johannesburg
             </div>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
             Premium Websites <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">for Sandton Elite.</span>
-          </motion.h2>
-          <motion.div variants={fadeInUp} className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
+          </h2>
+          <div className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
             <p>
               Sandton demands excellence. From Bryanston{"'"}s corporate towers to Rivonia{"'"}s luxury brands, we create <strong className="text-white">premium digital experiences that command market leadership</strong>.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button
               onClick={() => onPageChange?.("contact")}
               className="group bg-[#d4f534] text-black font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(212,245,52,0.3)] md:hover:scale-105"
@@ -136,13 +136,10 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             >
               View Portfolio
             </button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+        <div
           className="flex-1 w-full hidden md:block"
         >
           <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
@@ -151,8 +148,8 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
               <Globe className="w-24 h-24 text-[#d4f534]/30" />
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -199,31 +196,28 @@ function WhySandtonSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Why Sandton</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Why Sandton Businesses Demand Premium Web Design
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Africa{"'"}s most competitive market demands the most sophisticated digital strategies
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {reasons.map((reason, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
               className="p-8 rounded-xl border border-white/10 hover:border-[#d4f534]/50 transition-colors bg-white/5 backdrop-blur-sm"
             >
               <reason.icon className="w-12 h-12 text-[#d4f534] mb-4" />
               <h3 className="text-xl font-bold mb-2">{reason.title}</h3>
               <p className="text-muted-foreground">{reason.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -245,28 +239,25 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Specialized Sectors</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Enterprise & Luxury Solutions
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {industries.map((industry, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
               className="p-8 rounded-xl border border-[#d4f534]/30 bg-gradient-to-br from-[#d4f534]/10 to-transparent hover:border-[#d4f534]/60 transition-all"
             >
               <industry.icon className="w-12 h-12 text-[#d4f534] mb-4" />
               <h3 className="text-2xl font-bold mb-2">{industry.name}</h3>
               <p className="text-muted-foreground">{industry.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -290,8 +281,8 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div variants={fadeInUp}>
+        <div whileInView="visible" className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
             <PageBadge>Premium SEO Strategy</PageBadge>
             <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
               Command Sandton Search Results
@@ -301,19 +292,19 @@ function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
             </p>
             <div className="space-y-4">
               {seoFeatures.map((feature, idx) => (
-                <motion.div key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.05 }} className="flex items-center gap-3">
+                <div key={idx} className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-[#d4f534] flex-shrink-0" />
                   <span>{feature}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
+          </div>
+          <div className="rounded-xl overflow-hidden border border-white/10 bg-white/5">
             <div className="w-full h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
               <Search className="w-24 h-24 text-[#d4f534]/30" />
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -326,20 +317,17 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Web Design Packages</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Enterprise Solutions for Every Scale
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
         >
           {webPackages.map((pkg) => (
@@ -355,7 +343,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -379,30 +367,27 @@ function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Premium Suburbs</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Serving Sandton Elite Areas
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
+          </h2>
+          <p className="text-lg text-muted-foreground">
             From corporate hubs to exclusive residential areas
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-4 gap-4">
           {areas.map((area, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.05 }}
               className="p-6 rounded-lg border border-white/10 hover:border-[#d4f534]/50 text-center transition-colors bg-white/5"
             >
               <MapPin className="w-6 h-6 text-[#d4f534] mx-auto mb-3" />
               <p className="font-medium">{area}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -424,27 +409,24 @@ function PremiumStrategySection({ isMobile, onPageChange }: { isMobile: boolean;
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Digital Strategy</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Beyond Web Design—Digital Leadership
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         <div className="grid md:grid-cols-4 gap-6">
           {strategies.map((strategy, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
               className="p-8 rounded-xl border border-white/10 text-center hover:border-[#d4f534]/50 transition-colors"
             >
               <strategy.icon className="w-12 h-12 text-[#d4f534] mx-auto mb-4" />
               <h3 className="font-bold">{strategy.name}</h3>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -466,23 +448,23 @@ function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32">
       <div className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>Your Strategic Partner</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-8">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
             Why Sandton Leaders Choose Us
-          </motion.h2>
+          </h2>
 
           <div className="grid md:grid-cols-2 gap-6 text-left">
             {reasons.map((reason, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.1 }} className="flex items-start gap-4">
+              <div key={idx} className="flex items-start gap-4">
                 <CheckCircle className="w-6 h-6 text-[#d4f534] flex-shrink-0 mt-1" />
                 <p className="text-lg">{reason}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -505,22 +487,19 @@ function FAQsSection() {
   return (
     <section className="px-4 sm:px-8 py-20 md:py-32 bg-white/5">
       <div className="max-w-3xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer} className="text-center mb-16">
-          <motion.div variants={fadeInUp} className="inline-block mb-4">
+        <div whileInView="visible" className="text-center mb-16">
+          <div className="inline-block mb-4">
             <PageBadge>FAQs</PageBadge>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold">
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold">
             Frequently Asked Questions
-          </motion.h2>
-        </motion.div>
+          </h2>
+        </div>
 
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
               className="border border-white/10 rounded-lg overflow-hidden"
             >
               <button
@@ -530,14 +509,14 @@ function FAQsSection() {
                 <span className="font-bold">{faq.q}</span>
                 <ChevronDown className={`w-5 h-5 transition-transform ${openIdx === idx ? "rotate-180" : ""}`} />
               </button>
-              <AnimatePresence>
+              
                 {openIdx === idx && (
-                  <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
+                  <div className="overflow-hidden">
                     <div className="p-6 bg-white/5 border-t border-white/10 text-muted-foreground">{faq.a}</div>
-                  </motion.div>
+                  </div>
                 )}
-              </AnimatePresence>
-            </motion.div>
+              
+            </div>
           ))}
         </div>
       </div>
@@ -554,22 +533,21 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
       <div className="absolute inset-0 bg-gradient-to-r from-[#d4f534]/10 to-transparent opacity-50 -z-10" />
       
       <div className="max-w-3xl mx-auto text-center">
-        <motion.div initial="hidden" whileInView="visible" variants={staggerContainer}>
-          <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-6">
+        <div whileInView="visible">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             Ready for Digital Excellence?
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="text-xl text-muted-foreground mb-12">
+          </h2>
+          <p className="text-xl text-muted-foreground mb-12">
             Schedule a confidential consultation with our Sandton digital strategists
-          </motion.p>
-          <motion.button
-            variants={fadeInUp}
+          </p>
+          <button
             onClick={() => onPageChange?.("contact")}
             className="group bg-[#d4f534] text-black font-bold py-6 px-12 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(212,245,52,0.3)] md:hover:scale-105 mx-auto"
           >
             <span>Schedule Consultation</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </section>
   );

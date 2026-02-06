@@ -24,11 +24,11 @@ import {
   Target,
   Heart,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { webPackages } from "@/lib/data";
-import { fadeInUp, staggerContainer, staggerContainerMobile } from "@/lib/animations";
+
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
 
@@ -39,8 +39,8 @@ interface ThohoyandouWebDesignPageProps {
 export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -52,7 +52,7 @@ export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWe
   return (
     <PageLayout containerRef={containerRef} currentPage="thohoyandou-web-design" onPageChange={onPageChange}>
       {/* Hero - Narrative-led split layout */}
-      <HeroSection heroY={heroY} onPageChange={onPageChange} />
+      <HeroSection onPageChange={onPageChange} />
 
       {/* The Opportunity - storytelling section */}
       <OpportunitySection />
@@ -85,12 +85,12 @@ export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWe
 // HERO - Narrative-led, text-heavy with bold statement
 // Different from other pages: no image, centered manifesto style
 // =============================
-function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page: PageType) => void }) {
+function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-24 md:py-40 overflow-hidden">
-      <motion.div style={{ y: heroY }} className="max-w-5xl mx-auto text-center">
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-          <motion.div variants={fadeInUp} className="mb-6">
+      <div className="max-w-5xl mx-auto text-center">
+        <div>
+          <div className="mb-6">
             <div className="flex items-center justify-center gap-2 mb-4 text-sm text-muted-foreground">
               <button onClick={() => onPageChange?.("home")} className="hover:text-white transition-colors">Home</button>
               <span>/</span>
@@ -101,20 +101,20 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#5dd9c1]/50 bg-[#5dd9c1]/10 rounded-full text-[#5dd9c1] text-xs font-bold tracking-widest uppercase">
               <MapPin className="w-3 h-3" /> Vhembe District, Limpopo
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-balance">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-balance">
             The Best Websites in{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5dd9c1] via-[#d4f534] to-[#b4a7d6]">
               Thohoyandou & Venda
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p variants={fadeInUp} className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-muted-foreground font-light text-pretty mb-10">
+          <p className="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-muted-foreground font-light text-pretty mb-10">
             From the bustle of Thavhani City to the academic corridors of Univen, the Vhembe district is rapidly digitizing. Your business needs a presence that leads this change, not one that follows it. We bring <strong className="text-white">Sandton-level development standards</strong> to the heart of Venda.
-          </motion.p>
+          </p>
 
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => onPageChange?.("contact")}
               className="group bg-[#5dd9c1] text-black font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(93,217,193,0.3)] md:hover:scale-105"
@@ -128,10 +128,10 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
             >
               View Our Work
             </button>
-          </motion.div>
+          </div>
 
           {/* Hero image placeholder - replace src with actual Thohoyandou image */}
-          <motion.div variants={fadeInUp} className="mt-14 max-w-4xl mx-auto">
+          <div className="mt-14 max-w-4xl mx-auto">
             <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#5dd9c1]/20 to-transparent mix-blend-overlay z-10" />
               <img
@@ -140,9 +140,9 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
                 className="w-full h-auto object-cover"
               />
             </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -155,15 +155,12 @@ function OpportunitySection() {
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
           className="grid md:grid-cols-5 gap-12 items-start"
         >
           {/* Left: narrative column */}
-          <motion.div variants={fadeInUp} className="md:col-span-3">
+          <div className="md:col-span-3">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight text-balance">
               Modernizing Business in the{" "}
               <span className="text-[#5dd9c1]">Vhembe District</span>
@@ -179,10 +176,10 @@ function OpportunitySection() {
                 We don{"'"}t do basic templates. Every site we build is a <strong className="text-white">custom digital asset</strong> tailored to the specific economy of Thohoyandou and the wider Vhembe region.
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: key stats stacked vertically */}
-          <motion.div variants={fadeInUp} className="md:col-span-2 space-y-6">
+          <div className="md:col-span-2 space-y-6">
             {[
               { value: "1.4M+", label: "Vhembe population online", color: "#5dd9c1" },
               { value: "73%", label: "Mobile-first searches", color: "#d4f534" },
@@ -194,8 +191,8 @@ function OpportunitySection() {
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -209,11 +206,8 @@ function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; o
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-14"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
@@ -223,18 +217,14 @@ function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; o
           <p className="text-muted-foreground text-lg max-w-2xl">
             Custom digital solutions built for the unique economy of Thohoyandou and Venda.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="grid md:grid-cols-2 gap-5"
         >
           {/* Large featured card */}
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="md:row-span-2 group p-8 md:p-10 rounded-2xl bg-gradient-to-br from-[#5dd9c1]/10 to-transparent border border-[#5dd9c1]/20 hover:border-[#5dd9c1]/40 transition-all"
           >
             <div className="w-14 h-14 rounded-2xl bg-[#5dd9c1]/20 flex items-center justify-center mb-6">
@@ -253,11 +243,10 @@ function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; o
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Tourism card */}
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="group p-8 rounded-2xl bg-gradient-to-br from-[#b4a7d6]/10 to-transparent border border-[#b4a7d6]/20 hover:border-[#b4a7d6]/40 transition-all"
           >
             <div className="w-12 h-12 rounded-xl bg-[#b4a7d6]/20 flex items-center justify-center mb-5">
@@ -268,11 +257,10 @@ function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; o
             <p className="text-muted-foreground leading-relaxed text-sm">
               Stunning, image-rich websites for lodges and guesthouses featuring direct booking engines that cut out expensive third-party commissions.
             </p>
-          </motion.div>
+          </div>
 
           {/* Construction card */}
-          <motion.div
-            variants={fadeInUp}
+          <div
             className="group p-8 rounded-2xl bg-gradient-to-br from-[#d4f534]/10 to-transparent border border-[#d4f534]/20 hover:border-[#d4f534]/40 transition-all"
           >
             <div className="w-12 h-12 rounded-xl bg-[#d4f534]/20 flex items-center justify-center mb-5">
@@ -283,33 +271,30 @@ function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; o
             <p className="text-muted-foreground leading-relaxed text-sm">
               Robust, professional catalogues that showcase inventory and capabilities to secure government tenders and big contracts.
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Bottom row: two smaller equal cards */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="grid md:grid-cols-3 gap-5 mt-5"
         >
-          <motion.div variants={fadeInUp} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
             <Phone className="w-8 h-8 text-[#5dd9c1] mb-4" />
             <h4 className="font-bold mb-2">WhatsApp Integration</h4>
             <p className="text-sm text-muted-foreground">Direct ordering and customer support built for how Venda does business.</p>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+          </div>
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
             <Smartphone className="w-8 h-8 text-[#d4f534] mb-4" />
             <h4 className="font-bold mb-2">Mobile-First Design</h4>
             <p className="text-sm text-muted-foreground">Optimized for African internet speeds and the devices your customers actually use.</p>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
+          </div>
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all">
             <Globe className="w-8 h-8 text-[#b4a7d6] mb-4" />
             <h4 className="font-bold mb-2">Multi-Language Support</h4>
             <p className="text-sm text-muted-foreground">Tshivenda, English, and more. Reach every customer in their language.</p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -323,15 +308,12 @@ function ManifestoSection({ onPageChange }: { onPageChange?: (page: PageType) =>
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
           className="grid md:grid-cols-2 gap-12 items-center"
         >
           {/* Left: bold statement */}
-          <motion.div variants={fadeInUp}>
+          <div>
             <div className="text-xs font-bold tracking-widest uppercase text-[#5dd9c1] mb-4">Our Philosophy</div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 text-balance">
               We respect the culture,{" "}
@@ -342,10 +324,10 @@ function ManifestoSection({ onPageChange }: { onPageChange?: (page: PageType) =>
             <p className="text-muted-foreground leading-relaxed text-lg text-pretty">
               We understand that business in Venda is built on strong relationships and legacy. We translate that trust into the digital world. Our team combines local insight with elite technical skill, ensuring that your website isn{"'"}t just {"\""}online{"\""}{""}it is the best in your sector.
             </p>
-          </motion.div>
+          </div>
 
           {/* Right: capabilities checklist */}
-          <motion.div variants={fadeInUp} className="space-y-4">
+          <div className="space-y-4">
             {[
               { title: "Custom Built, Never Templated", desc: "Every pixel designed for your specific business and market." },
               { title: "Sandton-Level Quality", desc: "Enterprise development standards, delivered locally." },
@@ -361,8 +343,8 @@ function ManifestoSection({ onPageChange }: { onPageChange?: (page: PageType) =>
                 </div>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -387,13 +369,10 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.div variants={fadeInUp} className="mb-12">
+          <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
               <Search className="w-6 h-6 text-[#d4f534]" />
               <h2 className="text-3xl md:text-4xl font-bold">
@@ -403,10 +382,10 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
             <p className="text-muted-foreground text-lg max-w-3xl text-pretty">
               It is not enough to just have a website; you must be found. We specialize in local SEO for the Vhembe region. When a customer searches for a service in Louis Trichardt, Malamulele, or Thohoyandou, we ensure your business appears at the top.
             </p>
-          </motion.div>
+          </div>
 
           {/* Search terms cloud */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-3 mb-12">
             {searchTerms.map((term, idx) => (
               <div
                 key={idx}
@@ -416,11 +395,10 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
                 {term}
               </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* SEO features in horizontal cards */}
-          <motion.div
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
             className="grid md:grid-cols-4 gap-4"
           >
             {[
@@ -429,14 +407,14 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
               { icon: Users, title: "High-Intent Traffic", desc: "Reach customers ready to buy, right when they search", color: "#b4a7d6" },
               { icon: Zap, title: "Fast Results", desc: "See ranking improvements within weeks, not months", color: "#5dd9c1" },
             ].map((item, idx) => (
-              <motion.div key={idx} variants={fadeInUp} className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all text-center">
+              <div key={idx} className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all text-center">
                 <item.icon className="w-8 h-8 mx-auto mb-3" style={{ color: item.color }} />
                 <h4 className="font-bold text-sm mb-2">{item.title}</h4>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -449,11 +427,8 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-14 text-center"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
@@ -465,13 +440,10 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Flexible plans designed for every stage of growth. From startups in Sibasa to established brands in Thohoyandou CBD.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
         >
           {webPackages.map((pkg) => (
@@ -487,7 +459,7 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -519,13 +491,10 @@ function ServiceAreaCloud() {
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-5xl mx-auto text-center">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.div variants={fadeInUp} className="mb-10">
+          <div className="mb-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
               Proudly Serving the{" "}
               <span className="text-[#5dd9c1]">Entire Vhembe District</span>
@@ -533,9 +502,9 @@ function ServiceAreaCloud() {
             <p className="text-muted-foreground text-lg">
               From Thohoyandou CBD to the far reaches of the Limpopo province.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             {areas.map((area, idx) => (
               <span
                 key={idx}
@@ -549,8 +518,8 @@ function ServiceAreaCloud() {
                 {area.name}
               </span>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -592,22 +561,18 @@ function FAQsSection() {
   return (
     <section className="px-4 sm:px-8 py-20 border-t border-white/10">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-10 text-center text-balance">
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-balance">
             Questions About Web Design in{" "}
             <span className="text-[#5dd9c1]">Thohoyandou</span>
-          </motion.h2>
+          </h2>
 
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                variants={fadeInUp}
                 className="border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all"
               >
                 <button
@@ -620,25 +585,21 @@ function FAQsSection() {
                     style={{ transform: openFaq === idx ? "rotate(180deg)" : "none" }}
                   />
                 </button>
-                <AnimatePresence>
+                
                   {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                    <div
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-white/10 pt-4">
                         {faq.a}
                       </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
-              </motion.div>
+                
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -650,11 +611,8 @@ function FAQsSection() {
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="px-4 sm:px-8 py-20">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        variants={fadeInUp}
+      <div
+       
         className="max-w-4xl mx-auto"
       >
         <div className="relative p-10 md:p-16 rounded-3xl overflow-hidden border border-[#5dd9c1]/20">
@@ -684,7 +642,7 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

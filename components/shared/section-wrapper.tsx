@@ -7,8 +7,6 @@
  * and optional background styling.
  */
 
-import { motion, type Variants } from "framer-motion";
-import { staggerContainer, staggerContainerMobile, fadeInUp } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 interface SectionWrapperProps {
@@ -49,25 +47,10 @@ export function SectionWrapper({
     className
   );
 
-  if (!animate) {
-    return (
-      <section id={id} className={baseClasses}>
-        <div className="max-w-7xl mx-auto">{children}</div>
-      </section>
-    );
-  }
-
   return (
-    <motion.section
-      id={id}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: isMobile ? "0px" : "-10%", amount: 0.2 }}
-      variants={isMobile ? staggerContainerMobile : staggerContainer}
-      className={baseClasses}
-    >
+    <section id={id} className={baseClasses}>
       <div className="max-w-7xl mx-auto">{children}</div>
-    </motion.section>
+    </section>
   );
 }
 
@@ -100,8 +83,7 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={cn("mb-12 md:mb-20", className)}>
-      <motion.h2 
-        variants={fadeInUp} 
+      <h2 
         className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-white mb-6"
       >
         {title}{" "}
@@ -115,24 +97,20 @@ export function SectionHeader({
           >
             {titleHighlight}
             {showUnderline && !isMobile && (
-              <motion.span
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute -bottom-2 left-0 h-[2px]"
+              <span
+                className="absolute -bottom-2 left-0 h-[2px] w-full"
                 style={{ backgroundColor: accentColor }}
               />
             )}
           </span>
         )}
-      </motion.h2>
+      </h2>
       {description && (
-        <motion.p 
-          variants={fadeInUp} 
+        <p 
           className="text-muted-foreground text-lg md:text-xl max-w-2xl font-light"
         >
           {description}
-        </motion.p>
+        </p>
       )}
     </div>
   );

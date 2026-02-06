@@ -13,11 +13,11 @@ import {
   Code,
   Layers,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { appPackages, appProcessSteps, appDevFAQs } from "@/lib/data";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
+
 
 import { PageLayout, Breadcrumb, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
@@ -78,28 +78,22 @@ function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void
           Your All-in-one Business Solution | Creative Digital Agency | Web Design Company
         </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div
         >
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-8 leading-[1] tracking-tight">
             Build apps that <br />
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-500">
               users love.
-              <motion.svg
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
+              <svg
                 className="absolute -bottom-2 left-0 w-full"
                 viewBox="0 0 300 12"
                 fill="none"
               >
                 <path d="M2 10C50 2 150 2 298 10" stroke="#6ee2d1" strokeWidth="4" strokeLinecap="round" />
-              </motion.svg>
+              </svg>
             </span>
           </h1>
-        </motion.div>
+        </div>
 
         <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl font-light leading-relaxed mb-6">
           From concept to launch, we build high-performance mobile and web applications that engage users and drive business growth.
@@ -151,25 +145,21 @@ function TechStackSection() {
   return (
     <div className="py-20 px-6 bg-white/[0.02]">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
+        <div
+         
           className="grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {technologies.map((tech) => (
-            <motion.div
+            <div
               key={tech.name}
-              variants={fadeInUp}
               className="flex flex-col items-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-[#6ee2d1]/30 transition-colors"
             >
               <tech.icon className="w-8 h-8 text-[#6ee2d1] mb-3" />
               <span className="text-white font-bold text-sm">{tech.name}</span>
               <span className="text-muted-foreground text-xs mt-1">{tech.description}</span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -179,11 +169,8 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
   return (
     <section id="packages" className="relative z-10 px-4 sm:px-8 py-12 md:py-16">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
@@ -192,13 +179,10 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
           <p className="text-muted-foreground max-w-2xl">
             From simple mobile apps to complex enterprise solutions, we have a package that fits your needs and budget.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
           className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
         >
           {appPackages.map((pkg) => (
@@ -214,7 +198,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -230,22 +214,19 @@ function ProcessSection({
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
+        <div
+         
           className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <div>
-            <motion.h2 variants={fadeInUp} className="text-4xl md:text-6xl font-bold mb-4 text-white">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
               Our <span className="text-transparent" style={{ WebkitTextStroke: "1px #6ee2d1" }}>process</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-muted-foreground max-w-xl text-lg">
+            </h2>
+            <p className="text-muted-foreground max-w-xl text-lg">
               A proven development workflow that delivers quality apps on time and within budget.
-            </motion.p>
+            </p>
           </div>
-          <motion.div variants={fadeInUp} className="gap-4 hidden md:flex">
+          <div className="gap-4 hidden md:flex">
             <button
               onClick={() => scroll("left")}
               className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-[#6ee2d1] hover:text-black transition-all"
@@ -258,8 +239,8 @@ function ProcessSection({
             >
               <ChevronRight className="w-6 h-6" />
             </button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
           <div
@@ -268,12 +249,8 @@ function ProcessSection({
             style={{ scrollBehavior: "smooth" }}
           >
             {appProcessSteps.map((step, index) => (
-              <motion.div
+              <div
                 key={step.id}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                 className="snap-center flex-none w-[85vw] md:w-[350px] rounded-[2rem] p-8 relative transition-all hover:-translate-y-2"
                 style={{ backgroundColor: step.color.replace("bg-[", "").replace("]", "") }}
               >
@@ -287,7 +264,7 @@ function ProcessSection({
                 )}
                 <h3 className="text-3xl font-bold mb-4 mt-6 text-black">{step.title}</h3>
                 <p className="text-base font-medium text-black/70">{step.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -300,7 +277,7 @@ function FAQsSection() {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-black border-t border-white/10">
       <div className="max-w-4xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-16">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-[#6ee2d1]/10 text-[#6ee2d1] text-xs font-bold uppercase tracking-wider">
             <Layers className="w-3 h-3" /> Questions & Answers
           </div>
@@ -308,18 +285,15 @@ function FAQsSection() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             Everything you need to know about our app development services.
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-8">
           {appDevFAQs.map((section, idx) => {
             const IconComponent = faqIcons[section.icon] || Globe;
             return (
-              <motion.div
+              <div
                 key={idx}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeInUp}
+               
                 className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 hover:border-white/20 transition-colors"
               >
                 <h3 className="text-xl md:text-2xl font-bold mb-6 text-[#6ee2d1] flex items-center gap-3">
@@ -331,7 +305,7 @@ function FAQsSection() {
                     <FAQItem key={qIdx} question={item.q} answer={item.a} />
                   ))}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -351,13 +325,13 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         </span>
         <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      <AnimatePresence>
+      
         {isOpen && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+          <div className="overflow-hidden">
             <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">{answer}</p>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </div>
   );
 }

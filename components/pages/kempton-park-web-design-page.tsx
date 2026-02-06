@@ -23,11 +23,11 @@ import {
   ShoppingCart,
   Wrench,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { webPackages } from "@/lib/data";
-import { fadeInUp, staggerContainer, staggerContainerMobile } from "@/lib/animations";
+
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
 
@@ -39,8 +39,8 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | undefined>(undefined);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -72,22 +72,19 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-[#d4f534]/5" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 w-full">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
+            <div
             >
-              <motion.div variants={fadeInUp}>
+              <div>
                 <PageBadge icon={<Plane className="w-3.5 h-3.5" />} text="East Rand's Digital Partner" />
-              </motion.div>
-              <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-6 leading-[1.1] text-balance">
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mt-6 leading-[1.1] text-balance">
                 The <span className="text-[#d4f534]">Best</span> Web Design in{" "}
                 <span className="text-[#d4f534]">Kempton Park</span>
-              </motion.h1>
-              <motion.p variants={fadeInUp} className="text-lg text-white/60 mt-6 max-w-lg leading-relaxed">
+              </h1>
+              <p className="text-lg text-white/60 mt-6 max-w-lg leading-relaxed">
                 You don't need to look outside of the East Rand for world-class digital services. LM Studios is Kempton Park's leading web design team -- fast, professional, and built to help local businesses grow.
-              </motion.p>
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mt-8">
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <button
                   onClick={() => onPageChange?.("contact")}
                   className="group bg-[#d4f534] text-black font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_0_40px_rgba(212,245,52,0.3)] md:hover:scale-105"
@@ -101,14 +98,11 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                 >
                   See Our Work
                 </button>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Hero image placeholder */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+            <div
               className="relative hidden lg:block"
             >
               <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
@@ -129,7 +123,7 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -144,17 +138,13 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
               { value: "Local", label: "SEO Included" },
               { value: "24/7", label: "Support" },
             ].map((stat, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="py-8 px-4 text-center"
               >
                 <p className="text-2xl md:text-3xl font-bold text-[#d4f534]">{stat.value}</p>
                 <p className="text-white/40 text-sm mt-1">{stat.label}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -163,13 +153,10 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
       {/* WHY KEMPTON - Offset cards layout */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="max-w-2xl mb-16">
+            <div className="max-w-2xl mb-16">
               <span className="text-[#d4f534] text-sm font-semibold tracking-wider uppercase">Why LM Studios</span>
               <h2 className="text-3xl md:text-4xl font-bold mt-3 text-balance">
                 The Top Choice in Kempton Park
@@ -177,7 +164,7 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
               <p className="text-white/50 mt-4 leading-relaxed">
                 From the busy retail hubs of Festival Mall to the quiet residential streets of Aston Manor, we know what local customers are looking for.
               </p>
-            </motion.div>
+            </div>
 
             <div className="grid md:grid-cols-3 gap-6">
               {[
@@ -200,9 +187,8 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                   accent: "#b4a7d6",
                 },
               ].map((card, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  variants={fadeInUp}
                   className="group relative bg-white/[0.03] border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
                   style={{ marginTop: isMobile ? 0 : idx % 2 !== 0 ? 32 : 0 }}
                 >
@@ -218,28 +204,25 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                     className="absolute bottom-0 left-8 right-8 h-[2px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{ backgroundColor: card.accent }}
                   />
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* BUSINESS SOLUTIONS - Alternating rows */}
       <section className="py-24 px-6 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="text-center max-w-2xl mx-auto mb-16">
+            <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="text-[#5dd9c1] text-sm font-semibold tracking-wider uppercase">Solutions</span>
               <h2 className="text-3xl md:text-4xl font-bold mt-3 text-balance">
                 Affordable Solutions for Every Kempton Business
               </h2>
-            </motion.div>
+            </div>
 
             <div className="space-y-6">
               {[
@@ -265,9 +248,8 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                   color: "#b4a7d6",
                 },
               ].map((solution, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  variants={fadeInUp}
                   className="group flex flex-col md:flex-row items-start gap-6 bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 transition-all hover:border-white/20 hover:bg-white/[0.05]"
                 >
                   <div
@@ -289,10 +271,10 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                     <p className="text-white/50 leading-relaxed">{solution.desc}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/20 group-hover:text-white/50 transition-colors shrink-0 hidden md:block mt-2" />
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -300,13 +282,10 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
+            <div
+             
             >
-              <motion.div variants={fadeInUp}>
+              <div>
                 <span className="text-[#b4a7d6] text-sm font-semibold tracking-wider uppercase">Local SEO</span>
                 <h2 className="text-3xl md:text-4xl font-bold mt-3 text-balance">
                   Dominate the East Rand Search Results
@@ -314,9 +293,9 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                 <p className="text-white/50 mt-4 leading-relaxed">
                   Being the best means being visible. We specialise in Kempton Park SEO so when someone searches for your service, your business pops up first.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div variants={fadeInUp} className="mt-8 space-y-4">
+              <div className="mt-8 space-y-4">
                 {[
                   { title: "Local Ranking", desc: "When someone searches 'Best [Your Service] in Kempton Park,' we make sure your business appears first." },
                   { title: "Google Maps", desc: "We optimise your map listing to capture the huge volume of local traffic searching for businesses near the airport and CBD." },
@@ -330,13 +309,10 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                     </div>
                   </div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+            <div
               className="grid grid-cols-2 gap-3"
             >
               {[
@@ -357,7 +333,7 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                   <span>{`"${term}"`}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -365,13 +341,10 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
       {/* PACKAGES */}
       <section className="py-24 px-6 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-[#d4f534] text-sm font-semibold tracking-wider uppercase">Packages</span>
               <h2 className="text-3xl md:text-4xl font-bold mt-3">
                 Get the Best for Less
@@ -379,14 +352,11 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
               <p className="text-white/50 mt-4 leading-relaxed">
                 {"Don't settle for average. Partner with the web design team that is setting the standard in Kempton Park."}
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
             className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
           >
             {webPackages.map((pkg) => (
@@ -402,31 +372,27 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                 onSelect={() => onPageChange?.("contact")}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* SERVICE AREAS - Horizontal scroll cards */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-12">
               <span className="text-[#d4f534] text-sm font-semibold tracking-wider uppercase">Coverage</span>
               <h2 className="text-3xl md:text-4xl font-bold mt-3">
                 Proudly Serving the East Rand
               </h2>
-            </motion.div>
+            </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {eastRandAreas.map((group, gIdx) => (
-                <motion.div
+                <div
                   key={gIdx}
-                  variants={fadeInUp}
                   className="bg-white/[0.03] border border-white/10 rounded-2xl p-6"
                 >
                   <h3 className="text-sm font-semibold text-[#d4f534] uppercase tracking-wider mb-4">{group.zone}</h3>
@@ -438,20 +404,17 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="bg-gradient-to-br from-[#d4f534]/10 to-transparent border border-[#d4f534]/20 rounded-3xl p-12 md:p-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
@@ -467,31 +430,27 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
               <span>Start Your Project Today</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="py-24 px-6 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
         <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
           >
-            <motion.div variants={fadeInUp} className="text-center mb-12">
+            <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold">
                 Frequently Asked Questions
               </h2>
               <p className="text-white/50 mt-3">Common questions from Kempton Park businesses</p>
-            </motion.div>
+            </div>
 
             <div className="space-y-3">
               {faqs.map((faq, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  variants={fadeInUp}
                   className="border border-white/10 rounded-xl overflow-hidden bg-white/[0.02]"
                 >
                   <button
@@ -503,22 +462,18 @@ export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWe
                       className={`w-5 h-5 text-white/40 shrink-0 transition-transform duration-200 ${openFaq === idx ? "rotate-180" : ""}`}
                     />
                   </button>
-                  <AnimatePresence>
+                  
                     {openFaq === idx && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                      <div
                       >
                         <p className="px-5 pb-5 text-white/50 leading-relaxed">{faq.a}</p>
-                      </motion.div>
+                      </div>
                     )}
-                  </AnimatePresence>
-                </motion.div>
+                  
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

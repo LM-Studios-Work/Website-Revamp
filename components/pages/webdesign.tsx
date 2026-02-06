@@ -14,12 +14,12 @@ import {
   Smartphone,
   Server,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 // Centralized imports
 import type { PageType } from "@/lib/navigation";
 import { webPackages, webProcessSteps, webDesignFAQs } from "@/lib/data";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
+
 
 // Shared components
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
@@ -66,10 +66,10 @@ function ServerIcon(props: React.SVGProps<SVGSVGElement>) {
 export default function StandardPackPage({ onPageChange }: StandardPackPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  
+  
+  
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -81,10 +81,7 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
   return (
     <PageLayout containerRef={containerRef} currentPage="web-design" onPageChange={onPageChange}>
       {/* Hero Section */}
-      <HeroSection 
-        heroY={heroY} 
-        imageY={imageY} 
-      />
+      <HeroSection />
 
       {/* Packages Grid */}
       <PackagesSection onPageChange={onPageChange} />
@@ -106,12 +103,12 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
 
 // --- Sub-components ---
 
-function HeroSection({ heroY, imageY }: { heroY: any; imageY: any }) {
+function HeroSection() {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-20 md:py-32 overflow-hidden">
-      <motion.div style={{ y: heroY }} className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex-1">
-          <motion.div variants={fadeInUp} className="mb-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div className="flex-1">
+          <div className="mb-4">
             <h1 
               className="text-3xl sm:text-4xl md:text-5xl mb-3 font-bold select-none tracking-tight" 
               style={{ WebkitTextStroke: "1px rgba(255,255,255,0.8)", WebkitTextFillColor: "transparent" }}
@@ -121,23 +118,19 @@ function HeroSection({ heroY, imageY }: { heroY: any; imageY: any }) {
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#d4f534]/50 bg-[#d4f534]/10 rounded-full text-[#d4f534] text-xs font-bold tracking-widest uppercase">
               <MapPin className="w-3 h-3" /> Johannesburg & Midrand
             </div>
-          </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
             Responsive Design <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">& Development.</span>
-          </motion.h2>
-          <motion.div variants={fadeInUp} className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
+          </h2>
+          <div className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
             <p>
               LM Studios is a <strong className="text-white">Johannesburg-based web design company</strong> providing professional website design services. We work with small, growing, and large businesses across South Africa.
             </p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          transition={{ duration: 1, delay: 0.3 }} 
-          style={{ y: imageY }} 
+        <div 
           className="flex-1 w-full hidden md:block"
         >
           <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
@@ -148,8 +141,8 @@ function HeroSection({ heroY, imageY }: { heroY: any; imageY: any }) {
               className="w-full h-auto object-cover" 
             />
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -158,24 +151,18 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
   return (
     <section className="relative z-10 px-4 sm:px-8 py-12 md:py-16">
       <div className="max-w-7xl mx-auto">
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true, margin: "-100px" }} 
-          variants={fadeInUp}
+        <div 
+         
           className="mb-12"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Our Packages</h2>
           <p className="text-muted-foreground max-w-2xl">
             We do not use templates. We build custom solutions tailored to your business needs.
           </p>
-        </motion.div>
+        </div>
         
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div 
+         
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-16"
         >
           {webPackages.map((pkg) => (
@@ -191,7 +178,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -202,11 +189,11 @@ function BusinessTypesSection() {
     <section className="relative z-10 px-4 sm:px-8 py-16 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="order-2 lg:order-1">
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-6">
+          <div className="order-2 lg:order-1">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Web Design for <span className="text-[#5dd9c1]">Small & Large</span> Businesses
-            </motion.h2>
-            <motion.div variants={fadeInUp} className="space-y-6 text-muted-foreground font-light leading-relaxed">
+            </h2>
+            <div className="space-y-6 text-muted-foreground font-light leading-relaxed">
               <p>
                 Every business is different. We do not use templates or off-the-shelf website builders. 
                 Our work ranges from focused micro-sites to fully custom-built, content-managed websites tailored to your business needs.
@@ -233,8 +220,8 @@ function BusinessTypesSection() {
                   </ul>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
           <div className="order-1 lg:order-2 relative hidden md:block">
             <div className="absolute -top-10 -right-10 w-60 h-60 bg-[#5dd9c1]/10 rounded-full blur-[80px]" />
             <div className="relative rounded-3xl overflow-hidden border border-white/10">
@@ -314,7 +301,7 @@ function FAQsSection() {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-black border-t border-white/10">
       <div className="max-w-4xl mx-auto">
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className="text-center mb-16">
+        <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-[#b4a7d6]/10 text-[#b4a7d6] text-xs font-bold uppercase tracking-wider">
             <Zap className="w-3 h-3" /> Usability & Performance
           </div>
@@ -324,18 +311,15 @@ function FAQsSection() {
             We prioritise <span className="text-white font-medium">user-focused design, fast page load speeds, and clean code</span>. 
             Without usability, even the most visually appealing site will underperform.
           </p>
-        </motion.div>
+        </div>
 
         <div className="space-y-8">
           {webDesignFAQs.map((section, idx) => {
             const IconComponent = faqIcons[section.icon] || Globe;
             return (
-              <motion.div 
-                key={idx}
-                initial="hidden" 
-                whileInView="visible" 
-                viewport={{ once: true, margin: "-50px" }} 
-                variants={fadeInUp}
+              <div 
+                key={idx} 
+               
                 className="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8 hover:border-white/20 transition-colors"
               >
                 <h3 className="text-xl md:text-2xl font-bold mb-6 text-[#d4f534] flex items-center gap-3">
@@ -347,7 +331,7 @@ function FAQsSection() {
                     <FAQItem key={qIdx} question={item.q} answer={item.a} />
                   ))}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -359,7 +343,7 @@ function FAQsSection() {
 function ContactCTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="relative z-10 px-4 py-20 text-center border-t border-white/10">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <div>
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
           Looking for a web design company in <span className="text-[#d4f534]">Johannesburg or Midrand</span>?
         </h2>
@@ -372,7 +356,7 @@ function ContactCTASection({ onPageChange }: { onPageChange?: (page: PageType) =
         >
           Get a Quote
         </button>
-      </motion.div>
+      </div>
     </section>
   );
 }
@@ -392,20 +376,17 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         </span>
         <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      <AnimatePresence>
+      
         {isOpen && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+          <div
             className="overflow-hidden"
           >
             <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">
               {answer}
             </p>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      
     </div>
   );
 }

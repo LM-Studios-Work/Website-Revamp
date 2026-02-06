@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
 import { ArrowUpRight, Github, Filter, LayoutGrid, List } from "lucide-react";
 
 // Centralized imports
 import type { PageType } from "@/lib/navigation";
 import { projects, projectCategories } from "@/lib/data";
-import { fadeInUp } from "@/lib/animations";
+
 
 // Shared components
 import { PageLayout } from "@/components/shared/page-layout";
@@ -35,9 +35,7 @@ export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#D4FF3F]/10 blur-[150px] rounded-full -translate-y-1/2 pointer-events-none" />
         
         <div className="max-w-7xl mx-auto relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <div
             className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12"
           >
             <div>
@@ -52,7 +50,7 @@ export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
             <p className="text-muted-foreground text-xl max-w-md leading-relaxed">
               Explore our diverse body of work spanning web, mobile, and digital strategy.
             </p>
-          </motion.div>
+          </div>
 
           {/* Filters */}
           <FilterBar
@@ -64,13 +62,9 @@ export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
           />
 
           {/* Projects Grid/List */}
-          <AnimatePresence mode="wait">
-            <motion.div
+          
+            <div
               key={activeCategory + viewMode}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
               className={
                 viewMode === "grid" 
                   ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
@@ -84,8 +78,8 @@ export default function ProjectsPage({ onPageChange }: ProjectsPageProps) {
                   viewMode={viewMode} 
                 />
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          
           
           {filteredProjects.length === 0 && (
             <div className="py-32 text-center">
@@ -171,7 +165,7 @@ function ProjectCard({ project, viewMode }: ProjectCardProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <motion.div
+    <div
       layout
       className={`group relative overflow-hidden rounded-[40px] border border-white/10 bg-white/5 ${
         viewMode === "list" ? "flex flex-col md:flex-row gap-8 p-8" : ""
@@ -236,6 +230,6 @@ function ProjectCard({ project, viewMode }: ProjectCardProps) {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+
 import {
   Building2,
   Target,
@@ -23,7 +23,7 @@ import { PageLayout, PageBadge } from "@/components/shared";
 import { PackageCard } from "@/components/shared/package-card";
 import { webPackages } from "@/lib/data";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
+
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import {
   Accordion,
@@ -40,12 +40,6 @@ export default function PolokwaneWebDesignPage({
   onPageChange,
 }: PolokwaneWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const isMobile = useIsMobile();
 
   return (
@@ -61,10 +55,7 @@ export default function PolokwaneWebDesignPage({
         <div className="container mx-auto px-4 py-24 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+            <div
             >
               <PageBadge
                 location="Polokwane"
@@ -111,13 +102,10 @@ export default function PolokwaneWebDesignPage({
                   View Our Work
                 </button>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right: Hero Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <div
               className="relative"
             >
               <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
@@ -130,10 +118,7 @@ export default function PolokwaneWebDesignPage({
               </div>
 
               {/* Floating Stats Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+              <div
                 className="absolute -bottom-6 -left-6 bg-black/80 backdrop-blur-xl border border-[#d4f534]/30 rounded-2xl p-6 shadow-xl"
               >
                 <div className="flex items-center gap-4">
@@ -145,8 +130,8 @@ export default function PolokwaneWebDesignPage({
                     <div className="text-sm text-white/60">Limpopo Projects</div>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -154,47 +139,38 @@ export default function PolokwaneWebDesignPage({
       {/* Infrastructure Statement Strip */}
       <SectionWrapper className="py-16 bg-gradient-to-r from-[#d4f534]/10 via-transparent to-[#b4a7d6]/10">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+          <div
+           
             className="text-center max-w-4xl mx-auto"
           >
-            <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               World-Class Infrastructure for Limpopo Businesses
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-white/70 leading-relaxed">
+            </h2>
+            <p className="text-lg text-white/70 leading-relaxed">
               You don't need to outsource to Sandton to get Sandton-quality code. We bring that standard to you. We understand that Polokwane is a unique hybrid economy—part corporate capital, part industrial giant. We build digital assets that respect this duality.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Sector-Specific Strategies - Vertical Card Stack */}
       <SectionWrapper className="py-24">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+          <div
+           
             className="mb-16 text-center"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Sector-Specific Digital <span className="text-[#d4f534]">Strategies</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-white/60 text-lg max-w-2xl mx-auto">
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
               Tailored solutions for Polokwane's unique business landscape
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Sector 1: Government & Tenders */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+            <div
               className="group bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 hover:border-[#d4f534]/50 transition-all"
             >
               <div className="w-14 h-14 rounded-xl bg-[#d4f534]/20 flex items-center justify-center mb-6 group-hover:bg-[#d4f534]/30 transition-colors">
@@ -219,13 +195,10 @@ export default function PolokwaneWebDesignPage({
                   <span>Project Portfolio Showcases</span>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Sector 2: Logistics & Industry */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+            <div
               className="group bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 hover:border-[#5dd9c1]/50 transition-all"
             >
               <div className="w-14 h-14 rounded-xl bg-[#5dd9c1]/20 flex items-center justify-center mb-6 group-hover:bg-[#5dd9c1]/30 transition-colors">
@@ -250,13 +223,10 @@ export default function PolokwaneWebDesignPage({
                   <span>Tracking Portals & Service Catalogs</span>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Sector 3: Lifestyle & Professional */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+            <div
               className="group bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8 hover:border-[#b4a7d6]/50 transition-all"
             >
               <div className="w-14 h-14 rounded-xl bg-[#b4a7d6]/20 flex items-center justify-center mb-6 group-hover:bg-[#b4a7d6]/30 transition-colors">
@@ -281,7 +251,7 @@ export default function PolokwaneWebDesignPage({
                   <span>Instant 4G Network Load Times</span>
                 </li>
               </ul>
-            </motion.div>
+            </div>
           </div>
         </div>
       </SectionWrapper>
@@ -291,10 +261,7 @@ export default function PolokwaneWebDesignPage({
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+              <div
               >
                 <div className="inline-flex items-center gap-2 bg-[#d4f534]/10 border border-[#d4f534]/30 rounded-full px-4 py-2 mb-6">
                   <Search className="w-4 h-4 text-[#d4f534]" />
@@ -313,14 +280,11 @@ export default function PolokwaneWebDesignPage({
                   Learn About Our SEO Strategy
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
-              </motion.div>
+              </div>
             </div>
 
             <div className="lg:col-span-3">
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+              <div
                 className="grid grid-cols-2 gap-4"
               >
                 {[
@@ -339,7 +303,7 @@ export default function PolokwaneWebDesignPage({
                     <div className="text-[#d4f534] text-xs">{item.searches}</div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -348,20 +312,17 @@ export default function PolokwaneWebDesignPage({
       {/* Service Areas - Grouped Pills */}
       <SectionWrapper className="py-24">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+          <div
+           
             className="max-w-4xl mx-auto text-center mb-12"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-4">
               Serving All of <span className="text-[#d4f534]">Polokwane</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-white/60">
+            </h2>
+            <p className="text-white/60">
               From the CBD to the suburbs—we deliver excellence across the capital
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           <div className="max-w-5xl mx-auto space-y-8">
             {/* Central & Government */}
@@ -415,26 +376,20 @@ export default function PolokwaneWebDesignPage({
       {/* Packages Section */}
       <SectionWrapper className="py-24 bg-gradient-to-b from-transparent to-white/[0.02]">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+          <div
+           
             className="text-center mb-16"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Premium Web Design <span className="text-[#d4f534]">Packages</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-white/60 text-lg max-w-2xl mx-auto">
+            </h2>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">
               Enterprise-grade solutions built for Limpopo's capital
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
+          <div
+           
             className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
           >
             {webPackages.map((pkg) => (
@@ -450,23 +405,20 @@ export default function PolokwaneWebDesignPage({
                 onSelect={() => onPageChange?.("contact")}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* FAQ Section */}
       <SectionWrapper className="py-24">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
+          <div
+           
             className="max-w-3xl mx-auto"
           >
-            <motion.h2 variants={fadeInUp} className="text-4xl font-bold mb-12 text-center">
+            <h2 className="text-4xl font-bold mb-12 text-center">
               Frequently Asked <span className="text-[#d4f534]">Questions</span>
-            </motion.h2>
+            </h2>
 
             <Accordion type="single" collapsible className="space-y-4">
               <AccordionItem value="item-1" className="border border-white/10 rounded-xl px-6 bg-white/[0.02]">
@@ -505,17 +457,14 @@ export default function PolokwaneWebDesignPage({
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Final CTA */}
       <SectionWrapper className="py-24 bg-gradient-to-br from-[#d4f534]/10 via-transparent to-[#b4a7d6]/10">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="text-center max-w-3xl mx-auto"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -531,7 +480,7 @@ export default function PolokwaneWebDesignPage({
               <span>Start Your Project Today</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
     </PageLayout>

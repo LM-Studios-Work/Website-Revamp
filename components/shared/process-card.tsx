@@ -6,7 +6,6 @@
  * A reusable card for displaying process/workflow steps.
  */
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ProcessCardProps {
@@ -29,11 +28,7 @@ export function ProcessCard({
   index = 0,
 }: ProcessCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      viewport={{ once: true }}
+    <div
       className={cn(
         color,
         textColor,
@@ -55,6 +50,6 @@ export function ProcessCard({
         <h3 className="text-2xl font-bold mb-4 leading-tight">{title}</h3>
         <p className="opacity-80 leading-relaxed">{description}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }

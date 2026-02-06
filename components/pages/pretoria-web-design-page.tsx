@@ -22,11 +22,11 @@ import {
   Users,
   Lock,
 } from "lucide-react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+
 
 import type { PageType } from "@/lib/navigation";
 import { webPackages } from "@/lib/data";
-import { fadeInUp, staggerContainer, staggerContainerMobile } from "@/lib/animations";
+
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
 
@@ -37,8 +37,8 @@ interface PretoriaWebDesignPageProps {
 export default function PretoriaWebDesignPage({ onPageChange }: PretoriaWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  
+  
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -50,7 +50,7 @@ export default function PretoriaWebDesignPage({ onPageChange }: PretoriaWebDesig
   return (
     <PageLayout containerRef={containerRef} currentPage="pretoria-web-design" onPageChange={onPageChange}>
       {/* Hero - Authority-led with side image */}
-      <HeroSection heroY={heroY} onPageChange={onPageChange} />
+      <HeroSection onPageChange={onPageChange} />
 
       {/* Digital Authority - full-width statement */}
       <AuthorityStatement />
@@ -83,13 +83,13 @@ export default function PretoriaWebDesignPage({ onPageChange }: PretoriaWebDesig
 // HERO - Side-by-side: text left, image right
 // Different from Thohoyandou (centered), Midrand (stacked), Sandton/Centurion (standard)
 // =============================
-function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page: PageType) => void }) {
+function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="relative z-10 px-4 sm:px-8 py-24 md:py-36 overflow-hidden">
-      <motion.div style={{ y: heroY }} className="max-w-7xl mx-auto">
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: text content */}
-          <motion.div variants={fadeInUp}>
+          <div>
             <div className="flex items-center gap-2 mb-4 text-sm text-muted-foreground">
               <button onClick={() => onPageChange?.("home")} className="hover:text-white transition-colors">Home</button>
               <span>/</span>
@@ -127,10 +127,10 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
                 View Our Work
               </button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: hero image placeholder - replace with actual Pretoria image */}
-          <motion.div variants={fadeInUp}>
+          <div>
             <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#d4f534]/20 to-transparent mix-blend-overlay z-10" />
               <img
@@ -139,9 +139,9 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
                 className="w-full h-auto object-cover"
               />
             </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -153,17 +153,14 @@ function HeroSection({ heroY, onPageChange }: { heroY: any; onPageChange?: (page
 function AuthorityStatement() {
   return (
     <section className="px-4 sm:px-8 py-16 border-y border-white/10 bg-gradient-to-r from-[#d4f534]/5 via-transparent to-[#5dd9c1]/5">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        variants={fadeInUp}
+      <div
+       
         className="max-w-5xl mx-auto text-center"
       >
         <h2 className="text-2xl md:text-4xl font-bold leading-relaxed text-balance">
           In Pretoria, <span className="text-[#d4f534]">reputation is everything</span>. Whether you are a law firm in Brooklyn or a medical specialist in Faerie Glen, your digital presence needs to convey <span className="text-[#5dd9c1]">absolute trust</span>. We craft digital identities that <span className="text-[#b4a7d6]">command respect</span>.
         </h2>
-      </motion.div>
+      </div>
     </section>
   );
 }
@@ -207,11 +204,8 @@ function EconomySegments({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-14"
         >
           <div className="text-xs font-bold tracking-widest uppercase text-[#d4f534] mb-3">Tailored Solutions</div>
@@ -222,19 +216,15 @@ function EconomySegments({ isMobile, onPageChange }: { isMobile: boolean; onPage
           <p className="text-muted-foreground text-lg max-w-3xl">
             We understand the distinct pulse of this city. Our development strategy is segmented to serve the diverse industries that drive the capital.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="grid md:grid-cols-3 gap-6"
         >
           {segments.map((seg, idx) => (
-            <motion.div
+            <div
               key={idx}
-              variants={fadeInUp}
               className="group relative p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all overflow-hidden"
             >
               {/* Subtle background gradient unique to each card */}
@@ -265,9 +255,9 @@ function EconomySegments({ isMobile, onPageChange }: { isMobile: boolean; onPage
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -288,11 +278,8 @@ function WhyUsSection({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-14"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
@@ -302,19 +289,15 @@ function WhyUsSection({ isMobile }: { isMobile: boolean }) {
           <p className="text-muted-foreground text-lg max-w-2xl">
             We don{"'"}t hide behind jargon. Here{"'"}s exactly why businesses across Tshwane choose us.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="space-y-4"
         >
           {reasons.map((r, idx) => (
-            <motion.div
+            <div
               key={idx}
-              variants={fadeInUp}
               className="flex gap-6 md:gap-8 items-start p-6 md:p-8 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all group"
             >
               <div className="text-4xl md:text-5xl font-black opacity-30 group-hover:opacity-60 transition-opacity" style={{ color: r.color }}>
@@ -324,9 +307,9 @@ function WhyUsSection({ isMobile }: { isMobile: boolean }) {
                 <h3 className="text-lg md:text-xl font-bold mb-2">{r.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{r.desc}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -349,13 +332,10 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.div variants={fadeInUp} className="mb-14">
+          <div className="mb-14">
             <div className="flex items-center gap-3 mb-4">
               <Search className="w-6 h-6 text-[#d4f534]" />
               <h2 className="text-3xl md:text-4xl font-bold">
@@ -365,16 +345,14 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
             <p className="text-muted-foreground text-lg max-w-3xl text-pretty">
               Pretoria is vast. A customer in Montana is not looking for a plumber in Waterkloof. We specialize in hyper-local SEO that targets the specific micro-climates of the city, ensuring you own your backyard before expanding your reach.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {zones.map((zone, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                variants={fadeInUp}
                 className="p-6 rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#d4f534]/30 transition-all group"
               >
                 <div className="flex items-center gap-3 mb-3">
@@ -382,10 +360,10 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
                   <h4 className="font-bold text-sm">{zone.area}</h4>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">{zone.context}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -398,11 +376,8 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={fadeInUp}
+        <div
+         
           className="mb-14 text-center"
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4 text-balance">
@@ -414,13 +389,10 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Enterprise-grade development at every price point. From startups in Hatfield to corporates in Menlyn Maine.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={isMobile ? staggerContainerMobile : staggerContainer}
+        <div
+         
           className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 mb-8"
         >
           {webPackages.map((pkg) => (
@@ -436,7 +408,7 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
               onSelect={() => onPageChange?.("contact")}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -468,13 +440,10 @@ function ServiceAreasGrid({ isMobile }: { isMobile: boolean }) {
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.div variants={fadeInUp} className="mb-12 text-center">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
               Proudly Serving the Entire{" "}
               <span className="text-[#d4f534]">Tshwane Metro</span>
@@ -482,16 +451,14 @@ function ServiceAreasGrid({ isMobile }: { isMobile: boolean }) {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               From Menlyn Maine to Montana, Brooklyn to Rosslyn. Every corner of the capital covered.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={isMobile ? staggerContainerMobile : staggerContainer}
+          <div
             className="grid md:grid-cols-3 gap-6"
           >
             {regions.map((reg, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                variants={fadeInUp}
                 className="p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all"
               >
                 <h3 className="font-bold text-lg mb-4" style={{ color: reg.color }}>{reg.region}</h3>
@@ -506,10 +473,10 @@ function ServiceAreasGrid({ isMobile }: { isMobile: boolean }) {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -551,22 +518,18 @@ function FAQsSection() {
   return (
     <section className="px-4 sm:px-8 py-20 border-t border-white/10">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={staggerContainer}
+        <div
+         
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl md:text-4xl font-bold mb-10 text-center text-balance">
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-balance">
             Questions About Web Design in{" "}
             <span className="text-[#d4f534]">Pretoria</span>
-          </motion.h2>
+          </h2>
 
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                variants={fadeInUp}
                 className="border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-all"
               >
                 <button
@@ -579,25 +542,21 @@ function FAQsSection() {
                     style={{ transform: openFaq === idx ? "rotate(180deg)" : "none" }}
                   />
                 </button>
-                <AnimatePresence>
+                
                   {openFaq === idx && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                    <div
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-white/10 pt-4">
                         {faq.a}
                       </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
-              </motion.div>
+                
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -609,11 +568,8 @@ function FAQsSection() {
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="px-4 sm:px-8 py-20">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        variants={fadeInUp}
+      <div
+       
         className="max-w-4xl mx-auto"
       >
         <div className="relative p-10 md:p-16 rounded-3xl overflow-hidden border border-[#d4f534]/20">
@@ -643,7 +599,7 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

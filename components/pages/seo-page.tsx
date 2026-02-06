@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+
 
 // Centralized imports
 import type { PageType } from "@/lib/navigation";
 import { seoPackages, seoProcessSteps } from "@/lib/data";
-import { fadeInUp } from "@/lib/animations";
+
 
 // Shared components
 import { PageLayout, Breadcrumb, PageBadge } from "@/components/shared/page-layout";
@@ -66,28 +66,22 @@ function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void
           Your All-in-one Business Solution | Creative Digital Agency | Web Design Company
         </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <div
         >
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-8 leading-[1] tracking-tight">
             Get found by <br />
             <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-500">
               customers who matter.
-              <motion.svg 
-                initial={{ pathLength: 0 }} 
-                animate={{ pathLength: 1 }} 
-                transition={{ duration: 1, delay: 0.5 }}
+              <svg
                 className="absolute -bottom-2 left-0 w-full" 
                 viewBox="0 0 300 12" 
                 fill="none"
               >
                 <path d="M2 10C50 2 150 2 298 10" stroke="#c084fc" strokeWidth="4" strokeLinecap="round" />
-              </motion.svg>
+              </svg>
             </span>
           </h1>
-        </motion.div>
+        </div>
 
         <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl font-light leading-relaxed mb-6">
           A beautiful website is useless if no one sees it. We use data-driven strategies to increase your visibility, drive organic traffic, and convert clicks into clients.

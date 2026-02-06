@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { ArrowUpRight, Code, PenTool, Sparkles } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+
 
 // Centralized imports
 import type { PageType } from "@/lib/navigation";
 import { teamMembers } from "@/lib/data";
-import { fadeInUp, staggerContainerSlow, drawLineSlow } from "@/lib/animations";
+
 
 // Shared components
 import { PageLayout } from "@/components/shared/page-layout";
@@ -18,12 +18,8 @@ interface AboutPageProps {
 
 export default function AboutPage({ onPageChange }: AboutPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
 
-  const headerY = useTransform(scrollYProgress, [0, 0.5], ["0%", "50%"]);
+  
 
   return (
     <PageLayout containerRef={containerRef} solidBackground vignette currentPage="about" onPageChange={onPageChange}>
@@ -31,46 +27,37 @@ export default function AboutPage({ onPageChange }: AboutPageProps) {
         <div className="max-w-6xl mx-auto">
           
           {/* Header Section */}
-          <motion.div 
-            style={{ y: headerY }}
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainerSlow}
+          <div 
             className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 md:mb-24 lg:mb-32 relative"
           >
-            <motion.div 
-              variants={fadeInUp} 
+            <div 
               className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 border border-white/10 bg-white/5 rounded-full text-muted-foreground text-xs font-bold tracking-widest uppercase mb-4 sm:mb-6"
             >
               <Sparkles className="w-3 h-3 text-[#d4f534]" />
               Meet the Makers
-            </motion.div>
+            </div>
 
-            <motion.h1 
-              variants={fadeInUp} 
+            <h1 
               className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold mb-4 sm:mb-6 tracking-tighter leading-none"
             >
               The Team
-            </motion.h1>
+            </h1>
             
             {/* Wavy underline animation */}
-            <motion.svg
-              variants={fadeInUp}
+            <svg
               className="text-[#d4f534] mx-auto w-24 sm:w-32 md:w-48 h-4 sm:h-6"
               viewBox="0 0 100 20"
             >
-              <motion.path
-                variants={drawLineSlow}
+              <path
                 d="M0 10 Q 25 20 50 10 T 100 10"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="4"
                 strokeLinecap="round"
               />
-            </motion.svg>
+            </svg>
 
-            <motion.p 
-              variants={fadeInUp} 
+            <p 
               className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-muted-foreground mt-6 sm:mt-8 md:mt-10 font-light px-4"
             >
               We are a{" "}
@@ -80,8 +67,8 @@ export default function AboutPage({ onPageChange }: AboutPageProps) {
                 designer and developer
               </span>
               . Our process is agile, personal, and fully invested in your success.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           {/* Team Cards Grid */}
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 max-w-5xl mx-auto items-start px-4">
@@ -113,31 +100,24 @@ function Annotations() {
   return (
     <>
       {/* Annotation 1: No Middlemen */}
-      <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+      <div
+       
         className="absolute -top-16 -left-4 md:-left-32 transform -rotate-12 hidden md:block z-20"
       >
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+        <p
           className="font-serif italic text-muted-foreground text-xl mb-2"
         >
           No middlemen
-        </motion.p>
+        </p>
         <svg className="w-10 h-16 text-gray-500" viewBox="0 0 24 36">
-          <motion.path
-            variants={drawLineSlow}
+          <path
             d="M12 0 C8 12 16 24 12 36"
             stroke="currentColor"
             fill="none"
             strokeLinecap="round"
             strokeWidth="2"
           />
-          <motion.path
-            variants={drawLineSlow}
+          <path
             d="M8 32 L12 36 L16 32"
             stroke="currentColor"
             fill="none"
@@ -145,40 +125,33 @@ function Annotations() {
             strokeWidth="2"
           />
         </svg>
-      </motion.div>
+      </div>
 
       {/* Annotation 2: Direct Access */}
-      <motion.div 
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+      <div
+       
         className="absolute top-1/2 -right-4 md:-right-24 transform rotate-6 hidden lg:block z-20"
       >
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
+        <p
           className="font-serif italic text-[#d4f534] text-2xl mb-2 ml-4"
         >
           Direct access!
-        </motion.p>
+        </p>
         <svg fill="none" height="50" viewBox="0 0 60 50" width="60" className="text-[#d4f534]">
-          <motion.path
-            variants={drawLineSlow}
+          <path
             d="M50 5 C30 15 45 40 10 45"
             stroke="currentColor"
             strokeLinecap="round"
             strokeWidth="2"
           />
-          <motion.path
-            variants={drawLineSlow}
+          <path
             d="M10 45 L20 35 M10 45 L22 52"
             stroke="currentColor"
             strokeLinecap="round"
             strokeWidth="2"
           />
         </svg>
-      </motion.div>
+      </div>
     </>
   );
 }
@@ -190,11 +163,8 @@ interface TeamMemberCardProps {
 
 function TeamMemberCard({ member, index }: TeamMemberCardProps) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      variants={fadeInUp}
+    <div
+     
       className={`group relative ${index === 1 ? "md:mt-32" : ""}`}
     >
       {/* Glow effect */}
@@ -236,29 +206,22 @@ function TeamMemberCard({ member, index }: TeamMemberCardProps) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <motion.div 
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={staggerContainerSlow}
+    <div
+     
       className="mt-32 md:mt-48 relative"
     >
       {/* Dashed line connector */}
-      <motion.div 
-        initial={{ height: 0 }}
-        whileInView={{ height: 96 }}
-        transition={{ duration: 1 }}
+      <div
         className="absolute left-1/2 -top-24 w-[1px] border-l-2 border-dashed border-gray-800 hidden md:block" 
       />
 
-      <motion.div 
-        variants={fadeInUp}
+      <div
         className="bg-white/5 backdrop-blur-xl rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between border border-white/10 shadow-2xl relative overflow-hidden group"
       >
         {/* Animated Background Glow */}
@@ -274,23 +237,18 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
         </div>
 
         <div className="relative z-10">
-          <motion.button
+          <button
             onClick={() => onPageChange?.("contact")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             className="bg-white text-black hover:bg-[#d4f534] transition-colors px-8 py-5 rounded-full font-bold flex items-center gap-4 text-lg shadow-xl"
           >
             Discuss your project
             <div className="bg-black text-white rounded-full p-2 flex items-center justify-center transition-transform group-hover:rotate-45">
               <ArrowUpRight className="w-5 h-5" />
             </div>
-          </motion.button>
+          </button>
 
           {/* Handwritten annotation */}
-          <motion.div 
-            initial={{ opacity: 0, rotate: -12 }}
-            whileInView={{ opacity: 1, rotate: -12 }}
-            transition={{ delay: 0.5 }}
+          <div
             className="absolute -bottom-12 -right-8 hidden lg:block"
           >
             <span className="font-serif italic text-muted-foreground text-lg">
@@ -302,17 +260,16 @@ function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void 
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <motion.path
-                variants={drawLineSlow}
+              <path
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
               />
             </svg>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
