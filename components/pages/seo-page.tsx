@@ -127,7 +127,7 @@ function SEOTypesSection() {
 
 function OptimizationSection() {
   return (
-    <div className="py-24 px-6 bg-black">
+    <div className="py-24 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <div className="rounded-[40px] overflow-hidden border border-white/10 relative group">
@@ -178,7 +178,7 @@ function ProcessSection({
   const stepTextColors = ["text-black", "text-black", "text-white", "text-white"];
 
   return (
-    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24 bg-black">
+    <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-xl">
@@ -246,7 +246,7 @@ function ProcessSection({
 
 function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <div id="packages" className="py-24 px-6 bg-black relative overflow-hidden">
+    <div id="packages" className="py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -281,7 +281,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
 
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <div className="py-24 px-6 bg-black">
+    <div className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-[40px] p-8 md:p-16 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#c084fc]/10 blur-[100px] -mr-48 -mt-48" />

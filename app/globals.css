@@ -172,3 +172,20 @@ input[type="range"]::-moz-range-thumb {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Scroll indicator animation */
+@keyframes scroll-pulse {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-scroll-pulse {
+  animation: scroll-pulse 2s ease-in-out infinite;
+}

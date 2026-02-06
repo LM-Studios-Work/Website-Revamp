@@ -30,10 +30,10 @@ export function PageBackground({
         style={{
           backgroundImage: solid 
             ? "url(/images/dark-background-solid.png)" 
-            : "url(/images/dark-background.png)",
+            : "url(/newhero.webp)",
           backgroundColor: "#050505",
           backgroundSize: "cover",
-          backgroundPosition: "center",
+          backgroundPosition: "center top",
         }}
       />
       

@@ -77,10 +77,11 @@ interface PageHeroProps {
   children: React.ReactNode;
   className?: string;
   /** Minimum height variant */
-  size?: "default" | "large" | "full";
+  size?: "auto" | "default" | "large" | "full";
 }
 
 const heroSizes = {
+  auto: "",
   default: "min-h-[60vh]",
   large: "min-h-[80vh]",
   full: "min-h-screen",
@@ -96,7 +97,7 @@ export function PageHero({
       className={cn(
         "relative w-full flex flex-col justify-center",
         "px-4 sm:px-6 md:px-12 lg:px-24 overflow-hidden",
-        "py-20 lg:py-0",
+        "py-20 lg:py-24",
         heroSizes[size],
         className
       )}

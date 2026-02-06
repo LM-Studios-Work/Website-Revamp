@@ -38,17 +38,17 @@ export default function HomePage({ onPageChange }: HomePageProps) {
   return (
     <PageLayout containerRef={containerRef} currentPage="home" onPageChange={onPageChange}>
       {/* Hero Section */}
-      <PageHero size="large" className="lg:min-h-screen">
+      <PageHero size="full">
         <div 
           className="w-full max-w-[1000px] mx-auto lg:mx-0"
         >
           {/* Brand Title */}
           <div
-            className="relative mb-8 md:mb-10"
+            className="relative mb-3 md:mb-5"
           >
             <div className="flex flex-col md:flex-row md:items-baseline leading-none select-none">
               <span
-                className="font-bold text-[5rem] sm:text-[7rem] md:text-[8rem] lg:text-[10rem] tracking-tighter mr-0 md:mr-6 leading-[0.9]"
+                className="font-bold text-[5rem] sm:text-[7rem] md:text-[7rem] lg:text-[7rem] tracking-tighter mr-0 md:mr-6 leading-[0.9]"
                 style={{
                   color: "transparent",
                   WebkitTextStroke: "2px rgba(255,255,255,0.8)",
@@ -58,7 +58,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
               </span>
               <div className="flex flex-col relative z-20">
                 <span
-                  className="font-bold text-white text-[3.5rem] sm:text-[5rem] md:text-[6rem] lg:text-[8rem] tracking-tight leading-[0.9]"
+                  className="font-bold text-white text-[3.5rem] sm:text-[5rem] md:text-[5rem] lg:text-[5rem] tracking-tight leading-[0.9]"
                 >
                   Studios
                 </span>
@@ -71,10 +71,10 @@ export default function HomePage({ onPageChange }: HomePageProps) {
 
           {/* Headline & Sub */}
           <div
-            className="space-y-6 md:space-y-8 mb-10 md:mb-12 pl-4 border-l-2 border-white/10"
+            className="space-y-3 md:space-y-4 mb-5 md:mb-6 pl-4 border-l-2 border-white/10"
           >
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold leading-[1.1] tracking-tight"
             >
               Innovative Web Design <br />
               <span className="text-gray-500">for Johannesburg Businesses.</span>
@@ -146,14 +146,14 @@ export default function HomePage({ onPageChange }: HomePageProps) {
 function ScrollIndicator() {
   return (
     <div
-      className="hidden lg:flex absolute bottom-10 right-20 items-center gap-4"
+      className="flex absolute bottom-6 right-4 sm:bottom-8 sm:right-6 lg:bottom-10 lg:right-20 items-center gap-4"
     >
-      <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground rotate-90 origin-right translate-x-8">
+      <span className="text-[10px] lg:text-xs uppercase tracking-[0.2em] text-muted-foreground rotate-90 origin-right translate-x-8">
         Scroll
       </span>
-      <div className="h-24 w-[1px] bg-gradient-to-b from-transparent via-gray-500 to-transparent relative overflow-hidden">
+      <div className="h-20 lg:h-24 w-[1px] bg-gradient-to-b from-transparent via-gray-500 to-transparent relative overflow-hidden">
         <div 
-          className="absolute top-0 left-0 w-full h-1/2 bg-[#d4f534]" 
+          className="absolute top-0 left-0 w-full h-1/2 bg-[#d4f534] animate-scroll-pulse" 
         />
       </div>
     </div>
