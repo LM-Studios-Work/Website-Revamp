@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import {
   ChevronDown,
   MapPin,
@@ -37,16 +37,6 @@ interface SandtonWebDesignPageProps {
 
 export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  
-  
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <PageLayout containerRef={containerRef} currentPage="sandton-web-design" onPageChange={onPageChange}>
@@ -57,25 +47,25 @@ export default function SandtonWebDesignPage({ onPageChange }: SandtonWebDesignP
       <TrustBar />
 
       {/* Why Sandton Businesses Need a Website */}
-      <WhySandtonSection isMobile={isMobile} onPageChange={onPageChange} />
+      <WhySandtonSection onPageChange={onPageChange} />
 
       {/* Industry-Specific Web Design */}
-      <IndustrySection isMobile={isMobile} onPageChange={onPageChange} />
+      <IndustrySection onPageChange={onPageChange} />
 
       {/* Local SEO Section */}
-      <LocalSEOSection isMobile={isMobile} onPageChange={onPageChange} />
+      <LocalSEOSection onPageChange={onPageChange} />
 
       {/* Packages */}
       <PackagesSection onPageChange={onPageChange} />
 
       {/* Service Area Map */}
-      <ServiceAreaSection isMobile={isMobile} />
+      <ServiceAreaSection />
 
       {/* Premium Strategy */}
-      <PremiumStrategySection isMobile={isMobile} onPageChange={onPageChange} />
+      <PremiumStrategySection onPageChange={onPageChange} />
 
       {/* Why Partner With Us */}
-      <WhyPartnerSection isMobile={isMobile} onPageChange={onPageChange} />
+      <WhyPartnerSection onPageChange={onPageChange} />
 
       {/* FAQs */}
       <FAQsSection />
@@ -185,7 +175,7 @@ function TrustBar() {
 // =============================
 // WHY SANDTON SECTION
 // =============================
-function WhySandtonSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function WhySandtonSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const reasons = [
     { icon: Banknote, title: "Financial Hub", desc: "Africa's largest concentration of financial institutions" },
     { icon: Building2, title: "Corporate Excellence", desc: "Multinational HQs demand world-class digital presence" },
@@ -228,7 +218,7 @@ function WhySandtonSection({ isMobile, onPageChange }: { isMobile: boolean; onPa
 // =============================
 // INDUSTRY SECTION
 // =============================
-function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function IndustrySection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const industries = [
     { name: "Financial Services", icon: Banknote, desc: "Secure platforms for banking, investment & insurance" },
     { name: "Luxury Brands", icon: Award, desc: "Premium aesthetics and exclusive brand positioning" },
@@ -268,7 +258,7 @@ function IndustrySection({ isMobile, onPageChange }: { isMobile: boolean; onPage
 // =============================
 // LOCAL SEO SECTION
 // =============================
-function LocalSEOSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function LocalSEOSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const seoFeatures = [
     "Sandton-specific keyword domination",
     "Google Business Profile optimization",
@@ -352,7 +342,7 @@ function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => 
 // =============================
 // SERVICE AREA SECTION
 // =============================
-function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
+function ServiceAreaSection() {
   const areas = [
     "Bryanston",
     "Rivonia",
@@ -398,7 +388,7 @@ function ServiceAreaSection({ isMobile }: { isMobile: boolean }) {
 // =============================
 // PREMIUM STRATEGY SECTION
 // =============================
-function PremiumStrategySection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function PremiumStrategySection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const strategies = [
     { name: "Market Positioning", icon: Target },
     { name: "Competitive Analysis", icon: TrendingUp },
@@ -437,7 +427,7 @@ function PremiumStrategySection({ isMobile, onPageChange }: { isMobile: boolean;
 // =============================
 // WHY PARTNER SECTION
 // =============================
-function WhyPartnerSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function WhyPartnerSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const reasons = [
     "Deep expertise in Sandton market dynamics",
     "Enterprise-grade security and compliance",

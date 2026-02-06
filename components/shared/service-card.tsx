@@ -17,7 +17,6 @@ interface ServiceCardProps {
   image: string;
   items: string[];
   accentColor?: string;
-  isMobile?: boolean;
   className?: string;
   compact?: boolean;
 }
@@ -30,7 +29,6 @@ export function ServiceCard({
   image,
   items,
   accentColor = "#d4f534",
-  isMobile = false,
   className,
   compact = false,
 }: ServiceCardProps) {

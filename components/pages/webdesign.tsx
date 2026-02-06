@@ -24,6 +24,7 @@ import { webPackages, webProcessSteps, webDesignFAQs } from "@/lib/data";
 // Shared components
 import { PageLayout, PageBadge } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
+import { FAQItem } from "@/components/shared/faq-item";
 
 interface StandardPackPageProps {
   onPageChange?: (page: PageType) => void;
@@ -81,17 +82,18 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
   return (
     <PageLayout containerRef={containerRef} currentPage="web-design" onPageChange={onPageChange}>
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection onPageChange={onPageChange} />
 
       {/* Packages Grid */}
       <PackagesSection onPageChange={onPageChange} />
+         {/* Process Section */}
+      <ProcessSection scrollRef={scrollRef} scroll={scroll} />
+
 
       {/* Small vs Large Business */}
       <BusinessTypesSection />
 
-      {/* Process Section */}
-      <ProcessSection scrollRef={scrollRef} scroll={scroll} />
-
+   
       {/* FAQs Section */}
       <FAQsSection />
 
@@ -103,9 +105,9 @@ export default function StandardPackPage({ onPageChange }: StandardPackPageProps
 
 // --- Sub-components ---
 
-function HeroSection() {
+function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <section className="relative z-10 px-4 sm:px-8 py-20 md:py-32 overflow-hidden">
+    <section className="relative z-10 px-4 sm:px-8 pt-8 md:pt-16 pb-20 md:pb-32 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
         <div className="flex-1">
           <div className="mb-4">
@@ -127,6 +129,21 @@ function HeroSection() {
             <p>
               LM Studios is a <strong className="text-white">Johannesburg-based web design company</strong> providing professional website design services. We work with small, growing, and large businesses across South Africa.
             </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 mt-8">
+            <button
+              onClick={() => onPageChange?.("contact")}
+              className="bg-[#d4f534] text-black font-bold py-3 px-6 rounded-full hover:bg-[#c7e81f] hover:scale-105 transition-all shadow-[0_0_30px_rgba(212,245,52,0.3)]"
+            >
+              Get a Free Quote
+            </button>
+            <button
+              onClick={() => document.getElementById("packages")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-transparent border border-white/20 text-white font-bold py-3 px-6 rounded-full hover:bg-white/10 transition-all"
+            >
+              View Packages
+            </button>
           </div>
         </div>
 
@@ -242,8 +259,8 @@ function ProcessSection({
   scrollRef: React.RefObject<HTMLDivElement | null>; 
   scroll: (direction: "left" | "right") => void;
 }) {
-  // Color values for process steps (matching the Tailwind classes from data)
-  const stepColors = ["#d4f534", "#5dd9c1", "#b4a7d6", "#ff6b6b"];
+  // Lime gradient shades (light to dark)
+  const stepColors = ["#d4f534", "#b8d92a", "#9cbe20", "#80a216"];
 
   return (
     <section className="relative z-10 px-4 sm:px-8 py-16 md:py-24">
@@ -361,32 +378,4 @@ function ContactCTASection({ onPageChange }: { onPageChange?: (page: PageType) =
   );
 }
 
-// --- Helper Component: FAQ Accordion ---
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className="border-b border-white/10 last:border-0 pb-4 last:pb-0">
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-start justify-between text-left group py-2"
-      >
-        <span className="font-bold text-white text-sm md:text-base group-hover:text-[#d4f534] transition-colors pr-4">
-          {question}
-        </span>
-        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
-      </button>
-      
-        {isOpen && (
-          <div
-            className="overflow-hidden"
-          >
-            <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">
-              {answer}
-            </p>
-          </div>
-        )}
-      
-    </div>
-  );
-}

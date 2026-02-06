@@ -14,8 +14,6 @@ interface SectionWrapperProps {
   className?: string;
   /** Add background styling (white/5 with border) */
   withBackground?: boolean;
-  /** Use mobile-optimized animations */
-  isMobile?: boolean;
   /** Animate section on scroll into view */
   animate?: boolean;
   /** Custom ID for scroll targeting */
@@ -35,7 +33,6 @@ export function SectionWrapper({
   children,
   className,
   withBackground = false,
-  isMobile = false,
   animate = true,
   id,
   padding = "lg",

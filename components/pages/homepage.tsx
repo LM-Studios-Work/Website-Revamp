@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { ArrowRight, Sparkles, TrendingUp, Code, Zap, CheckCircle, Smartphone } from "lucide-react";
 
 // Centralized imports
@@ -32,15 +33,7 @@ const featureIcons: Record<string, React.ComponentType<{ className?: string }>> 
 
 export default function HomePage({ onPageChange }: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile();
 
   return (
     <PageLayout containerRef={containerRef} currentPage="home" onPageChange={onPageChange}>
@@ -111,7 +104,7 @@ export default function HomePage({ onPageChange }: HomePageProps) {
       </PageHero>
 
       {/* Services Section */}
-      <SectionWrapper isMobile={isMobile}>
+      <SectionWrapper>
         <SectionHeader
           title="Our"
           titleHighlight="services"
@@ -130,7 +123,6 @@ export default function HomePage({ onPageChange }: HomePageProps) {
               image={service.image}
               items={service.items}
               accentColor={service.accentColor}
-              isMobile={isMobile}
               compact
             />
           ))}
@@ -138,10 +130,10 @@ export default function HomePage({ onPageChange }: HomePageProps) {
       </SectionWrapper>
 
       {/* Custom Pack Section */}
-      <CustomPackSection isMobile={isMobile} />
+      <CustomPackSection />
 
       {/* Why Choose Us Section */}
-      <WhyChooseUsSection isMobile={isMobile} />
+      <WhyChooseUsSection />
 
       {/* CTA Section */}
       <CTASection onPageChange={onPageChange} />
@@ -168,7 +160,7 @@ function ScrollIndicator() {
   );
 }
 
-function CustomPackSection({ isMobile }: { isMobile: boolean }) {
+function CustomPackSection() {
   return (
     <section className="px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
@@ -234,7 +226,7 @@ function CustomPackSection({ isMobile }: { isMobile: boolean }) {
   );
 }
 
-function WhyChooseUsSection({ isMobile }: { isMobile: boolean }) {
+function WhyChooseUsSection() {
   return (
     <section className="px-4 sm:px-6 md:px-8 py-16 md:py-24 lg:py-32 bg-white/5 backdrop-blur-3xl border-y border-white/5">
       <div className="max-w-7xl mx-auto">

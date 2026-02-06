@@ -20,7 +20,7 @@ import type { PageType } from "@/lib/navigation";
 interface PageLayoutProps {
   children: React.ReactNode;
   /** Reference for scroll tracking (optional) */
-  containerRef?: React.RefObject<HTMLDivElement>;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   /** Use solid background variant */
   solidBackground?: boolean;
   /** Show vignette effect on background */

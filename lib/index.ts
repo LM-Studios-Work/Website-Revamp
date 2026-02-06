@@ -2,9 +2,6 @@
  * Lib Index
  * 
  * Centralized exports for all library utilities.
- * 
- * Usage:
- *   import { projects, animations, navItems } from "@/lib";
  */
 
 // ============================================
@@ -42,47 +39,6 @@ export {
 } from "./data";
 
 // ============================================
-// ANIMATIONS
-// ============================================
-export {
-  // Fade Animations
-  fadeIn,
-  fadeInUp,
-  fadeInUpSlow,
-  fadeInDown,
-  fadeInLeft,
-  fadeInRight,
-  // Scale Animations
-  scaleIn,
-  scaleInLarge,
-  // Stagger Containers
-  staggerContainer,
-  staggerContainerFast,
-  staggerContainerSlow,
-  staggerContainerMobile,
-  // Spring Animations
-  springCard,
-  // Special Effects
-  drawLine,
-  drawLineSlow,
-  slideUp,
-  slideDown,
-  expandWidth,
-  expandWidthMobile,
-  // Hover Animations
-  hoverScale,
-  hoverScaleLarge,
-  hoverLift,
-  hoverGlow,
-  // Utility Functions
-  createItemVariant,
-  // Viewport Options
-  viewportOnce,
-  viewportDefault,
-  viewportMobile,
-} from "./animations";
-
-// ============================================
 // NAVIGATION
 // ============================================
 export {
@@ -94,12 +50,13 @@ export {
 } from "./navigation";
 
 // ============================================
-// PROJECTS (Real portfolio projects)
+// AREA DATA
 // ============================================
 export {
-  projects as portfolioProjects,
-  type Project as PortfolioProject,
-} from "./projects";
+  midrandData,
+  centurionData,
+  type AreaPageData,
+} from "./area-data";
 
 // ============================================
 // UTILITIES

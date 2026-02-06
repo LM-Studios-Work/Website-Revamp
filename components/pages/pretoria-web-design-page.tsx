@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import {
   MapPin,
   ArrowRight,
@@ -36,16 +36,6 @@ interface PretoriaWebDesignPageProps {
 
 export default function PretoriaWebDesignPage({ onPageChange }: PretoriaWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  
-  
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <PageLayout containerRef={containerRef} currentPage="pretoria-web-design" onPageChange={onPageChange}>
@@ -56,19 +46,19 @@ export default function PretoriaWebDesignPage({ onPageChange }: PretoriaWebDesig
       <AuthorityStatement />
 
       {/* Segmented Economy - 3-column deep cards */}
-      <EconomySegments isMobile={isMobile} onPageChange={onPageChange} />
+      <EconomySegments onPageChange={onPageChange} />
 
       {/* Why Pretoria Chooses Us - side-by-side proof */}
-      <WhyUsSection isMobile={isMobile} />
+      <WhyUsSection />
 
       {/* Local SEO Dominance - map-grid approach */}
-      <LocalSEOSection isMobile={isMobile} />
+      <LocalSEOSection />
 
       {/* Packages */}
-      <PackagesSection isMobile={isMobile} onPageChange={onPageChange} />
+      <PackagesSection onPageChange={onPageChange} />
 
       {/* Service Areas - structured grid, not pills */}
-      <ServiceAreasGrid isMobile={isMobile} />
+      <ServiceAreasGrid />
 
       {/* FAQs */}
       <FAQsSection />
@@ -170,7 +160,7 @@ function AuthorityStatement() {
 // Different from Thohoyandou bento, Midrand standard grid, Sandton/Centurion cards
 // Each card is a tall, detailed segment with its own accent
 // =============================
-function EconomySegments({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function EconomySegments({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   const segments = [
     {
       icon: Briefcase,
@@ -267,7 +257,7 @@ function EconomySegments({ isMobile, onPageChange }: { isMobile: boolean; onPage
 // WHY US - Horizontal proof section: big number + description
 // Unique layout: numbered reasons, not checkboxes or cards
 // =============================
-function WhyUsSection({ isMobile }: { isMobile: boolean }) {
+function WhyUsSection() {
   const reasons = [
     { number: "01", title: "Direct Access to Senior Developers", desc: "No middlemen, no account managers. You work directly with the developers who build your site.", color: "#d4f534" },
     { number: "02", title: "Capital City Seriousness", desc: "We combine the agility of a modern tech team with the professionalism Pretoria demands.", color: "#5dd9c1" },
@@ -319,7 +309,7 @@ function WhyUsSection({ isMobile }: { isMobile: boolean }) {
 // LOCAL SEO - Grid of target areas with search context
 // Different from Thohoyandou search cloud, other pages' vertical layouts
 // =============================
-function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
+function LocalSEOSection() {
   const zones = [
     { area: "Menlyn & Pretoria East", context: "High-income professionals searching for premium services", icon: Briefcase },
     { area: "Hatfield & Arcadia", context: "Student hubs and diplomatic sector with diverse search patterns", icon: Globe },
@@ -372,7 +362,7 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
 // =============================
 // PACKAGES
 // =============================
-function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">
@@ -418,7 +408,7 @@ function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPage
 // SERVICE AREAS - Structured grid with region grouping
 // Different from Thohoyandou pills, other pages' flat lists
 // =============================
-function ServiceAreasGrid({ isMobile }: { isMobile: boolean }) {
+function ServiceAreasGrid() {
   const regions = [
     {
       region: "Pretoria East",

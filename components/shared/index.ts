@@ -13,3 +13,6 @@ export { SectionWrapper, SectionHeader } from "./section-wrapper";
 export { ServiceCard } from "./service-card";
 export { PackageCard, SEOPackageCard } from "./package-card";
 export { ProcessCard } from "./process-card";
+
+// Interactive Components
+export { FAQItem } from "./faq-item";

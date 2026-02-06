@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ChevronDown,
   MapPin,
@@ -37,17 +38,8 @@ interface KemptonParkWebDesignPageProps {
 
 export default function KemptonParkWebDesignPage({ onPageChange }: KemptonParkWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [openFaq, setOpenFaq] = useState<number | undefined>(undefined);
-  
-  
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const faqs = [
     { q: "How much does a website cost in Kempton Park?", a: "Our packages start from R4,999 for a professional small business website. We offer solutions for every budget, from startups in Glen Marais to large industrial firms in Isando. Every package includes mobile-responsive design, SEO basics, and hosting setup." },

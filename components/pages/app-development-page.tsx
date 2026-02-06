@@ -19,8 +19,9 @@ import type { PageType } from "@/lib/navigation";
 import { appPackages, appProcessSteps, appDevFAQs } from "@/lib/data";
 
 
-import { PageLayout, Breadcrumb, PageBadge } from "@/components/shared/page-layout";
+import { PageLayout } from "@/components/shared/page-layout";
 import { PackageCard } from "@/components/shared";
+import { FAQItem } from "@/components/shared/faq-item";
 
 interface AppDevelopmentPageProps {
   onPageChange?: (page: PageType) => void;
@@ -43,7 +44,7 @@ export default function AppDevelopmentPage({ onPageChange }: AppDevelopmentPageP
   };
 
   return (
-    <PageLayout solidBackground vignette currentPage="app-development" onPageChange={onPageChange}>
+    <PageLayout currentPage="app-development" onPageChange={onPageChange}>
       <div className="relative z-10">
         <HeroSection onPageChange={onPageChange} />
         <TechStackSection />
@@ -58,79 +59,58 @@ export default function AppDevelopmentPage({ onPageChange }: AppDevelopmentPageP
 
 function HeroSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
-    <div className="relative pt-32 pb-20 px-6 overflow-hidden min-h-[80vh] flex items-center">
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#6ee2d1]/10 rounded-full blur-[120px] opacity-50 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <Breadcrumb
-          items={[
-            { label: "Home", onClick: () => onPageChange?.("home") },
-            { label: "App Development" },
-          ]}
-          accentColor="#6ee2d1"
-        />
-
-        <div className="flex items-center gap-3 mb-6">
-          <PageBadge color="#6ee2d1">App Development</PageBadge>
-        </div>
-
-        <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-4xl">
-          Your All-in-one Business Solution | Creative Digital Agency | Web Design Company
-        </p>
-
-        <div
-        >
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-8 leading-[1] tracking-tight">
+    <section className="relative z-10 px-4 sm:px-8 pt-8 md:pt-16 pb-20 md:pb-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div className="flex-1">
+          <div className="mb-4">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl mb-3 font-bold select-none tracking-tight"
+              style={{ WebkitTextStroke: "1px rgba(255,255,255,0.8)", WebkitTextFillColor: "transparent" }}
+            >
+              App Development
+            </h1>
+            <div className="inline-flex items-center gap-2 px-3 py-1 border border-[#6ee2d1]/50 bg-[#6ee2d1]/10 rounded-full text-[#6ee2d1] text-xs font-bold tracking-widest uppercase">
+              Mobile & Web Applications
+            </div>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
             Build apps that <br />
-            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-500">
-              users love.
-              <svg
-                className="absolute -bottom-2 left-0 w-full"
-                viewBox="0 0 300 12"
-                fill="none"
-              >
-                <path d="M2 10C50 2 150 2 298 10" stroke="#6ee2d1" strokeWidth="4" strokeLinecap="round" />
-              </svg>
-            </span>
-          </h1>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">users love.</span>
+          </h2>
+          <div className="text-base md:text-lg leading-relaxed max-w-xl text-muted-foreground font-light border-l border-white/20 pl-6">
+            <p>
+              From concept to launch, we build <strong className="text-white">high-performance mobile and web applications</strong> that engage users and drive business growth.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 mt-8">
+            <button
+              onClick={() => onPageChange?.("contact")}
+              className="bg-[#6ee2d1] text-black font-bold py-4 px-8 rounded-full hover:bg-[#5dd9c1] hover:scale-105 transition-all shadow-[0_0_30px_rgba(110,226,209,0.3)]"
+            >
+              Start Your Project
+            </button>
+            <button
+              onClick={() => document.getElementById("packages")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-full hover:bg-white/10 transition-all"
+            >
+              View Packages
+            </button>
+          </div>
         </div>
 
-        <p className="text-lg md:text-2xl text-muted-foreground max-w-2xl font-light leading-relaxed mb-6">
-          From concept to launch, we build high-performance mobile and web applications that engage users and drive business growth.
-        </p>
-
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6 max-w-3xl mb-10">
-          <h3 className="text-sm font-bold text-[#6ee2d1] mb-3 uppercase tracking-wider">What We Build</h3>
-          <p className="text-gray-300 text-sm leading-relaxed">
-            We develop native iOS and Android applications, cross-platform solutions using React Native and Flutter, Progressive Web Apps (PWAs), and custom web applications. Our team handles everything from UI/UX design to backend development and app store deployment.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap gap-4">
-          <button
-            onClick={() => onPageChange?.("contact")}
-            className="bg-[#6ee2d1] text-black font-bold py-4 px-8 rounded-full hover:bg-[#5dd9c1] hover:scale-105 transition-all shadow-[0_0_30px_rgba(110,226,209,0.3)]"
-          >
-            Start Your Project
-          </button>
-          <button
-            onClick={() => document.getElementById("packages")?.scrollIntoView({ behavior: "smooth" })}
-            className="bg-transparent border border-white/20 text-white font-bold py-4 px-8 rounded-full hover:bg-white/10 transition-all"
-          >
-            View Packages
-          </button>
+        <div className="flex-1 w-full hidden md:block">
+          <div className="rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#6ee2d1]/20 to-transparent mix-blend-overlay z-10" />
+            <img
+              src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=1080&q=80"
+              alt="App Development"
+              className="w-full h-auto object-cover"
+            />
+          </div>
         </div>
       </div>
-
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[60%] opacity-20 pointer-events-none hidden lg:block">
-        <svg viewBox="0 0 400 200" className="w-full h-full text-[#6ee2d1] drop-shadow-[0_0_10px_rgba(110,226,209,0.5)]">
-          <rect x="50" y="20" width="100" height="160" rx="20" fill="none" stroke="currentColor" strokeWidth="2" />
-          <rect x="250" y="40" width="120" height="80" rx="8" fill="none" stroke="white" strokeWidth="1" opacity="0.5" />
-          <circle cx="100" cy="160" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
-          <path d="M150 100 L250 80" stroke="currentColor" strokeWidth="2" strokeDasharray="5,5" />
-        </svg>
-      </div>
-    </div>
+    </section>
   );
 }
 
@@ -302,7 +282,7 @@ function FAQsSection() {
                 </h3>
                 <div className="space-y-4">
                   {section.questions.map((item, qIdx) => (
-                    <FAQItem key={qIdx} question={item.q} answer={item.a} />
+                    <FAQItem key={qIdx} question={item.q} answer={item.a} hoverClass="group-hover:text-[#6ee2d1]" />
                   ))}
                 </div>
               </div>
@@ -314,27 +294,7 @@ function FAQsSection() {
   );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
-  const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className="border-b border-white/10 last:border-0 pb-4 last:pb-0">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-start justify-between text-left group py-2">
-        <span className="font-bold text-white text-sm md:text-base group-hover:text-[#6ee2d1] transition-colors pr-4">
-          {question}
-        </span>
-        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${isOpen ? "rotate-180" : ""}`} />
-      </button>
-      
-        {isOpen && (
-          <div className="overflow-hidden">
-            <p className="pt-2 text-sm text-muted-foreground leading-relaxed font-light">{answer}</p>
-          </div>
-        )}
-      
-    </div>
-  );
-}
 
 function CTASection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (

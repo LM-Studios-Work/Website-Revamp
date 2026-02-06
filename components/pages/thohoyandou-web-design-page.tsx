@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import {
   MapPin,
   ArrowRight,
@@ -38,16 +38,6 @@ interface ThohoyandouWebDesignPageProps {
 
 export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  
-  
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <PageLayout containerRef={containerRef} currentPage="thohoyandou-web-design" onPageChange={onPageChange}>
@@ -58,16 +48,16 @@ export default function ThohoyandouWebDesignPage({ onPageChange }: ThohoyandouWe
       <OpportunitySection />
 
       {/* Industry Bento Grid - unique to this page */}
-      <IndustryBentoSection isMobile={isMobile} onPageChange={onPageChange} />
+      <IndustryBentoSection onPageChange={onPageChange} />
 
       {/* Why We're Different - manifesto style */}
       <ManifestoSection onPageChange={onPageChange} />
 
       {/* Local SEO Dominance */}
-      <LocalSEOSection isMobile={isMobile} />
+      <LocalSEOSection />
 
       {/* Packages */}
-      <PackagesSection isMobile={isMobile} onPageChange={onPageChange} />
+      <PackagesSection onPageChange={onPageChange} />
 
       {/* Service Areas - pill cloud */}
       <ServiceAreaCloud />
@@ -202,7 +192,7 @@ function OpportunitySection() {
 // INDUSTRY BENTO GRID - Unique asymmetric layout
 // Unlike other pages which use uniform 3-col grids
 // =============================
-function IndustryBentoSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function IndustryBentoSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="px-4 sm:px-8 py-20">
       <div className="max-w-7xl mx-auto">
@@ -354,7 +344,7 @@ function ManifestoSection({ onPageChange }: { onPageChange?: (page: PageType) =>
 // LOCAL SEO - Horizontal layout with map-style area listing
 // Different from other pages' vertical SEO sections
 // =============================
-function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
+function LocalSEOSection() {
   const searchTerms = [
     "web design Thohoyandou",
     "website developer Venda",
@@ -423,7 +413,7 @@ function LocalSEOSection({ isMobile }: { isMobile: boolean }) {
 // =============================
 // PACKAGES SECTION
 // =============================
-function PackagesSection({ isMobile, onPageChange }: { isMobile: boolean; onPageChange?: (page: PageType) => void }) {
+function PackagesSection({ onPageChange }: { onPageChange?: (page: PageType) => void }) {
   return (
     <section className="px-4 sm:px-8 py-20 border-y border-white/10">
       <div className="max-w-7xl mx-auto">

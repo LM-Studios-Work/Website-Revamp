@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import {
   ChevronDown,
   MapPin,
@@ -36,17 +36,7 @@ interface JohannesburgWebDesignPageProps {
 
 export default function JohannesburgWebDesignPage({ onPageChange }: JohannesburgWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  
-  
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   return (
     <PageLayout containerRef={containerRef} currentPage="johannesburg-web-design" onPageChange={onPageChange}>

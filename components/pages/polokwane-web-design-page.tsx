@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 import {
   Building2,
@@ -22,7 +22,6 @@ import type { PageType } from "@/lib/navigation";
 import { PageLayout, PageBadge } from "@/components/shared";
 import { PackageCard } from "@/components/shared/package-card";
 import { webPackages } from "@/lib/data";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 import { SectionWrapper } from "@/components/shared/section-wrapper";
 import {
@@ -40,7 +39,6 @@ export default function PolokwaneWebDesignPage({
   onPageChange,
 }: PolokwaneWebDesignPageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   return (
     <PageLayout
